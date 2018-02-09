@@ -9,6 +9,7 @@
 ---
 ## Changelog and Development Log
 * Feb 9, 2018
+    * Created Pages and APIs controller
     * Generated ERD with `rails-erd`
     * Authentication with `Devise` has been setup
         * Admin model with Views
