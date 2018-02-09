@@ -8,6 +8,7 @@
 * Wesley Aaron Cua - Systems Analyst
 ---
 ## Contents
+
 <ul>
     <li>
         <h4><a href="#dependencies">Dependencies</a></h4>
@@ -39,6 +40,7 @@
 </ul>
 
 ---
+
 <h2 id="dependencies">Dependencies</h2>
 
 <h3 id="ruby-v">Ruby Version: 2.2 up and Rails 5.4</h3>
