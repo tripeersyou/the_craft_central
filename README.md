@@ -9,41 +9,23 @@
 ---
 ## Contents
 
-<ul>
-    <li>
-        <h4><a href="#dependencies">Dependencies</a></h4>
-        <ul>
-            <li><a href="#ruby-v">Ruby Version</a></li>
-            <li><a href="#rails-v">Rails Version</a></li>
-            <li><a href="#rails-erd">Optional: Rails ERD</a></li>
-        </ul>
-    </li>
-    <li>
-        <h4><a href="#setting-up">Setting up the development environment</a></h4>
-    </li>
-    <li>
-        <h4><a href="#running-tests">Running Tests</a></h4>
-    </li>
-    <li>
-        <h4><a href="#running-production">Running in Production</a></h4>
-    </li>
-    <li>
-        <h4><a href="#change-adapter">Changing the database adapter</h4>
-        <ul>
-            <li><a href="#postgres">PostgreSQL</a></li>
-            <li><a href="#mysql">MySQL</a></li>
-        </ul>
-    </li>
-    <li>
-        <h4><a href="#git">Git and others . . .</a></h4>
-    </li>
-</ul>
+* #### Dependencies
+    * Ruby Version
+    * Rails version
+    * Optional: Rails ERD
+* #### Setting up the development environment
+* #### Running Tests
+* #### Running in Production
+* #### Changine the database adapter
+    * PostgreSQL
+    * MySQL
+* #### Git and others
 
 ---
 
-<h2 id="dependencies">Dependencies</h2>
+## Dependencies
 
-<h3 id="ruby-v">Ruby Version: 2.2 up and Rails 5.4</h3>
+### Ruby Version: 2.2 up and Rails 5.4<
 
 ### Instructions for:
 
@@ -56,7 +38,7 @@ Checking your version:
 $ ruby -v
 => ruby-2.2
 ```
-<h3 id="rails-v">Rails Version: 5.1.4</h3>
+### Rails Version: 5.1.4
 Updating Rails version
 
 Run the following in the terminal:
@@ -72,9 +54,9 @@ Checking your version:
 $ rails -v
 => Rails 5.1.4
 ```
-<h3 id="rails-erd">Optional: Rails-ERD</h3>
+## Optional: Rails-ERD
 
-* Install [`Graphviz`](http://graphviz.org/Download..php)s
+* Install [`Graphviz`](http://graphviz.org/Download..php)
 * Add `Graphviz` bin to the `$PATH` environment variable.
 * Restart all instances of the terminal.
 * Check if `Graphviz` is installed.
@@ -87,7 +69,7 @@ $ dot -V
 $ rails erd
 ```
 ---
-<h2 id="setting-up">Setting up the development environment</h2>
+## Setting up the development environment
 
 * Clone/download the repository.
 * Open the `Gemfile` and change the adapter of the database to your own choosing `sqlite3` is the default.
@@ -107,7 +89,7 @@ $ rails db:drop:_unsafe db:create db:migrate db:seed
 * Start your database service, if database adapter is not `sqlite3`.
 * Run `rails server` in the terminal. In your browser go to http://localhost:3000.
 ---
-<h2 id="running-tests">Running tests</h2>
+## Running tests
 
 Using the RSpec Gem
 * Create a  database in the `test` environment
@@ -119,7 +101,7 @@ $ rails db:drop:_unsafe db:create db:migrate RAILS_ENV=test
 $ bundle exec rspec --format documentation
 ```
 ---
-<h2 id="running-production">Running in the production environment</h2>
+## Running in the production environment
 
 * Uncomment the Devise secret key on `config/intializers/devise.rb`.
 * In `production.rb` edit the following line.
@@ -148,9 +130,9 @@ $ rails db:drop:_unsafe db:create db:migrate db:seed RAILS_ENV=production
 $ rails server --environment=production
 ```
 ---
-<h2 id="change-adapter">Changing the database adapter</h2>
+## Changing the database adapter
 
-<h3 id="postgres">PostgreSQL</h3>
+### PostgreSQL
 
 * Download PostgreSQL for their [website](https://www.postgresql.org/download/) with pgAdmin.
 * Take note of the user name and password during the installation.
@@ -180,7 +162,7 @@ development/test/development:
 ```
 $ rails db:create db:migrate db:seed
 ```
-<h3 id="mysql">MySQL</h3>
+### MySQL
 
 * Download XAMPP of the Apache Friends [website](https://www.apachefriends.org/download.html).
 * Open XAMPP Control Panel and start Apache Web Server and MySQL.
@@ -208,7 +190,7 @@ development/test/development:
 $ rails db:create db:migrate db:seed
 ```
 ---
-<h2 id="git">Git and others . . .</h2>
+## Git and others . . .
 
 ### Installing Git
 
