@@ -12,7 +12,7 @@
 * #### Dependencies
     * Ruby Version
     * Rails version
-    * Optional: Rails ERD
+    * Optional: Rails ERD and Router Visualizer
 * #### Setting up the development environment
 * #### Running Tests
 * #### Running in Production
@@ -54,7 +54,7 @@ Checking your version:
 $ rails -v
 => Rails 5.1.4
 ```
-## Optional: Rails-ERD
+## Optional: Rails-ERD and Router Visualizer
 
 * Install [`Graphviz`](http://graphviz.org/Download..php)
 * Add `Graphviz` bin to the `$PATH` environment variable.
@@ -68,6 +68,8 @@ $ dot -V
 ```
 $ rails erd
 ```
+* Looking at the visualizer: `rails server` and go to [http://localhost:3000/routes](http://localhost:3000/routes).
+
 ---
 ## Setting up the development environment
 
