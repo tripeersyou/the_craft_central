@@ -5,11 +5,7 @@
 **The Team:**
 
 * Laura Denise Ang - Project Manager
-<<<<<<< HEAD
 * Francis Oliver Avancena - Lead Developer
-=======
-* Francis Oliver Avanceña - Lead Developer
->>>>>>> 0acef941252bddee614c71bf691d7f2874a3e6d5
 * Lance Derek Andallaza - Quality Assurance
 * Wesley Aaron Cua - Systems Analyst
 
