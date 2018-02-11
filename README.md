@@ -1,11 +1,14 @@
 # The Craft Central Integrated Consignment System
 ## Developed by: R-Factor Solutions
 ### MIS 121/122 Academic Year 2017 - 2018
+
 **The Team:**
+
 * Laura Denise Ang - Project Manager
-* Francis Oliver Avanceña - Lead Developer
+* Francis Oliver Avancena - Lead Developer
 * Lance Derek Andallaza - Quality Assurance
 * Wesley Aaron Cua - Systems Analyst
+
 ---
 ## Contents
 
