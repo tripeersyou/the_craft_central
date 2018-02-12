@@ -14,6 +14,10 @@
 ## Changelog and Development Log
 
 * Feb 12, 2018
+    * Regerenerated Rails ERD
+    * Added model relationships
+    * Added xls to mime types
+    * Created all models
     * Edited Login/Sign-up pages
     * Edited README.md
 * Feb 11, 2018
