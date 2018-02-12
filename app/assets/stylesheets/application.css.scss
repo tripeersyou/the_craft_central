@@ -14,3 +14,27 @@
  *= require_self
  */
  @import "semantic-ui";
+
+ #login_page {
+    height: 100vh;
+    #login {
+       background-image: image-url('login_bg.png');
+       background-repeat:no-repeat;
+       background-size:cover;
+    }
+    img {
+        margin-left: 4em;
+    }
+    .ui.form {
+        padding-left: 4em;
+        padding-right: 4em;
+        top: 45%;
+        left:50%;
+        transform: translate(-50%,-50%);
+    }
+    #login_side{
+        background-image: image-url('sign_in.jpg');
+        background-repeat:no-repeat;
+        background-size:cover;
+    }
+}

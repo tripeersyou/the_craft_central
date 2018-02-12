@@ -13,6 +13,9 @@
 
 ## Changelog and Development Log
 
+* Feb 12, 2018
+    * Edited Login/Sign-up pages
+    * Edited README.md
 * Feb 11, 2018
     * Added `router-visualizer` to the Gemfile.
         * To look at router visualization: [http://localhost:3000/routes](http://localhost:3000/routes)

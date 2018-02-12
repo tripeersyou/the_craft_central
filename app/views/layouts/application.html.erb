@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
   <head>
     <title>The Craft Central Integrated Consignment System</title>
     <%= csrf_meta_tags %>
-
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -11,8 +13,12 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <% if admin_signed_in? || staff_signed_in? %>
     <div class="ui container">
-      <%= yield %>      
-    </div>
+      <%= yield %>
+    </div>    
+    <% else %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>

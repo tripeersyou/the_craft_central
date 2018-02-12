@@ -28,7 +28,7 @@
 
 ## Dependencies
 
-### Ruby Version: 2.2 up and Rails 5.4<
+### Ruby Version: 2.2 up and Rails 5.4
 
 ### Instructions for:
 
@@ -97,6 +97,7 @@ $ rails db:drop:_unsafe db:create db:migrate db:seed
 ## Running tests
 
 Using the RSpec Gem
+
 * Create a  database in the `test` environment
 ```
 $ rails db:drop:_unsafe db:create db:migrate RAILS_ENV=test

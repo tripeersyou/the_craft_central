@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   root 'devise/sessions#new'
 
-  devise_for :staffs
+  devise_for :staffs, skip: [:registration, :passwords]
   devise_scope :staff do
     authenticated :staff do
       root 'products#index', as: :staff_root
