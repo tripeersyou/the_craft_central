@@ -12,7 +12,14 @@
 ---
 
 ## Changelog and Development Log
-
+* Feb 13, 2018
+    * Created dashboard page
+    * Added the account page and edit account page
+    * Added assets for sidebar icons and the font
+    * Created Navbar and Sidebars
+    * Created `ProductsController` and dashboard
+    * Added default Admin and Staff accounts to `seeds.rb`
+    * Added the gems `will_paginate` and `will_paginate_semantic_ui`
 * Feb 12, 2018
     * Regerenerated Rails ERD
     * Added model relationships

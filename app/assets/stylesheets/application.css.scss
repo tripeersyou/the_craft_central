@@ -15,10 +15,20 @@
  */
 
 @import "semantic-ui";
+//****************FONT*****************//
+@font-face {
+    font-family: 'Questrial Regular';
+    src: font-url('Questrial-Regular.otf') format('truetype');
+}
 
+* {
+    font-family: 'Questrial Regular';
+}
+
+//************************************//
 // **************LOGIN****************//
 #login_page {
-    height: 100vh;
+    height: 102vh;
     #login {
         background-image: image-url('login_bg.png');
         background-repeat: no-repeat;
@@ -40,4 +50,29 @@
         background-size: cover;
     }
 }
+
 // ***********************************//
+//***************NAVBAR**************//
+.ui.top.fixed.menu {
+    height: 3.5em;
+    z-index: 0;
+}
+
+//***********************************//
+//**************SIDEBAR**************//
+.ui.left.fixed.vertical.menu {
+    .item {
+        img {
+            display: inline;
+        }
+    }
+}
+
+//***********************************//
+//**************CONTENT*************//
+#content {
+    padding-top: 5em;
+    padding-right: 7em;
+}
+
+//********************************//

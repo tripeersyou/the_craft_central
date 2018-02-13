@@ -4,6 +4,7 @@
     <title>The Craft Central Integrated Consignment System</title>
     <%= csrf_meta_tags %>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=7">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,14 +12,31 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+
     <% if admin_signed_in? || staff_signed_in? %>
-    <div class="ui container">
-      <%= yield %>
-    </div>    
+    <%# Authenticated %>
+      <div class="ui fluid container">
+        <div class="ui grid">
+          <div class="row">
+
+            <div class="three wide column">
+              <%= render 'layouts/sidebar' %>
+            </div>
+            <div class="thirteen wide column">
+              <%= render 'layouts/navbar' %>
+              <div id="content">
+                <%= render 'layouts/popups' %>                            
+                <%= yield %>            
+              </div>
+            </div>
+
+          </div> <!--Row-->
+        </div> <!--Grid-->
+      </div> <!--Container-->
     <% else %>
+    <%# Unauthenticated User %>
       <%= yield %>
     <% end %>
+
   </body>
 </html>

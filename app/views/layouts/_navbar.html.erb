@@ -1,0 +1,23 @@
+<div class="ui top fixed menu">
+  <div class="right menu">
+    <div class="ui simple dropdown item">
+      <%= semantic_icon('user circle') %>
+      &nbsp;
+      <% if admin_signed_in? %>
+        Hello, <%= current_admin.first_name %>!
+      <% else %>
+        Hello, <%= current_staff.first_name %>!
+      <% end %>
+
+      <div class="menu">
+        <div class="item">
+          <%= link_to "Account", accounts_path, style: 'color:black;' %>
+        </div>
+        <div class="item">
+          <%= link_to "Sign Out", destroy_admin_session_path, method: :delete, style: 'color:black;' %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<h1>Account Profile</h1>
+
+<div class="ui card" style="width: 35em;">
+    <div class="content">
+        <div class="ui grid">
+            <div class="row">
+                <div class="four wide column">
+                    <h1 style="text-align:center;font-size:3.5em"><%= semantic_icon('user circle') %></h1>
+                </div>
+                <div class="twelve wide column">
+                    <% if admin_signed_in? %>
+                        <h3 style="margin:0;"><%= current_admin.first_name %> <%= current_admin.last_name %></h3>
+                        <h5 style="margin:0;">Admin</h5>
+                        <%= link_to 'Edit Admin', edit_admin_registration_path %>
+                    <% else %>
+                        <h3 style="margin:0;"><%= current_staff.first_name %> <%= current_staff.last_name %></h3>
+                        <h5 style="margin:0;">Staff</h5>
+                        <a href="#">Ask an admin to edit your account.</a>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="ui card" style="width: 35em;">
+    <div class="content">
+        <div class="ui grid">
+            <div class="two wide column"></div>
+            <div class="twelve wide column">
+                <table class="ui very basic table">
+                    <tbody>
+                        <tr>
+                            <td><b>Email Address</b></td>
+                            <% if admin_signed_in? %>
+                                <td><%= current_admin.email %></td>
+                            <% else %>
+                                <td><%= current_staff.email %></td>
+                            <% end %>
+                        </tr>
+                        <tr>
+                            <td><b>Password</b></td>
+                            <td>*********</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="two wide column"></div>
+        </div>
+    </div>
+</div>

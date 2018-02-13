@@ -39,9 +39,11 @@ gem 'devise'
 gem 'simple_form'
 # Semantic-UI as front-end framework
 gem 'semantic-ui-sass', '~> 2.2', '>= 2.2.12.0'
+# Will Paginate for paging models
+gem 'will_paginate'
+gem 'will_paginate_semantic_ui'
 # Cocoon gem for dynamic and nested forms
 gem 'cocoon'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

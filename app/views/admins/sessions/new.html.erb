@@ -1,9 +1,11 @@
-<div class="ui grid" id="login_page">
-  <div class="eight wide column" id="login_side"></div>
+<div class="ui stackable two column grid" id="login_page">
+  <div class="eight wide column" id="login_side">
+  </div>
   <div class="eight wide column" id="login">
-
+  
       <%= simple_form_for(resource, html: {class: "ui form"}, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= image_tag('logo.png')%>      
+        <%= render 'layouts/popups' %>               
         <div class="field">
           <%= f.input :email, required: false, autofocus: true %>
         </div>
@@ -18,7 +20,8 @@
         <div class="form-actions">
           <%= f.button :submit, "Log in", class: 'ui button secondary' %>
         </div>
+      <br>
+      <%= link_to 'Staff Login', new_staff_session_path %>        
       <% end %>
-
   </div>
 </div>
