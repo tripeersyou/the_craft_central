@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-    has_one :brand
+    belongs_to :brand
     has_many :delivery_products
     has_many :pullout_products
     has_many :ending_inventory_products
@@ -10,4 +10,10 @@ class Product < ApplicationRecord
     has_many :stores, through: :store_products
     has_many :supplier_products
     has_many :suppliers, through: :supplier_products
+    def to_s
+        name
+    end
+    # def brand
+    #     Brand.find(brand.id)
+    # end
 end

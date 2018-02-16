@@ -1,0 +1,58 @@
+<div class="ui grid">
+    <div class="row">
+        <div class="eight wide column">
+        <!--<%= link_to 'Back', '/account', class: 'ui button' %>-->
+        <h1>Admin Accounts</h1>
+        <table class="ui very simple table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th colspan="2" >Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @admins.each do |admin| %>
+                    <tr>
+                        <td><%= admin.first_name + ' ' + admin.last_name %></td>
+                        <td><%= admin.email %></td>
+                        <% if admin.status %>
+                            <td><%= link_to 'Unauthorize' %></td>  
+                        <% else %>
+                            <td><%= link_to 'Authorize' %></td>                                      
+                        <% end %>
+                        <td><%= link_to 'Delete Account' %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <%= will_paginate @admins, param_name: 'admins_page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+        </div>
+        <div class="eight wide column">
+        &nbsp;
+        <h1 style="display:inline;">Staff Accounts</h1>
+        <table class="ui very simple table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @staffs.each do |staff| %>
+                    <tr>
+                        <td><%= staff.first_name + ' ' + staff.last_name %></td>
+                        <td><%= staff.email %></td>
+                        <td><%= link_to 'Edit Profile' %></td>
+                        <td><%= link_to 'Delete Account' %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>        
+        <%= will_paginate @staffs, param_name: 'staffs_page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>       
+        <%= link_to 'Create a Staff Account', '#', class: 'ui button secondary' %>        
+        </div>
+    </div>
+</div>
+

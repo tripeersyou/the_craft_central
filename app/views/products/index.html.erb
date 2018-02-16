@@ -1,0 +1,57 @@
+<h1>Products Page</h1>
+<form class="ui form" id="index_form">
+    <div class="fields">
+        <div class="field">
+            <input type="text" name="product_search" id="product_search" placeholder="Search for products" style="width: 20em">
+        </div>
+        <div class="field">
+            <select name="product_sort" id="product_sort">
+                <option value="">Sort by</option>
+                <option value="sku">SKU</option>
+                <option value="name">Name</option>
+                <option value="brand">Brand</option>
+                <option value="cost">Cost</option>
+                <option value="price">Price</option>
+                <option value="limit">Limit</option>
+                <option value="inventory">Inventory</option>
+                <option value="created_at">Created Date</option>
+                <option value="updated_at">Updated Date</option>
+            </select>
+        </div>
+        <% if admin_signed_in? %>
+            <div class="field">
+                <%= link_to 'CREATE PRODUCT', new_product_path, class: 'ui button primary' %>
+            </div>
+        <% end %>
+    </div>
+</form>
+<% if !@products.empty? %>
+  <div class="ui card" style="width:44em">
+    <div class="content">
+        <h2>Recently Updated Products</h2>
+        <table class="ui very basic table">
+            <thead>
+                <tr>
+                    <th>SKU</th>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @products.each do |product| %>
+                <tr>
+                    <td><%= product.sku %></td>
+                    <td><%= product.name %></td>
+                    <td><%= product.brand.name %></td>
+                    <td><%= link_to 'See Details', product_path(product) %></td>
+                </tr>
+            <% end %>
+            </tbody> 
+        </table>
+        <%= will_paginate @products,renderer: WillPaginateSemanticUi::ActionView::Renderer %> 
+    </div>
+  </div>
+<% else %>
+    <h2>No Products yet</h2>
+<% end %>

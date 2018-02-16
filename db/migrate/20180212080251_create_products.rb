@@ -3,9 +3,11 @@ class CreateProducts < ActiveRecord::Migration[5.1]
     create_table :products do |t|
       t.string :sku, null: false
       t.string :name, null: false
-      t.text :description, default: ""
+      t.references :brand, foreign_key: true
+      t.text :description
       t.integer :limit, null: false
       t.decimal :price, precision: 2, null: false
+      t.decimal :cost, precision: 2, null: false
       t.integer :inventory, null: false
 
       t.timestamps

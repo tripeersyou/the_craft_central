@@ -12,12 +12,24 @@
 ---
 
 ## Changelog and Development Log
+* Feb 16, 2018
+    * Edited migration for products table
+    * Created `products/index.html.erb`
+* Feb 14, 2018
+    * Created `manage_accounts/index.html.erb`
+    * Created `ManageAccountsController` and created `index` method.
+    * Changed Products icon
+    * Created `ProductsController` and methods
+    * Changed the server time to local time.
 * Feb 13, 2018
+    * Added active icon and text to dashboard at the sidebar
+    * Added to `:status` to Admin
+    * Added `:first_name` and `:last_name` to permitted parameters
     * Created dashboard page
     * Added the account page and edit account page
     * Added assets for sidebar icons and the font
     * Created Navbar and Sidebars
-    * Created `ProductsController` and dashboard
+    * Created `PagesController` and dashboard
     * Added default Admin and Staff accounts to `seeds.rb`
     * Added the gems `will_paginate` and `will_paginate_semantic_ui`
 * Feb 12, 2018

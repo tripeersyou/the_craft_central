@@ -15,14 +15,18 @@
  */
 
 @import "semantic-ui";
-//****************FONT*****************//
+//****************GLOBAL*****************//
 @font-face {
     font-family: 'Questrial Regular';
-    src: font-url('Questrial-Regular.otf') format('truetype');
+    src: url('Questrial-Regular.otf') format('truetype');
 }
 
 * {
     font-family: 'Questrial Regular';
+}
+
+body {
+    background-color: #f7f8fa;
 }
 
 //************************************//
@@ -56,11 +60,13 @@
 .ui.top.fixed.menu {
     height: 3.5em;
     z-index: 0;
+    background-color: #ffffff;
 }
 
 //***********************************//
 //**************SIDEBAR**************//
 .ui.left.fixed.vertical.menu {
+    background-color: #ffffff;
     .item {
         img {
             display: inline;
@@ -73,6 +79,7 @@
 #content {
     padding-top: 5em;
     padding-right: 7em;
+    font-family: 'Questrial Regular';
 }
 
 //********************************//

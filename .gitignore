@@ -28,3 +28,6 @@
 # Database credentials & Application secret key
 config/database.yml
 config/secrets.yml
+
+# Screens
+screens

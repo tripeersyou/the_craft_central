@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20180212125601) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.boolean "status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
@@ -111,12 +112,15 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   create_table "products", force: :cascade do |t|
     t.string "sku", null: false
     t.string "name", null: false
-    t.text "description", default: ""
+    t.integer "brand_id"
+    t.text "description"
     t.integer "limit", null: false
     t.decimal "price", precision: 2, null: false
+    t.decimal "cost", precision: 2, null: false
     t.integer "inventory", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["sku"], name: "index_products_on_sku", unique: true
   end
 
@@ -175,8 +179,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   create_table "stores", force: :cascade do |t|
     t.string "name", null: false
     t.integer "brand_id"
-    t.text "address", default: ""
-    t.text "email", default: ""
+    t.text "address"
+    t.string "email"
     t.string "contact_person", default: ""
     t.string "contact_number", limit: 11
     t.datetime "created_at", null: false

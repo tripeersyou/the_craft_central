@@ -1,8 +1,18 @@
 <div class="ui left fixed vertical menu">
   <a href="/" class="item"> <%= image_tag('logo.png', style: 'padding-left: 3em;') %></a>
-  <a href="/" class="item"> <%= image_tag('icons/dashboard-dark.png', size: '30x30')%> &nbsp; Dashboard</a>
-  <a class="item"> <%= image_tag('icons/products-dark.png', size: '30x30')%> &nbsp; Products</a>
+
+  <% if params[:action] == 'dashboard' %>
+    <a href="/" class="item" style="color:#517fff;"> <%= image_tag('icons/dashboard-active.png', size: '30x30')%> &nbsp; Dashboard</a>
+  <% else %>
+    <a href="/" class="item"> <%= image_tag('icons/dashboard-dark.png', size: '30x30')%> &nbsp; Dashboard</a>
+  <% end %>
+
+  <% if params[:controller] == 'products'%>
+    <a href="/products" class="item" style="color:#517fff;"> <%= image_tag('icons/products-active.png', size: '30x30')%> &nbsp; Products</a>        
+  <% else %>
+    <a href="/products" class="item"> <%= image_tag('icons/productsdark.png', size: '30x30')%> &nbsp; Products</a>    
+  <% end %>
   <a class="item"> <%= image_tag('icons/store-dark.png', size: '30x30')%> &nbsp; Stores</a>
-  <a class="item"> <%= image_tag('icons/copy.png', size: '30x30')%> &nbsp; Documents</a>
+  <a class="item"> <%= image_tag('icons/copy.png', size: '30x30')%> &nbsp; Forms</a>
   <a class="item"> <%= image_tag('icons/shopping-cart.png', size: '30x30')%> &nbsp; Suppliers</a>
 </div>
