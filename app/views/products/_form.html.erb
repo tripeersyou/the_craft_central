@@ -1,0 +1,42 @@
+<div class="ui grid">
+    <div class="seven wide column">
+    <%= simple_form_for(@product, html: {class: 'ui form'}) do |f| %>
+        <div class="fields">
+            <div class="field">
+                <%= f.input :sku, label: 'SKU' %>
+            </div>
+            <div class="field">
+                <%= f.label :brand %>
+                <%= f.association :brand, label: false, collection: Brand.all%>
+            </div>
+        </div>
+        <div class="field">
+            <%= f.input :name %>
+        </div>
+        <div class="field">
+            <%= f.input :description %>
+        </div>
+        <div class="fields">
+            <div class="field">
+                <%= f.input  :cost %>
+            </div>
+            <div class="field">
+                <%= f.input :price, label: 'List Price' %>
+            </div>
+        </div>
+        <div class="fields">
+            <div class="field">
+                <%= f.input :limit, label: 'Quantity Limit' %>
+            </div>
+            <div class="field">
+                <%= f.input :inventory, label: 'Current Quantity' %>
+            </div>
+        </div>
+        <% if params[:action] == 'new' %>
+            <%= f.button :submit, class: 'ui button primary' %>                      
+        <% else %>
+            <%= f.button :submit, class: 'ui button positive' %>
+        <% end %>
+    <% end %>
+    </div>
+</div>

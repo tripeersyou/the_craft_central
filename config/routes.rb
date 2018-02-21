@@ -29,10 +29,10 @@ Rails.application.routes.draw do
         resources :orders, except: [:destroy, :update, :edit]
       end
       resources :stores, except: [:destroy] do
-        resources :deliveries, except: [:destroy, :edit]
-        resources :pullouts, except: [:destroy, :edit, :update]
-        resources :transfers, except: [:destroy, :edit, :update]
-        resources :ending_inventories, except: [:destroy]
+        resources :deliveries, except: [:destroy, :edit, :index]
+        resources :pullouts, except: [:destroy, :edit, :update, :index]
+        resources :transfers, except: [:destroy, :edit, :update, :index]
+        resources :ending_inventories, except: [:destroy, :index]
       end
       resources :manage_accounts
     end

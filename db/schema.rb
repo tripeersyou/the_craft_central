@@ -35,9 +35,9 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   create_table "beginning_inventory_products", force: :cascade do |t|
     t.integer "product_id"
     t.integer "ending_inventory_id"
-    t.decimal "price", precision: 2
+    t.decimal "price", precision: 2, null: false
     t.integer "cost", null: false
-    t.integer "inventory", null: false
+    t.integer "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ending_inventory_id"], name: "index_beginning_inventory_products_on_ending_inventory_id"
@@ -178,14 +178,12 @@ ActiveRecord::Schema.define(version: 20180212125601) do
 
   create_table "stores", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "brand_id"
     t.text "address"
     t.string "email"
     t.string "contact_person", default: ""
     t.string "contact_number", limit: 11
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["brand_id"], name: "index_stores_on_brand_id"
   end
 
   create_table "supplier_products", force: :cascade do |t|

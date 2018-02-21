@@ -1,0 +1,13 @@
+<%= link_to('< Go Back to Products', products_path, style: 'color:#7a828a;') %>
+<br>
+<h1 style='margin-bottom:0px;'><%= @product.name %></h1>
+<% if admin_signed_in? %>
+    <%= link_to('EDIT PRODUCT', edit_product_path(@product)) %>  
+<% end %>
+<br><br>
+<p>SKU: <%= @product.sku %></p>
+<p>Brand: <%= @product.brand.name %></p>
+<p>Cost: Php <%= @product.cost %></p>
+<p>List Price: Php <%= @product.price %></p>
+<p>Quantity Limit: <%= @product.limit %></p>
+<p>Current Quantity: <%= @product.inventory %></p>

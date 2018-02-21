@@ -12,7 +12,13 @@
   <% else %>
     <a href="/products" class="item"> <%= image_tag('icons/productsdark.png', size: '30x30')%> &nbsp; Products</a>    
   <% end %>
-  <a class="item"> <%= image_tag('icons/store-dark.png', size: '30x30')%> &nbsp; Stores</a>
+
+  <% if params[:controller] == 'stores' || params[:controller] == 'deliveries' || params[:controller] == 'pullouts' %>
+    <a class="item" href="/stores" style="color:#517fff;"> <%= image_tag('icons/store-active.png', size: '30x30')%> &nbsp; Stores</a>
+  <% else %>
+    <a class="item" href="/stores"> <%= image_tag('icons/store-dark.png', size: '30x30')%> &nbsp; Stores</a>    
+  <% end %>
+
   <a class="item"> <%= image_tag('icons/copy.png', size: '30x30')%> &nbsp; Forms</a>
   <a class="item"> <%= image_tag('icons/shopping-cart.png', size: '30x30')%> &nbsp; Suppliers</a>
 </div>

@@ -1,0 +1,51 @@
+<h1>All Stores</h1>
+<form class="ui form" id="index_form">
+    <div class="fields">
+        <div class="field">
+            <input type="text" name="store_search" id="store_search" placeholder="Search for stores" style="width: 20em">
+        </div>
+        <div class="field">
+            <select name="product_sort" id="store_sort" class="ui dropdown">
+                <option value="">Sort by</option>
+                <option value="name">Name</option>
+                <option value="created_at">Created At</option>
+                <option value="updated_at">Updated At</option>
+            </select>
+        </div>
+        <% if admin_signed_in? %>
+            <div class="field">
+                <%= link_to 'CREATE STORE', new_store_path, class: 'ui button primary' %>
+            </div>
+        <% end %>
+    </div>
+</form>
+<% if !@stores.empty? %>
+    <div class="ui three stackable cards">
+    <% @stores.each do |store| %>
+        <div class="card">
+            <div class="content">
+                <div class="header"> <%= link_to store.name, store_path(store), style: 'color:#000000;' %></div>
+                <br>
+                <div class="meta">
+                    Products Consigned: <%= store.products.count %> <br>
+                    Total Sales: <%= store.products.count %> <br>
+                </div>
+            </div>
+            <% if admin_signed_in? %>
+                <div class="extra content">
+                    <div class="ui basic default button">
+                        <%= link_to 'PULL-OUT', new_store_pullout_path(store)  %>
+                    </div>
+                    <div class="ui basic green button" style="text-align:right">
+                        <%= link_to 'ADD DELIVERY', new_store_delivery_path(store) %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+    </div>
+    <br>
+    <%= will_paginate @stores,renderer: WillPaginateSemanticUi::ActionView::Renderer %> 
+<% else %>
+  <h2>No Stores Yet</h2>
+<% end %>

@@ -14,6 +14,6 @@ class Product < ApplicationRecord
         name
     end
     # def brand
-    #     Brand.find(brand.id)
+        # Brand.find(brand.id).name
     # end
 end

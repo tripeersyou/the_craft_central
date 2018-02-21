@@ -12,6 +12,10 @@
 ---
 
 ## Changelog and Development Log
+* Feb 18, 2019
+    * Created `DeliveriesController`
+    * Finished Stores CRUD
+    * Finished Products CRUD
 * Feb 16, 2018
     * Edited migration for products table
     * Created `products/index.html.erb`

@@ -1,0 +1,19 @@
+<div class="ui grid">
+    <div class="seven wide column">
+        <%= simple_form_for([@store, @pullout], html: {class: 'ui form'}) do |f| %>
+            <div id="products">
+                <%= f.simple_fields_for :pullout_products do |f| %>
+                    <%= render 'pullout_product_fields', f, :pullout_products %>
+                <% end %>            
+            </div>
+            <div class="links">
+                <%= link_to_add_association 'Add Products', f, :pullout_products %>
+            </div>
+            <div class="field">
+                <%= f.input :description %>
+            </div>
+            <br>
+            <%= f.button :submit, class: 'ui primary button' %>
+        <% end %>
+    </div>
+</div>

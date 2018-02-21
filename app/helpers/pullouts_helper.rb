@@ -1,0 +1,2 @@
+module PulloutsHelper
+end

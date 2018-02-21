@@ -1,0 +1,24 @@
+<%= link_to('< Go Back to Stores', stores_path, style: 'color:#7a828a;') %>
+<br>
+
+<table class="ui very basic table">
+    <tr>
+        <td>
+            <h1 style="margin:0px;"><%= @store.name %></h1>
+            <% if admin_signed_in? %>
+                <a href="/stores/<%= @store.id %>/edit" >EDIT STORE</a>              
+            <% end %>
+        </td>
+        <td style="text-align:right;">
+            <% if admin_signed_in? %>
+                <a href="/stores/<%= @store.id %>/edit#products" class="ui button primary">ADD PRODUCT</a>
+                <%= link_to 'ADD ENDING INVENTORY', new_store_ending_inventory_path(@store), class: 'ui button green' %>              
+            <% end %>
+        </td>
+    </tr>
+</table>
+
+<p>Store Address: <%= @store.address %></p>
+<p>Email Address: <%= @store.email %></p>
+<p>Contact Person: <%= @store.contact_person %></p>
+<p>Contact Number: <%= @store.contact_number %></p>

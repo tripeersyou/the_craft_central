@@ -1,0 +1,31 @@
+<div class="ui grid">
+    <div class="seven wide column">
+    <%= simple_form_for(@store, html: {class: 'ui form', style: 'z-index: 2'}) do |f| %>
+        <div class="field">
+            <%= f.input :name, label: 'Store Name' %>
+        </div>
+        <div class="field">
+            <%= f.input :email, label: 'Email Address' %>
+        </div>
+        <div class="field">
+            <%= f.input :address, label: 'Store Address' %>
+        </div>
+        <div class="field">
+            <%= f.input :contact_person, label: 'Contact Person' %>
+        </div>
+        <div class="field">
+            <%= f.input :contact_number, label: 'Contact Number' %>
+        </div>
+        <div id="products">
+            <%= f.simple_fields_for :store_products do |sp| %>
+                <% render 'store_product_fields', f: sp %>
+            <% end %>
+        </div>
+        <div class="links">
+            <%= link_to_add_association 'Add Product', f, :store_products %>
+        </div>
+        <br>
+        <%= f.button :submit, class: 'ui button primary' %>
+    <% end %>
+    </div>
+</div>

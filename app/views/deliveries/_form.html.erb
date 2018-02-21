@@ -1,0 +1,25 @@
+<div class="ui grid">
+    <div class="seven wide column">
+        <%= simple_form_for([@store, @delivery], html: {class: 'ui form'}) do |f| %>
+            <div id="products">
+                <%= f.simple_fields_for :delivery_products do |dp| %>
+                    <%= render 'delivery_product_path', f: dp %>
+                <% end %>
+            </div>
+            <div class="links">
+                <%= link_to_add_association 'ADD PRODUCT', f, :delivery_products %>
+            </div>
+            <div class="field">
+                <%= f.input :description %>
+            </div>
+            <div class="field">
+                <div class="ui checkbox">
+                    <%= f.check_box :status, html: {class: 'hidden', type: 'checkbox'} %>
+                    <label>Delivered?</label>
+                </div>
+            </div>
+            <br>
+            <%= f.button :submit, class: 'ui button primary' %>
+        <% end %>
+    </div>
+</div>
