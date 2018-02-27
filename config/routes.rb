@@ -34,7 +34,9 @@ Rails.application.routes.draw do
         resources :transfers, except: [:destroy, :edit, :update, :index]
         resources :ending_inventories, except: [:destroy, :index]
       end
-      resources :manage_accounts
+      resources :manage_accounts, only: [:index]
+      resources :staffs, except: [:index, :show]
+      resources :admins, only: [:update, :destroy]
     end
   end
 

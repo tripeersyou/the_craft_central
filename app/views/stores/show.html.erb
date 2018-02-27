@@ -1,4 +1,5 @@
 <%= link_to('< Go Back to Stores', stores_path, style: 'color:#7a828a;') %>
+
 <br>
 
 <table class="ui very basic table">
@@ -22,3 +23,194 @@
 <p>Email Address: <%= @store.email %></p>
 <p>Contact Person: <%= @store.contact_person %></p>
 <p>Contact Number: <%= @store.contact_number %></p>
+
+<br>
+
+<% if !@products.empty? %>
+    <table class="ui very basic table show-table">
+        <thead>
+            <tr>
+                <th colspan='3'>
+                    <h2>List of All Store Products</h2>  
+                </th>
+                <th style="text-align:center;">
+                    <%= link_to 'PRINT', store_path(@store, format: 'xls'), class: 'ui basic positive button' %>
+                </th>
+            </tr>
+            <tr>
+                <th>SKU</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @products.each do |product| %>
+            <tr>
+                <td><%= product.product.sku %></td>
+                <td><%= product.product.name %></td>
+                <td><%= product.inventory %></td>
+                <td><%= link_to 'View', product_path(product.product) %></td>
+            </tr>
+            <% end %>
+            <tr>
+                <td colspan='4'class='paginate'>
+                    <%= will_paginate @products, param_name: 'products_page', renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+                </td>
+            </tr>
+        </tbody>
+    </table>  
+<% end %>
+
+<br>
+
+<% if !@deliveries.empty? %>
+    <table class="ui very basic table show-table">
+        <thead>
+            <tr>
+                <% if admin_signed_in? %>
+                    <th colspan='7'>
+                        <h2>List of Store Deliveries</h2>  
+                    </th>
+                    <th style="text-align:center;">
+                        <%= link_to 'ADD DELIVERY', new_store_delivery_path(@store), class: 'ui basic primary button' %>
+                    </th>
+                <% else %>
+                    <th colspan='7'>
+                        <h2>List of Store Deliveries</h2>  
+                    </th>
+                <% end %>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Price</th>
+                <th colspan='3'>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @deliveries.each do |delivery| %>
+            <tr>
+                <td><%= delivery.created_at.strftime('%d-%b-%y') %></td>
+                <td><%= delivery.description %></td>
+                <td><%= delivery.total_items %></td>            
+                <% if delivery.status %>
+                <td style="color:#08bf1b;">Delivered</td>
+                <% else %>
+                <td style="color:#ff5252">Pending</td>
+                <% end %>
+                <td><%= delivery.total_price %></td>            
+                <td><%= link_to 'View', store_delivery_path(@store, delivery) %></td>
+                <td><%= link_to 'Print', store_delivery_path(@store, delivery, format: 'xls'), style: 'color:#7a828a' %></td>                     
+                <% if admin_signed_in? %>
+                    <% if delivery.status %>
+                        <td style="color:#08bf1b">Change Status</td>                        
+                    <% else %>
+                        <td><%= link_to 'Change Status', store_delivery_path(@store,delivery), method: :patch,style: 'color:#08bf1b' %></td>
+                    <% end %>
+                <% end %>
+            </tr>
+            <% end %>
+            <tr>
+                <td colspan='8'class='paginate'>
+                <%= will_paginate @deliveries, param_name: 'deliveries_page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>      
+                </td>      
+            </tr>
+        </tbody>
+    </table>
+<% end %>
+
+<br>
+
+<% if !@pullouts.empty? %>
+    <table class="ui very basic table show-table">
+        <thead>
+            <tr>
+                <% if admin_signed_in? %>
+                    <th colspan='5'>
+                        <h2>List of Store Pullouts</h2>  
+                    </th>
+                    <th style="text-align:center;">
+                        <%= link_to 'ADD PULLOUT', new_store_pullout_path(@store), class: 'ui basic primary button' %>
+                    </th>
+                <% else %>
+                    <th colspan='6'>
+                        <h2>List of Store Pullout</h2>  
+                    </th>
+                <% end %>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th colspan='2'>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @pullouts.each do |pullout| %>
+            <tr>
+                <td><%= pullout.created_at.strftime('%d-%b-%y') %></td>
+                <td><%= pullout.description %></td>
+                <td><%= pullout.total_items %></td>            
+                <td><%= pullout.total_price %></td>            
+                <td><%= link_to 'View', store_pullout_path(@store, pullout) %></td>
+                <td><%= link_to 'Print', store_pullout_path(@store, pullout, format: 'xls'), style: 'color:#7a828a' %></td>                   
+            </tr>
+            <% end %>
+            <tr>
+                <td colspan='6' class='paginate'>
+                <%= will_paginate @pullouts, param_name: 'pullouts_page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>      
+                </td>      
+            </tr>
+        </tbody>
+    </table>
+<% end %>
+
+<br>
+
+<% if !@ending_inventories.empty? %>
+    <table class="ui very basic table show-table">
+        <thead>
+            <tr>
+                <% if admin_signed_in? %>
+                    <th colspan='5'>
+                        <h2>List of Sales Reports</h2>  
+                    </th>
+                    <th style="text-align:center;">
+                        <%= link_to 'ADD ENDING INVENTORY', new_store_ending_inventory_path(@store), class: 'ui basic primary button' %>
+                    </th>
+                <% else %>
+                    <th colspan='6'>
+                        <h2>List of Sales Reports</h2>  
+                    </th>
+                <% end %>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <th>Total Sales</th>
+                <th>Total COGS</th>
+                <th colspan='3'>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @ending_inventories.each do |ending_inventory| %>
+            <tr>
+                <td><%= ending_inventory.created_at.strftime('%d-%b-%y') %></td>
+                <td><%= ending_inventory.total_sales %></td>            
+                <td><%= ending_inventory.total_cogs %></td>            
+                <td><%= link_to 'View', store_ending_inventory_path(@store, ending_inventory) %></td>
+                <td><%= link_to 'Edit', edit_store_ending_inventory_path(@store, ending_inventory) %></td>
+                <td><%= link_to 'Print', store_ending_inventory_path(@store, ending_inventory, format: 'xls'), style: 'color:#7a828a' %></td>
+            </tr>
+            <% end %>
+            <tr>
+                <td colspan='8' class='paginate'>
+                <%= will_paginate @ending_inventories, param_name: 'deliveries_page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+                </td>      
+            </tr>
+        </tbody>
+    </table>
+<% end %>

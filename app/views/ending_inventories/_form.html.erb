@@ -1,0 +1,16 @@
+<div class="ui grid">
+    <div class="seven wide column">
+        <%= simple_form_for([@store, @ending_inventory], html: {class: 'ui form'}) do |f| %>
+            <div id="products">
+                <%= f.simple_fields_for :ending_inventory_products do |f| %>
+                    <%= render 'ending_inventory_product_fields', f, :ending_inventory_products %>
+                <% end %>            
+            </div>
+            <div class="links">
+                <%= link_to_add_association 'Add Products', f, :ending_inventory_products %>
+            </div>
+            <br>
+            <%= f.button :submit, class: 'ui primary button' %>
+        <% end %>
+    </div>
+</div>

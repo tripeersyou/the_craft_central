@@ -1,0 +1,25 @@
+<div class="ui grid">
+    <div class="seven wide column">
+    <%= simple_form_for(@staff, html: {class: 'ui form'}) do |f| %>
+        <div class="fields">
+            <div class="field">
+                <%= f.input :first_name, autofocus: true %>
+            </div>
+            <div class="field">
+                <%= f.input :last_name %>
+            </div>
+        </div>
+        <div class="field">
+            <%= f.input :email %>
+        </div>
+        <div class="field">
+            <%= f.input :password %>
+        </div>
+        <div class="field">
+            <%= f.input :password_confirmation %>
+        </div>
+        <br>
+        <%= f.button :submit, class: 'ui button primary' %>
+    <% end %>
+    </div>
+</div>

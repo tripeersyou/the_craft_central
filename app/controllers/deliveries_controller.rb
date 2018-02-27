@@ -12,6 +12,10 @@ class DeliveriesController < ApplicationController
         total_cost = 0.0
 
         delivery.delivery_products.each do |delivery_product|
+            delivery_product.product.inventory -= delivery_product.quantity
+            delivery_product.price = delivery_product.quantity * delivery_product.product.price
+            delivery_product.cost = delivery_product.quantity * delivery_product.product.cost
+            delivery_product.product.save
             total_items += delivery_product.quantity
             total_price += delivery_product.quantity * delivery_product.product.price
             total_cost += delivery_product.quantity * delivery_product.product.cost
@@ -22,10 +26,6 @@ class DeliveriesController < ApplicationController
         delivery.total_price = total_price
 
         delivery.delivery_products.each do |delivery_product|
-            delivery_product.price = delivery_product.quantity * delivery_product.product.price
-            delivery_product.cost = delivery_product.quantity * delivery_product.product.cost
-            delivery_product.product.inventory -= delivery_product.quantity
-            delivery_product.product.save
             delivery_product.save
         end
 
@@ -53,7 +53,7 @@ class DeliveriesController < ApplicationController
     end
 
     def show
-        @delivery = Deliver.find(params[:id])
+        @delivery = Delivery.find(params[:id])
     end
 
     def update
@@ -74,7 +74,7 @@ class DeliveriesController < ApplicationController
                     end
                 end 
             end
-
+            delivery.save
             redirect_to store_path(@store)
         end
     end

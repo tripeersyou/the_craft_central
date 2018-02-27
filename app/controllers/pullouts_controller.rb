@@ -11,6 +11,10 @@ class PulloutsController < ApplicationController
         total_cost = 0.0
 
         pullout.pullout_products.each do |pullout_product|
+            pullout_product.price = pullout_product.quantity * pullout_product.product.price
+            pullout_product.cost = pullout_product.quantity * pullout_product.product.cost
+            pullout_product.product.inventory += pullout_product.quantity
+            pullout_product.product.save
             total_items += pullout_product.quantity
             total_price += pullout_product.quantity * pullout_product.product.price
             total_cost += pullout_product.quantity * pullout_product.product.cost
@@ -21,10 +25,6 @@ class PulloutsController < ApplicationController
         pullout.total_price = total_price
 
         pullout.pullout_products.each do |pullout_product|
-            pullout_product.price = pullout_product.quantity * pullout_product.product.price
-            pullout_product.cost = pullout_product.quantity * pullout_product.product.cost
-            pullout_product.product.inventory += pullout_product.quantity
-            pullout_product.product.save
             pullout_product.save
         end
 

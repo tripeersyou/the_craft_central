@@ -4,7 +4,7 @@ class StoresController < ApplicationController
         if !params[:sort_by]
             @stores = Store.paginate(page: params[:page], per_page: 9)
         else
-            @stores = Store.paginate(page: params[:page], per_page: 9).order(params[:sort_by + ' DESC'])
+            @stores = Store.paginate(page: params[:page], per_page: 9).order(params[:sort_by] + ' ASC')
         end
     end
 
@@ -22,6 +22,10 @@ class StoresController < ApplicationController
     end
 
     def show
+        @products = @store.store_products.paginate(page: params[:products_page], per_page: 5).order('created_at DESC')
+        @deliveries = @store.deliveries.paginate(page: params[:deliveries_page], per_page: 5).order('created_at DESC')
+        @pullouts = @store.pullouts.paginate(page: params[:pullouts_page], per_page: 5).order('created_at DESC')
+        @ending_inventories = @store.ending_inventories.paginate(page: params[:ending_inventories_page], per_page: 5).order('created_at DESC')
     end
     
     def edit

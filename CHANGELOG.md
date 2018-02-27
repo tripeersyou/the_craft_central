@@ -12,6 +12,19 @@
 ---
 
 ## Changelog and Development Log
+* Feb 27, 2019
+    * More front end
+    * Refactored the `create` in `DeliveriesController` and `PulloutsController`
+* Feb 26, 2019
+    * More front-end stuff in `/stores/:id`
+    * Created `StaffsController` and added functionality
+    * Finished Ending Inventory functionality
+    * Created 'EndingInventoriesController'
+* Feb 21, 2019
+    * Finished Pullout functionality
+    * Created `PulloutsController`
+* Feb 20, 2019
+    * Finished Delivery functionality
 * Feb 18, 2019
     * Created `DeliveriesController`
     * Finished Stores CRUD

@@ -13,16 +13,18 @@
             </thead>
             <tbody>
                 <% @admins.each do |admin| %>
-                    <tr>
-                        <td><%= admin.first_name + ' ' + admin.last_name %></td>
-                        <td><%= admin.email %></td>
-                        <% if admin.status %>
-                            <td><%= link_to 'Unauthorize' %></td>  
-                        <% else %>
-                            <td><%= link_to 'Authorize' %></td>                                      
-                        <% end %>
-                        <td><%= link_to 'Delete Account' %></td>
-                    </tr>
+                    <% if admin != current_admin %>
+                        <tr>
+                            <td><%= admin.first_name + ' ' + admin.last_name %></td>
+                            <td><%= admin.email %></td>
+                            <% if admin.status %>
+                                <td><%= link_to 'Unauthorize' %></td>  
+                            <% else %>
+                                <td><%= link_to 'Authorize' %></td>                                      
+                            <% end %>
+                            <td><%= link_to 'Delete Account' %></td>
+                        </tr>
+                    <% end %>
                 <% end %>
             </tbody>
         </table>
@@ -44,14 +46,14 @@
                     <tr>
                         <td><%= staff.first_name + ' ' + staff.last_name %></td>
                         <td><%= staff.email %></td>
-                        <td><%= link_to 'Edit Profile' %></td>
-                        <td><%= link_to 'Delete Account' %></td>
+                        <td><%= link_to 'Edit Profile', edit_staff_path(staff) %></td>
+                        <td><%= link_to 'Delete Account', staff_path(staff), method: :delete, data: {confirm: 'Are you sure?'} %></td>
                     </tr>
                 <% end %>
             </tbody>
         </table>        
         <%= will_paginate @staffs, param_name: 'staffs_page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>       
-        <%= link_to 'Create a Staff Account', '#', class: 'ui button secondary' %>        
+        <%= link_to 'Create a Staff Account', new_staff_path, class: 'ui button secondary' %>        
         </div>
     </div>
 </div>
