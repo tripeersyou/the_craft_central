@@ -22,7 +22,8 @@ class EndingInventoriesController < ApplicationController
             end
             beginning_inventory_product.save            
         end
-
+        ending_inventory.sales = ending_inventory.total_sales
+        ending_inventory.cogs = ending_inventory.total_sales
         if ending_inventory.save
             redirect_to store_path(@store)
         else

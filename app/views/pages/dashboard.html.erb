@@ -1,0 +1,32 @@
+<div class="ui three column grid">
+    <div class="column">
+        <div class="ui card">
+            <div class="content">
+                <h1>Total Sales</h1>
+                <h2><%= 'P %.2f' % Store.total_sales %></h2>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui card">
+            <div class="content">
+                <h1>Total Revenue</h1>
+                    <h2><%= 'P %.2f' % (Store.total_sales - Store.total_cogs) %></h2>
+                </div>
+            </div>
+        </div>
+    <div class="column">
+        <div class="ui card">
+            <div class="content">
+                <h1>Total COGS</h1>
+                    <h2><%= 'P %.2f' % Store.total_cogs %></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h1>Sales: </h1>
+<%= column_chart EndingInventory.group_by_month(:created_at, format: "%B").sum(:sales) %>
+
+<h1>Cost of Goods Sold: </h1>
+<%= column_chart EndingInventory.group_by_month(:created_at, format: "%B").sum(:cogs) %>

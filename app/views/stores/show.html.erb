@@ -101,7 +101,7 @@
                 <% else %>
                 <td style="color:#ff5252">Pending</td>
                 <% end %>
-                <td><%= delivery.total_price %></td>            
+                <td><%= '%.2f' % delivery.total_price %></td>            
                 <td><%= link_to 'View', store_delivery_path(@store, delivery) %></td>
                 <td><%= link_to 'Print', store_delivery_path(@store, delivery, format: 'xls'), style: 'color:#7a828a' %></td>                     
                 <% if admin_signed_in? %>
@@ -155,7 +155,7 @@
                 <td><%= pullout.created_at.strftime('%d-%b-%y') %></td>
                 <td><%= pullout.description %></td>
                 <td><%= pullout.total_items %></td>            
-                <td><%= pullout.total_price %></td>            
+                <td><%= '%.2f' % pullout.total_price %></td>            
                 <td><%= link_to 'View', store_pullout_path(@store, pullout) %></td>
                 <td><%= link_to 'Print', store_pullout_path(@store, pullout, format: 'xls'), style: 'color:#7a828a' %></td>                   
             </tr>
@@ -199,8 +199,8 @@
             <% @ending_inventories.each do |ending_inventory| %>
             <tr>
                 <td><%= ending_inventory.created_at.strftime('%d-%b-%y') %></td>
-                <td><%= ending_inventory.total_sales %></td>            
-                <td><%= ending_inventory.total_cogs %></td>            
+                <td><%= '%.2f' % ending_inventory.total_sales %></td>            
+                <td><%= '%.2f' % ending_inventory.total_cogs %></td>            
                 <td><%= link_to 'View', store_ending_inventory_path(@store, ending_inventory) %></td>
                 <td><%= link_to 'Edit', edit_store_ending_inventory_path(@store, ending_inventory) %></td>
                 <td><%= link_to 'Print', store_ending_inventory_path(@store, ending_inventory, format: 'xls'), style: 'color:#7a828a' %></td>

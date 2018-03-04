@@ -12,6 +12,8 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require Chart.bundle
+//= require chartkick
 //= require jquery
 //= require select2
 //= require cocoon
@@ -23,4 +25,10 @@ $(document).on('turbolinks:load', function () {
         $(this).closest('.message').transition('fade');
     });
     $('.dropdown').dropdown();
+    $('.basic.button').mouseover(function () {
+        $(this).removeClass('basic')
+    });
+    $('.basic.button').mouseleave(function () {
+        $(this).addClass('basic')
+    });
 })

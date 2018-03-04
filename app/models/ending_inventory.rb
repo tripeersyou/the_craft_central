@@ -28,4 +28,19 @@ class EndingInventory < ApplicationRecord
     total_cogs
   end
 
+  def self.total_sales
+    ending_inventories = EndingInventory.all
+    total_sales = 0.00
+    ending_inventories.each do |ending_inventory|
+      ending_inventory.ending_inventory_products.each do |ending_inventory_product|
+        ending_inventory.beginning_inventory_products.each do |beginning_inventory_product|
+          if ending_inventory_product.product == beginning_inventory_product.product
+            total_sales += ending_inventory_product.quantity * beginning_inventory_product.price
+          end
+        end
+      end
+    end
+    total_sales
+  end
+
 end

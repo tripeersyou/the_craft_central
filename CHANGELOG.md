@@ -9,9 +9,13 @@
 * Lance Derek Andallaza - Quality Assurance
 * Wesley Aaron Cua - Systems Analyst
 
----
+--- 
 
 ## Changelog and Development Log
+* March 4, 2019
+    * Added `cogs` ands `sales` column for the ending inventories
+    * Created graphs for the dashboard
+    * Added `chartkick` and `groupdate` gems
 * Feb 27, 2019
     * More front end
     * Refactored the `create` in `DeliveriesController` and `PulloutsController`

@@ -22,23 +22,19 @@
 <% if !@stores.empty? %>
     <div class="ui three stackable cards">
     <% @stores.each do |store| %>
-        <div class="card">
+        <div class="card store">
             <div class="content">
                 <div class="header"> <%= link_to store.name, store_path(store), style: 'color:#000000;' %></div>
                 <br>
                 <div class="meta">
                     Products Consigned: <%= store.products.count %> <br>
-                    Total Sales: <%= store.products.count %> <br>
+                    Total Sales: <%= '%.2f' % store.total_sales %> <br>
                 </div>
             </div>
             <% if admin_signed_in? %>
                 <div class="extra content">
-                    <div class="ui basic default button">
-                        <%= link_to 'PULL-OUT', new_store_pullout_path(store)  %>
-                    </div>
-                    <div class="ui basic green button" style="text-align:right">
-                        <%= link_to 'ADD DELIVERY', new_store_delivery_path(store) %>
-                    </div>
+                    <%= link_to 'PULL-OUT', new_store_pullout_path(store), class: 'ui basic default button'  %>
+                    <%= link_to 'ADD DELIVERY', new_store_delivery_path(store), class: 'ui basic green button'%>
                 </div>
             <% end %>
         </div>

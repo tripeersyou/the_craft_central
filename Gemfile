@@ -45,6 +45,10 @@ gem 'will_paginate'
 gem 'will_paginate_semantic_ui'
 # Cocoon gem for dynamic and nested forms
 gem 'cocoon'
+# Chartkick for Graphs
+gem 'chartkick'
+# Groupdate for grouping the graph data
+gem 'groupdate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

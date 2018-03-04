@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
 
   create_table "ending_inventories", force: :cascade do |t|
     t.integer "store_id"
+    t.decimal "sales", precision: 2
+    t.decimal "cogs", precision: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_ending_inventories_on_store_id"

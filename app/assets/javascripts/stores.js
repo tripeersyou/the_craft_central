@@ -6,4 +6,10 @@ $(document).on('turbolinks:load', function () {
         $('select').addClass('search selection');
         $('select').dropdown();
     });
+    $('.card.store').mouseover(function () {
+        $(this).css('box-shadow', '2px 2px lightgrey');
+    });
+    $('.card.store').mouseleave(function () {
+        $(this).css('box-shadow', '');
+    });
 });
