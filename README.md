@@ -41,7 +41,7 @@ Checking your version:
 $ ruby -v
 => ruby-2.2
 ```
-### Rails Version: 5.1.4
+### Rails Version: 5.1.5
 Updating Rails version
 
 Run the following in the terminal:

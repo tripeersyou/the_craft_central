@@ -24,9 +24,62 @@
             </div>
         </div>
     </div>
+    <br><br><br>
+    <div class="ui grid">
+    <div class="twelve wide column">
+        <% if params[:range] == 'monthly' || params[:range] == nil %>
+            <h1>Monthly Sales:</h1>
+        <% elsif params[:range] == 'weekly' %>
+            <h1>Weekly Sales:</h1>
+        <% elsif params[:range] == 'quarterly' %>
+            <h1>Quarterly Sales:</h1>
+        <% else %>
+            <h1>Yearly Sales:</h1>
+        <% end %>
+    </div>
+    <div class="three wide column">
+        <form action="/" method="get" class="ui form" id="datetime_picker">
+            <div class="fields">
+                <div class="field">
+                    <select name="product_sort" id="date_range" class="ui dropdown">
+                    <% if params[:range] == 'monthly' || params[:range] == nil %>
+                        <option value=""></option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly" selected>Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="yearly">Yearly</option>
+                    <% elsif params[:range] == 'weekly' %>
+                        <option value=""></option>
+                        <option value="weekly" selected>Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="yearly">Yearly</option>
+                    <% elsif params[:range] == 'quarterly' %>
+                        <option value=""></option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly" selected>Quarterly</option>
+                        <option value="yearly">Yearly</option>
+                    <% else %>
+                        <option value=""></option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="yearly" selected>Yearly</option>
+                    <% end %>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-<h1>Sales: </h1>
-<%= column_chart EndingInventory.group_by_month(:created_at, format: "%B").sum(:sales) %>
-
-<h1>Cost of Goods Sold: </h1>
-<%= column_chart EndingInventory.group_by_month(:created_at, format: "%B").sum(:cogs) %>
+    <% if params[:range] == 'monthly' || params[:range] == nil %>
+        <%= column_chart EndingInventory.group_by_month(:created_at, format: '%B %Y').sum(:sales) %>
+    <% elsif params[:range] == 'weekly' %>
+        <%= column_chart EndingInventory.group_by_week(:created_at, format: 'Week of %b %d').sum(:sales) %>
+    <% elsif params[:range] == 'quarterly' %>
+        <%= column_chart EndingInventory.group_by_quarter(:created_at, format: 'Week of %b %d').sum(:sales) %>
+    <% else %>
+         <%= column_chart EndingInventory.group_by_year(:created_at, format: '%Y').sum(:sales) %>
+    <% end %>
+</div>

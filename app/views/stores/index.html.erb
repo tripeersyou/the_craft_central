@@ -27,7 +27,8 @@
                 <div class="header"> <%= link_to store.name, store_path(store), style: 'color:#000000;' %></div>
                 <br>
                 <div class="meta">
-                    Products Consigned: <%= store.products.count %> <br>
+                    Total Items Sold: <%= store.sold_items %> <br>
+                    Total Items Consigned: <%= store.total_products %> <br>
                     Total Sales: <%= '%.2f' % store.total_sales %> <br>
                 </div>
             </div>

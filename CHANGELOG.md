@@ -12,6 +12,11 @@
 --- 
 
 ## Changelog and Development Log
+* March 7, 2019
+    * Updated Rails version from `5.1.4` to `5.1.5`
+    * Edited `stores/index`
+    * Added another instance model for Store
+    * Added the query string parameters for the dashboard chart
 * March 4, 2019
     * Added `cogs` ands `sales` column for the ending inventories
     * Created graphs for the dashboard

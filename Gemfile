@@ -7,9 +7,9 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'rails', '~> 5.1.5'
+# Use mysql2 as the database for Active Record for Production
+gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -58,6 +58,8 @@ group :development, :test do
   gem 'selenium-webdriver'
   # Automatic behavior driven testing
   gem 'rspec-rails'
+# Use mysql2 as the database for Active Record for Development and Test
+  gem 'sqlite3'
 end
 
 group :development do
