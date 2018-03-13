@@ -12,6 +12,8 @@
 --- 
 
 ## Changelog and Development Log
+* March 13, 2019
+    * Created supplier module and order module
 * March 7, 2019
     * Updated Rails version from `5.1.4` to `5.1.5`
     * Edited `stores/index`

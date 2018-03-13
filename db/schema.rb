@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(version: 20180212125601) do
 
   create_table "suppliers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
+    t.string "email"
     t.text "address"
     t.string "contact_person"
     t.string "contact_number"

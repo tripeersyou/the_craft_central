@@ -1,0 +1,16 @@
+<div class="ui grid">
+    <div class="seven wide column">
+        <%= simple_form_for([@supplier, @order], html: {class: 'ui form'}) do |f| %>
+            <div id="products">
+                <%= f.simple_fields_for :order_products do |dp| %>
+                    <%= render 'order_product_fields', f: dp %>
+                <% end %>
+            </div>
+            <div class="links">
+                <%= link_to_add_association 'ADD PRODUCT', f, :order_products %>
+            </div>
+            <br>
+            <%= f.button :submit, class: 'ui button primary' %>
+        <% end %>
+    </div>
+</div>

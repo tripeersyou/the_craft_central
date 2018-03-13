@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       get 'account', to: 'pages#account', as: 'accounts'
       resources :products, except: [:destroy]
       resources :suppliers, except: [:destroy] do
-        resources :orders, except: [:destroy, :update, :edit]
+        resources :orders, except: [:destroy, :update, :edit, :index]
       end
       resources :stores, except: [:destroy] do
         resources :deliveries, except: [:destroy, :edit, :index]

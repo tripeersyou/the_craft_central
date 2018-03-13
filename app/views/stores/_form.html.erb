@@ -21,9 +21,11 @@
                 <% render 'store_product_fields', f: sp %>
             <% end %>
         </div>
-        <div class="links">
-            <%= link_to_add_association 'Add Product', f, :store_products %>
-        </div>
+        <% if !Product.all.empty? %>
+            <div class="links">
+                <%= link_to_add_association 'Add Product', f, :store_products %>
+            </div>
+        <% end %>
         <br>
         <%= f.button :submit, class: 'ui button primary' %>
     <% end %>

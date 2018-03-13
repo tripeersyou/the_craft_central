@@ -1,0 +1,102 @@
+<%= link_to('< Go Back to Suppliers', suppliers_path, style: 'color:#7a828a;') %>
+
+<br>
+
+<table class="ui very basic table">
+    <tr>
+        <td>
+            <h1 style="margin:0px;"><%= @supplier.name %></h1>
+            <% if admin_signed_in? %>
+                <a href="/suppliers/<%= @supplier.id %>/edit" >EDIT STORE</a>              
+            <% end %>
+        </td>
+        <td style="text-align:right;">
+            <% if admin_signed_in? %>
+                <%= link_to 'CREATE ORDER', new_supplier_order_path(@supplier), class: 'ui primary button' %>              
+            <% end %>
+        </td>
+    </tr>
+</table>
+
+<p>Store Address: <%= @supplier.address %></p>
+<p>Store Email Address: </p>
+<p>Contact Person: <%= @supplier.contact_person %></p>
+<p>Contact Number: <%= @supplier.contact_number %></p>
+
+<br>
+
+<% if !@products.empty? %>
+    <table class="ui very basic table show-table">
+        <thead>
+            <tr>
+                <th colspan='3'>
+                    <h2>List of All Supplied Products</h2>  
+                </th>
+                <th style="text-align:center;">
+                    <% if admin_signed_in? %>
+                        <a href="/suppliers/<%= @supplier.id %>/edit#products" class="ui button basic primary">ADD PRODUCT</a>
+                    <% end %>
+                </th>
+            </tr>
+            <tr>
+                <th>SKU</th>
+                <th>Product Name</th>
+                <th>Cost</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @products.each do |product| %>
+            <tr>
+                <td><%= product.product.sku %></td>
+                <td><%= product.product.name %></td>
+                <td><%= 'Php %.2f' % product.product.cost %></td>
+                <td><%= link_to 'View', product_path(product.product) %></td>
+            </tr>
+            <% end %>
+            <tr>
+                <td colspan='4'class='paginate'>
+                    <%= will_paginate @products, param_name: 'products_page', renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+                </td>
+            </tr>
+        </tbody>
+    </table>  
+<% end %>
+
+<br>
+
+<% if !@orders.empty? %>
+    <table class="ui very basic table show-table">
+        <thead>
+            <tr>
+                <th colspan='3'>
+                    <h2>List of Supplier Orders</h2>  
+                </th>
+                <th style="text-align:center;">
+                    <%= link_to 'PRINT', supplier_path(@supplier, format: 'xls'), class: 'ui basic positive button' %>
+                </th>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <th>Quantity</th>
+                <th>Total Cost</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @orders.each do |order| %>
+            <tr>
+                <td><%= order.created_at.strftime('%d-%b-%y') %></td>
+                <td><%= order.total_quantity %></td>
+                <td><%= 'Php %.2f' % order.total_cost %></td>
+                <td><%= link_to 'View', supplier_order_path(@supplier,order) %></td>
+            </tr>
+            <% end %>
+            <tr>
+                <td colspan='4'class='paginate'>
+                    <%= will_paginate @orders, param_name: 'orders_page', renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+                </td>
+            </tr>
+        </tbody>
+    </table>  
+<% end %>

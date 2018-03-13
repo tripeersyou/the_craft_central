@@ -13,12 +13,17 @@
     <a href="/products" class="item"> <%= image_tag('icons/productsdark.png', size: '30x30')%> &nbsp; Products</a>    
   <% end %>
 
-  <% if params[:controller] == 'stores' || params[:controller] == 'deliveries' || params[:controller] == 'pullouts' || params[:controller] == 'ending_inventories' %>
+  <% if params[:controller] == 'stores' || params[:controller] == 'deliveries' || params[:controller] == 'pullouts' || params[:controller] == 'ending_inventories' || params[:controller] == 'transfers' %>
     <a class="item" href="/stores" style="color:#517fff;"> <%= image_tag('icons/store-active.png', size: '30x30')%> &nbsp; Stores</a>
   <% else %>
     <a class="item" href="/stores"> <%= image_tag('icons/store-dark.png', size: '30x30')%> &nbsp; Stores</a>    
   <% end %>
 
   <a class="item"> <%= image_tag('icons/copy.png', size: '30x30')%> &nbsp; Forms</a>
-  <a class="item"> <%= image_tag('icons/shopping-cart.png', size: '30x30')%> &nbsp; Suppliers</a>
+
+  <% if params[:controller] == 'suppliers' || params[:controller] == 'orders' %>
+    <a class="item" href="/suppliers" style="color:#517fff;"> <%= image_tag('icons/shopping-cart-active.png', size: '30x30')%> &nbsp; Suppliers</a>
+  <% else %>
+    <a class="item" href="/suppliers" > <%= image_tag('icons/shopping-cart.png', size: '30x30')%> &nbsp; Suppliers</a>    
+  <% end %>
 </div>
