@@ -9,4 +9,5 @@ class Transfer < ApplicationRecord
   belongs_to :delivery
   has_many :transfer_products
   accepts_nested_attributes_for :transfer_products, reject_if: :all_blank,allow_destroy: true
+
 end

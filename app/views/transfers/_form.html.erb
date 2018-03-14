@@ -1,0 +1,19 @@
+<div class="ui grid">
+    <div class="seven wide column">
+        <%= simple_form_for([@store, @transfer], html: {class: 'ui form'}) do |f| %>
+            <div class="field">
+                <%= f.association :store_to, collection: Store.all.where('id != ' + @store.id.to_s) %>
+            </div>
+            <div id="products">
+                <%= f.simple_fields_for :transfer_products do |dp| %>
+                    <%= render 'transfer_product_fields', f: dp %>
+                <% end %>
+            </div>
+            <div class="links">
+                <%= link_to_add_association 'ADD PRODUCT', f, :transfer_products %>
+            </div>
+            <br>
+            <%= f.button :submit, class: 'ui button primary' %>
+        <% end %>
+    </div>
+</div>

@@ -6,6 +6,10 @@ class Store < ApplicationRecord
     has_many :ending_inventories
     accepts_nested_attributes_for :store_products, reject_if: :all_blank, allow_destroy: true
 
+    def transfers
+        Transfer.all.where(store_from_id: id)
+    end
+
     def total_sales
         total_sales = 0.0
         ending_inventories.each do |ending_inventory|

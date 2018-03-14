@@ -177,6 +177,7 @@ $ rails db:create db:migrate db:seed
 * In the `Gemfile` change the `sqlite3` gem with `mysql2`.
 * Run `bundle install`.
 * Edit the contents of `config/database.yml`. Add the following fields in the `default`.
+* Run the contents of this [script](https://gist.githubusercontent.com/ankane/1d6b0022173186accbf0/raw/time_zone_support.sql) at the MySQL database to install groupdate support for MySQL.
 ```yaml
 default: &default
   adapter: mysql2
@@ -195,6 +196,7 @@ development/test/development:
 ```
 $ rails db:create db:migrate db:seed
 ```
+
 ---
 ## Git and others . . .
 
