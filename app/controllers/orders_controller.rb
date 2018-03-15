@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
         end 
 
         if @order.save 
-            supplier_path(@supplier)
+            redirect_to supplier_path(@supplier)
         else
             render :new
         end

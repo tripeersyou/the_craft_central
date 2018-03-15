@@ -17,7 +17,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  
 
   devise_for :admins
   devise_scope :admin do
@@ -32,7 +31,7 @@ Rails.application.routes.draw do
         resources :deliveries, except: [:destroy, :edit, :index]
         resources :pullouts, except: [:destroy, :edit, :update, :index]
         resources :transfers, except: [:destroy, :edit, :update, :index]
-        resources :ending_inventories, except: [:destroy, :index]
+        resources :ending_inventories, except: [:destroy, :index, :edit, :update]
       end
       resources :manage_accounts, only: [:index]
       resources :staffs, except: [:index, :show]

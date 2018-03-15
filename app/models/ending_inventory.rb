@@ -16,6 +16,14 @@ class EndingInventory < ApplicationRecord
     total_sales
   end
 
+ def total_items
+    total_items = 0
+    ending_inventory_products.each do |ending_inventory_product|
+      total_items += ending_inventory_product.quantity
+    end
+    total_items
+ end
+
   def total_cogs
     total_cogs = 0.00
     ending_inventory_products.each do |ending_inventory_product|

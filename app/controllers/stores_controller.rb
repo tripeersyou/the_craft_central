@@ -27,6 +27,7 @@ class StoresController < ApplicationController
         @pullouts = @store.pullouts.paginate(page: params[:pullouts_page], per_page: 5).order('created_at DESC')
         @transfers = @store.transfers.paginate(page: params[:transfers_page], per_page: 5).order('created_at DESC')
         @ending_inventories = @store.ending_inventories.paginate(page: params[:ending_inventories_page], per_page: 5).order('created_at DESC')
+
     end
     
     def edit

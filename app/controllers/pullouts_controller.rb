@@ -44,6 +44,9 @@ class PulloutsController < ApplicationController
         end
     end
 
+    def show
+        @pullout = Pullout.find(params[:id])
+    end
     private
         def pullout_params
             params.require(:pullout).permit!

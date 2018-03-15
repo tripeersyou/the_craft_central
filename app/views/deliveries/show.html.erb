@@ -1,0 +1,41 @@
+<h1>Delivery to <%= @delivery.store.name %></h1>
+<p><%= @delivery.created_at.strftime("%B %d, %Y") %></p>
+
+<p><%= @delivery.description %></p>
+
+<% if @delivery.status %>
+	<p>Status: <span style="color:#08bf1b">Delivered</span></p>
+<% else %>
+	<p>Status: <span style="color:#ff5252">Pending</span></p>
+	<%= link_to "Change Status", store_delivery_path(@store, @delivery), method: :put, style: 'display:block; margin-bottom:1em;' %>
+<% end %>
+<%= link_to 'Download XLS', store_delivery_path(@delivery, format: :xls) %>
+
+<table class="ui very basic table show-table">
+	<thead>
+		<tr>
+			<th>SKU</th>
+			<th>Product Name</th>
+			<th>Cost</th>
+			<th>Price</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @delivery.delivery_products.each do |delivery_product| %>
+  		<tr>
+  			<td><%= delivery_product.product.sku %></td>
+  			<td><%= delivery_product.product.name %></td>
+  			<td><%= "Php %.2f" %  delivery_product.product.cost %></td>
+  			<td><%= "Php %.2f" % delivery_product.product.price %></td>
+  			<td><%= link_to "View", product_path(delivery_product.product) %></td>
+  		</tr>                                                                
+		<% end %>                                                                
+		<tr>
+			<td colspan="2"><b>Total: </b></td>
+			<td><b><%= "Php %.2f" % @delivery.total_cost %></b></td>
+			<td><b><%= "Php %.2f" % @delivery.total_price %></b></td>
+			<td></td>
+		</tr>
+	</tbody>                                                                     
+</table>                                                                         

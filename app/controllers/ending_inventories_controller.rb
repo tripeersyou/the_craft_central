@@ -23,7 +23,7 @@ class EndingInventoriesController < ApplicationController
             beginning_inventory_product.save            
         end
         ending_inventory.sales = ending_inventory.total_sales
-        ending_inventory.cogs = ending_inventory.total_sales
+        ending_inventory.cogs = ending_inventory.total_cogs
         if ending_inventory.save
             redirect_to store_path(@store)
         else
@@ -31,11 +31,9 @@ class EndingInventoriesController < ApplicationController
         end
     end
     def show
-
+        @ending_inventory = EndingInventory.find(params[:id])
     end
-    def edit
 
-    end
     private
         def set_store
             @store = Store.find(params[:store_id])

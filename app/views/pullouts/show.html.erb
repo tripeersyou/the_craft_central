@@ -1,0 +1,33 @@
+<h1>Pullout to <%= @pullout.store.name %></h1>
+<p><%= @pullout.created_at.strftime("%B %d, %Y") %></p>
+
+<%= link_to 'Download XLS', store_pullout_path(@pullout, format: :xls) %>
+
+<table class="ui very basic table show-table">
+	<thead>
+		<tr>
+			<th>SKU</th>
+			<th>Product Name</th>
+			<th>Cost</th>
+			<th>Price</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @pullout.pullout_products.each do |pullout_product| %>
+  		<tr>
+  			<td><%= pullout_product.product.sku %></td>
+  			<td><%= pullout_product.product.name %></td>
+  			<td><%= "Php %.2f" %  pullout_product.product.cost %></td>
+  			<td><%= "Php %.2f" % pullout_product.product.price %></td>
+  			<td><%= link_to "View", product_path(pullout_product.product) %></td>
+  		</tr>                                                                
+		<% end %>                                                                
+		<tr>
+			<td colspan="2"><b>Total: </b></td>
+			<td><b><%= "Php %.2f" % @pullout.total_cost %></b></td>
+			<td><b><%= "Php %.2f" % @pullout.total_price %></b></td>
+			<td></td>
+		</tr>
+	</tbody>                                                                     
+</table>                                                                         

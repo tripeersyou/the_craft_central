@@ -28,13 +28,16 @@
                     <th>Name</th>
                     <th>Product Count</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
             <% @suppliers.each do |supplier| %>
                 <tr>
+			        <th>SKU</th>
                     <td><%= supplier.name %></td>
-                    <td><%= supplier.products.count %></td>
+                    <td><%= supplier.products.count %> units</td>
+                    <td></td>
                     <td><%= link_to 'See Details', supplier_path(supplier) %></td>
                 </tr>
             <% end %>

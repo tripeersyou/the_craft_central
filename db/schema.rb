@@ -218,8 +218,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "transfers", force: :cascade do |t|
-    t.integer "store_to_id"
-    t.integer "store_from_id"
+    t.integer "store_to_id", null: false
+    t.integer "store_from_id", null: false
     t.integer "pullout_id"
     t.integer "delivery_id"
     t.datetime "created_at", null: false

@@ -1,0 +1,34 @@
+<h1>Product Transfer from <%= @transfer.store_from.name %> to <%= @transfer.store_to.name %></h1>
+<p><%= @transfer.created_at.strftime("%B %d, %Y") %></p>
+<table class="ui very basic table">
+	<tr>
+		<td><%= link_to 'View Delivery', store_delivery_path(@transfer.store_to, @transfer.delivery) %></td>
+		<td><%= link_to 'View Pullout', store_pullout_path(@transfer.store_from, @transfer.pullout) %></td>
+	</tr>
+</table>
+<hr>
+<table class="ui very basic table show-table">
+	<thead>
+		<tr>
+			<th>SKU</th>
+			<th>Name</th>
+			<th>Quantity</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @transfer.transfer_products.each do |transfer_product| %>
+		<tr>
+			<td><%= transfer_product.product.sku %></td>
+			<td><%= transfer_product.product.name %></td>
+			<td><%= transfer_product.quantity %> units</td>
+			<td><%= link_to 'View', product_path(transfer_product.product) %></td>
+		</tr>
+		<% end %>
+		<tr>
+			<td colspan="2"><b>Total:</b></td>
+			<td><b><%= @transfer.total_items %> units</b></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>

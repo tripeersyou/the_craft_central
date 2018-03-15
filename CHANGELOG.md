@@ -12,6 +12,9 @@
 --- 
 
 ## Changelog and Development Log
+* March 15, 2019
+    * Edited the stores/show to reflect transfers. 
+    * Created `show.html.erb` for deliveries, pullouts, orders, ending inventories and transfers
 * March 13, 2019
     * Created supplier module and order module
 * March 7, 2019
