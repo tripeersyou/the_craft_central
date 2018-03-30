@@ -12,6 +12,10 @@
 --- 
 
 ## Changelog and Development Log
+* March 30, 2019
+    * Added the `.xls.erb` template files
+    * Edited the ending_inventory.rb file
+    * Updated Rails version from `5.1.5` to `5.1.6`
 * March 15, 2019
     * Edited the stores/show to reflect transfers. 
     * Created `show.html.erb` for deliveries, pullouts, orders, ending inventories and transfers

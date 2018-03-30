@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
+    <Worksheet ss:Name="Sheet1">
+        <Table>
+        <Column ss:Index="1" ss:AutoFitWidth="0" ss:Width="110"/>
+            <Row>
+                <Cell><Data ss:Type="String">SKU</Data></Cell>
+                <Cell><Data ss:Type="String">Product Name</Data></Cell>
+                <Cell><Data ss:Type="String">Cost</Data></Cell>
+                <Cell><Data ss:Type="String">Price</Data></Cell>
+            </Row>
+            <% @delivery.delivery_products.each do |delivery_product| %>
+            <Row>
+                <Cell><Data ss:Type="String"><%= delivery_product.product.sku %></Data></Cell>
+                <Cell><Data ss:Type="String"><%= delivery_product.product.name %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= delivery_product.cost %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= delivery_product.price %></Data></Cell>
+            </Row>
+            <% end %>
+            <Row>
+                <Cell><Data ss:Type="String"></Data></Cell>
+                <Cell><Data ss:Type="String"></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= @delivery.total_cost %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= @delivery.total_price %></Data></Cell>
+            </Row>
+        </Table>
+    </Worksheet>
+</Workbook>

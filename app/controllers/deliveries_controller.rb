@@ -54,6 +54,10 @@ class DeliveriesController < ApplicationController
 
     def show
         @delivery = Delivery.find(params[:id])
+        respond_to do |format|
+            format.xls
+            format.html
+        end
     end
 
     def update

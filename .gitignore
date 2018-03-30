@@ -32,4 +32,5 @@ config/secrets.yml
 # Screens
 screens
 
+# Swap file from vim
 *.swp

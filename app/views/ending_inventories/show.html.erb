@@ -18,9 +18,9 @@
 				<tr>
                     <td><%= ending_inventory_product.product.sku %></td>
                     <td><%= ending_inventory_product.product.name %></td>
-                    <td><%= "Php %.2f" % (beginning_inventory_product.product.cost * ending_inventory_product.quantity) %></td>
-                    <td><%= "Php %.2f" % (beginning_inventory_product.product.price * ending_inventory_product.quantity) %></td>
-                    <td><%= ending_inventory_product.quantity %> units</td>
+                    <td><%= "Php %.2f" % (beginning_inventory_product.cost * (beginning_inventory_product.quantity - ending_inventory_product.quantity)) %></td>
+                    <td><%= "Php %.2f" % (beginning_inventory_product.price * (beginning_inventory_product.quantity - ending_inventory_product.quantity)) %></td>
+                    <td><%= beginning_inventory_product.quantity - ending_inventory_product.quantity %> units</td>
 				</tr>
                 <% end %>
             <% end %>        

@@ -80,6 +80,6 @@
     <% elsif params[:range] == 'quarterly' %>
         <%= column_chart EndingInventory.group_by_quarter(:created_at, format: 'Week of %b %d').sum(:sales) %>
     <% else %>
-         <%= column_chart EndingInventory.group_by_year(:created_at, format: '%Y').sum(:sales) %>
+        <%= column_chart EndingInventory.group_by_year(:created_at, format: '%Y').sum(:sales) %>
     <% end %>
 </div>
