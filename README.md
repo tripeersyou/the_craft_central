@@ -28,7 +28,7 @@
 
 ## Dependencies
 
-### Ruby Version: 2.2 up and Rails 5.4
+### Ruby Version: 2.2 up and Rails 5.1.6
 
 ### Instructions for:
 
