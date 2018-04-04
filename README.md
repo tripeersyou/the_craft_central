@@ -133,7 +133,7 @@ $ rails db:drop:_unsafe db:create db:migrate db:seed RAILS_ENV=production
 ```
 * Run the server in production environment. http://localhost:3000.
 ```
-$ rails server --environment=production
+$ RAILS_ENV=production rails s
 ```
 ---
 ## Changing the database adapter

@@ -58,7 +58,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   # Automatic behavior driven testing
   gem 'rspec-rails'
-# Use mysql2 as the database for Active Record for Development and Test
+  # Use sqlite3 as the database for Active Record for Development and Test
   gem 'sqlite3'
 end
 

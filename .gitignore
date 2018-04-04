@@ -34,3 +34,6 @@ screens
 
 # Swap file from vim
 *.swp
+
+# Precompiled Assets
+public/assets

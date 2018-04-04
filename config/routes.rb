@@ -40,6 +40,5 @@ Rails.application.routes.draw do
   end
 
   root 'devise/sessions#new'
-  visualize
 
 end
