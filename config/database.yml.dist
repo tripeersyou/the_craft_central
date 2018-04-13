@@ -2,9 +2,9 @@
 #   gem install sqlite3
 #   gem install mysql2
 #
-#   Ensure the SQLite 3 gem and the MySQL gem is defined in your Gemfile
+#   Ensure the SQLite 3 gem and the PostgreSQL gem is defined in your Gemfile
 #   gem 'sqlite3'
-#   gem 'mysql2'
+#   gem 'pg'
 
 development:
   adapter: sqlite3
@@ -22,9 +22,9 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter: mysql2
-  username: root
-  password: 
+  adapter: postgresql
+  username: postgres
+  password: PASSWORD_FOR_POSTGRES
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   database: the_craft_central

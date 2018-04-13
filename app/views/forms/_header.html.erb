@@ -1,0 +1,16 @@
+<h1>What do you need?</h1>
+<h3>
+    <% if params[:action] == 'index' %>
+        <a href="/forms" style="color:#517fff;">Sales Reports</a> &nbsp;|&nbsp;
+        <a href="/forms/products" style="color:#7a828a;">Craft Central Product List</a> &nbsp;|&nbsp;
+        <a href="/forms/store_products" style="color:#7a828a;">Consignment Stores Product List</a>
+    <% elsif params[:action] == 'products'%>
+        <a href="/forms" style="color:#7a828a;">Sales Reports</a> &nbsp;|&nbsp;
+        <a href="/forms/products" style="color:#517fff;">Craft Central Product List</a> &nbsp;|&nbsp;
+        <a href="/forms/store_products" style="color:#7a828a;">Consignment Stores Product List</a>
+    <% else %>
+        <a href="/forms" style="color:#7a828a;">Sales Reports</a> &nbsp;|&nbsp;
+        <a href="/forms/products" style="color:#7a828a;">Craft Central Product List</a> &nbsp;|&nbsp;
+        <a href="/forms/store_products" style="color:#517fff;">Consignment Stores Product List</a>
+    <% end %>
+</h3>

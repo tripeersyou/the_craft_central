@@ -12,38 +12,41 @@
 --- 
 
 ## Changelog and Development Log
-* March 30, 2019
+* April 13, 2018
+    * Created the forms controller
+    * Added routes for forms page
+* March 30, 2018
     * Added the `.xls.erb` template files
     * Edited the ending_inventory.rb file
     * Updated Rails version from `5.1.5` to `5.1.6`
-* March 15, 2019
+* March 15, 2018
     * Edited the stores/show to reflect transfers. 
     * Created `show.html.erb` for deliveries, pullouts, orders, ending inventories and transfers
-* March 13, 2019
+* March 13, 2018
     * Created supplier module and order module
-* March 7, 2019
+* March 7, 2018
     * Updated Rails version from `5.1.4` to `5.1.5`
     * Edited `stores/index`
     * Added another instance model for Store
     * Added the query string parameters for the dashboard chart
-* March 4, 2019
+* March 4, 2018
     * Added `cogs` ands `sales` column for the ending inventories
     * Created graphs for the dashboard
     * Added `chartkick` and `groupdate` gems
-* Feb 27, 2019
+* Feb 27, 2018
     * More front end
     * Refactored the `create` in `DeliveriesController` and `PulloutsController`
-* Feb 26, 2019
+* Feb 26, 2018
     * More front-end stuff in `/stores/:id`
     * Created `StaffsController` and added functionality
     * Finished Ending Inventory functionality
     * Created 'EndingInventoriesController'
-* Feb 21, 2019
+* Feb 21, 2018
     * Finished Pullout functionality
     * Created `PulloutsController`
-* Feb 20, 2019
+* Feb 20, 2018
     * Finished Delivery functionality
-* Feb 18, 2019
+* Feb 18, 2018
     * Created `DeliveriesController`
     * Finished Stores CRUD
     * Finished Products CRUD

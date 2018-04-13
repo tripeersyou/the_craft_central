@@ -6,6 +6,18 @@ class Store < ApplicationRecord
     has_many :ending_inventories
     accepts_nested_attributes_for :store_products, reject_if: :all_blank, allow_destroy: true
 
+
+    def clean_up
+        to_clean = []
+        store_products.each do |store_product|
+            to_clean << store_product if store_product.inventory <= 0
+        end
+
+        to_clean.each do |store_product|
+            store_products.delete store_product
+        end
+    end
+
     def transfers
         Transfer.all.where(store_from_id: id)
     end

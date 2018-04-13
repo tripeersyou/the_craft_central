@@ -15,6 +15,12 @@ Rails.application.routes.draw do
         resources :transfers, only: [:show, :index]
         resources :ending_inventories, only: [:show, :index]
       end
+      resources :forms, only: [:index] do
+        collection do
+          get 'products', to: 'forms#products', as: 'form_products'
+          get 'store_products', to: 'forms#store_products', as: 'form_store_products'
+        end
+      end
     end
   end
 
@@ -36,6 +42,12 @@ Rails.application.routes.draw do
       resources :manage_accounts, only: [:index]
       resources :staffs, except: [:index, :show]
       resources :admins, only: [:update, :destroy]
+      resources :forms, only: [:index] do
+        collection do
+          get 'products', to: 'forms#products'
+          get 'store_products', to: 'forms#store_products'
+        end
+      end
     end
   end
 

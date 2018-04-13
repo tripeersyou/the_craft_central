@@ -1,5 +1,5 @@
 class StaffsController < ApplicationController
-    before_action :set_staff, only: [:edit, :destroy]
+    before_action :set_staff, only: [:edit, :destroy, :update]
     def new
         @staff = Staff.new
     end
@@ -14,8 +14,7 @@ class StaffsController < ApplicationController
     def edit
     end
     def update
-        @staff = Staff.new(staff_params)
-        if @staff.save
+        if @staff.update(staff_params)
             redirect_to manage_accounts_path
         else
             render :edit

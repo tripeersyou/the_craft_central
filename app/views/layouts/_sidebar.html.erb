@@ -19,7 +19,11 @@
     <a class="item" href="/stores"> <%= image_tag('icons/store-dark.png', size: '30x30')%> &nbsp; Stores</a>    
   <% end %>
 
-  <a class="item"> <%= image_tag('icons/copy.png', size: '30x30')%> &nbsp; Forms</a>
+  <% if params[:controller] == 'forms' %>
+    <a class="item" href="/forms" style="color:#517fff;"> <%= image_tag('icons/copy-active.png', size: '30x30')%> &nbsp; Forms</a>
+  <% else %>
+    <a class="item" href="/forms"> <%= image_tag('icons/copy.png', size: '30x30')%> &nbsp; Forms</a>
+  <% end %>
 
   <% if params[:controller] == 'suppliers' || params[:controller] == 'orders' %>
     <a class="item" href="/suppliers" style="color:#517fff;"> <%= image_tag('icons/shopping-cart-active.png', size: '30x30')%> &nbsp; Suppliers</a>

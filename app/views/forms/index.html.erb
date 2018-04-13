@@ -1,0 +1,29 @@
+<%= render 'header' %>
+<form method="get" action="/forms" class="ui form">
+    <div class="fields">
+        <div class="five wide field">
+            <select type="text" name="store_id" class="ui search dropdown" required>
+                <option value="">Store Name</option>
+                <% @stores.each do |store| %>
+                    <option value="<%= store.id %>"><%= store.name %></option>
+                <% end %>
+            </select>
+        </div>
+        <div class="three wide field">
+            <div class="ui left icon input">
+                <input type="date" name="start_date" id="start_date" placeholder="Start Date">
+                <i class="calendar alternate icon"></i>
+            </div>
+        </div>
+        <div class="field" style="margin-top:0.5em;">
+            to
+        </div>
+        <div class="three wide field">
+            <div class="ui left icon input">
+                <input type="date" name="end_date" id="end_date" placeholder="End Date">
+                <i class="calendar alternate icon"></i>
+            </div>
+        </div>
+        <button type="submit" class="ui button primary">Submit</button>
+    </div>
+</form>

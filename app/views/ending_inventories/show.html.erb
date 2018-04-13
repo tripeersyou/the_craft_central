@@ -9,6 +9,7 @@
             <th>Cost</th>
             <th>Price</th>
             <th>Quantity Sold</th>
+            <th>Movement</th>
         </tr>
     </thead>
     <tbody>
@@ -16,11 +17,17 @@
             <% @ending_inventory.beginning_inventory_products.each do |beginning_inventory_product| %>
                 <% if ending_inventory_product.product == beginning_inventory_product.product %>
 				<tr>
+                    <% difference = beginning_inventory_product.quantity - ending_inventory_product.quantity %>                
                     <td><%= ending_inventory_product.product.sku %></td>
                     <td><%= ending_inventory_product.product.name %></td>
                     <td><%= "Php %.2f" % (beginning_inventory_product.cost * (beginning_inventory_product.quantity - ending_inventory_product.quantity)) %></td>
                     <td><%= "Php %.2f" % (beginning_inventory_product.price * (beginning_inventory_product.quantity - ending_inventory_product.quantity)) %></td>
                     <td><%= beginning_inventory_product.quantity - ending_inventory_product.quantity %> units</td>
+                    <% if difference >= 5 %>
+                        <td style="color:green;">Moving</td>
+                    <% else %>
+                        <td style="color:red;">Not moving</td>
+                    <% end %>
 				</tr>
                 <% end %>
             <% end %>        
@@ -29,7 +36,7 @@
             <td colspan="2"></td>
             <td><b><%= "Php %.2f" % @ending_inventory.total_cogs %></b></td>
             <td><b><%= "Php %.2f" % @ending_inventory.total_sales %></b></td>
-            <td><b><%= @ending_inventory.total_items %> units</b></td>
+            <td colspan="2"><b><%= @ending_inventory.total_items %> units</b></td>
         </tr>
     </tbody>
 </table>

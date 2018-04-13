@@ -25,6 +25,7 @@ class EndingInventoriesController < ApplicationController
         ending_inventory.sales = ending_inventory.total_sales
         ending_inventory.cogs = ending_inventory.total_cogs
         if ending_inventory.save
+            @store.clean_up
             redirect_to store_path(@store)
         else
             render :new
