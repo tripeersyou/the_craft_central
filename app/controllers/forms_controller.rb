@@ -1,11 +1,19 @@
 class FormsController < ApplicationController
     def index
         @stores = Store.all
-        if params[:store_id] and params[:store_id] != ""
-            store = Store.find(params[:store_id])
-            @ending_inventories = store.ending_inventories;
+        if params[:store_id] and params[:store_id] != " "
+            store = Store.find(params[:store_id])            
+            if (params[:start_date] && params[:end_date]) && (params[:start_date] != "" && params[:end_date] != "")
+                @ending_inventories = store.ending_inventories.paginate(page: params[:page], per_page: 10).order('created_at DESC').where('created_at BETWEEN ? AND ?', params[:start_date], params[:end_date]);                
+            else
+                @ending_inventories = store.ending_inventories.paginate(page: params[:page], per_page: 10).order('created_at DESC');
+            end
         else
-            @ending_inventories = EndingInventory.all
+            if (params[:start_date] && params[:end_date]) && (params[:start_date] != "" && params[:end_date] != "")
+                @ending_inventories = EndingInventory.paginate(page: params[:page], per_page: 10).order('created_at DESC').where('created_at BETWEEN ? AND ?', params[:start_date], params[:end_date])
+            else
+                @ending_inventories = EndingInventory.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+            end
         end
     end
     def products

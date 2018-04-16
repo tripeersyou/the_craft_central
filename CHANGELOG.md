@@ -12,6 +12,9 @@
 --- 
 
 ## Changelog and Development Log
+* April 16, 2018
+    * Added functionality for 'forms#index'
+    * Added `forms/index.html.erb` index code.
 * April 13, 2018
     * Created the forms controller
     * Added routes for forms page

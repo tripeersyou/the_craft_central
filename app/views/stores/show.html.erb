@@ -204,7 +204,7 @@
             <tr>
                 <td><%= pullout.created_at.strftime('%d-%b-%y') %></td>
                 <td><%= pullout.description %></td>
-                <td><%= pullout.total_items %></td>            
+                <td><%= pullout.total_items %></td>
                 <td><%= '%.2f' % pullout.total_price %></td>            
                 <td><%= link_to 'View', store_pullout_path(@store, pullout) %></td>
                 <td><%= link_to 'Print', store_pullout_path(@store, pullout, format: 'xls'), style: 'color:#7a828a' %></td>                   
@@ -257,7 +257,7 @@
             <% end %>
             <tr>
                 <td colspan='8' class='paginate'>
-                <%= will_paginate @ending_inventories, param_name: 'deliveries_page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+                <%= will_paginate @ending_inventories, param_name: 'ending_inventories_page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
                 </td>      
             </tr>
         </tbody>

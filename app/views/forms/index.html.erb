@@ -3,27 +3,61 @@
     <div class="fields">
         <div class="five wide field">
             <select type="text" name="store_id" class="ui search dropdown" required>
-                <option value="">Store Name</option>
+                <option value=" ">Store Name</option>
                 <% @stores.each do |store| %>
-                    <option value="<%= store.id %>"><%= store.name %></option>
+                    <% if params[:store_id].to_i == store.id%>
+                        <option selected="selected" value="<%= store.id %>"><%= store.name %></option>
+                    <% else %>
+                        <option value="<%= store.id %>"><%= store.name %></option>
+                    <% end %>
                 <% end %>
             </select>
         </div>
-        <div class="three wide field">
+        <div class="four wide field">
             <div class="ui left icon input">
-                <input type="date" name="start_date" id="start_date" placeholder="Start Date">
+                <input type="date" name="start_date" id="start_date" value="<%= params[:start_date]%>">
                 <i class="calendar alternate icon"></i>
             </div>
         </div>
         <div class="field" style="margin-top:0.5em;">
             to
         </div>
-        <div class="three wide field">
+        <div class="four wide field">
             <div class="ui left icon input">
-                <input type="date" name="end_date" id="end_date" placeholder="End Date">
+                <input type="date" name="end_date" id="end_date" value="<%= params[:end_date]%>">
                 <i class="calendar alternate icon"></i>
             </div>
         </div>
         <button type="submit" class="ui button primary">Submit</button>
     </div>
 </form>
+<table class="ui very basic table show-table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Consignment Store</th>
+            <th>Sales</th>
+            <th>COGS</th>
+            <th>Total Items</th>
+            <th colspan="2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @ending_inventories.each do |ending_inventory| %>
+        <tr>
+            <td><%= ending_inventory.created_at.strftime('%d-%b-%y') %></td>
+            <td><%= ending_inventory.store.name %></td>
+            <td>Php <%= '%.2f' % ending_inventory.total_sales %></td>
+            <td>Php <%= '%.2f' % ending_inventory.total_cogs %></td>
+            <td><%= ending_inventory.total_items %> units</td>
+            <td><%= link_to 'View',store_ending_inventory_path(ending_inventory.store, ending_inventory.id) %></td>
+            <td><%= link_to 'Download', store_ending_inventory_path(ending_inventory.store, ending_inventory.id, format: 'xls'), style: 'color:#7a828a'%></td>
+        </tr>    
+        <% end %>
+        <tr>
+            <td colspan="6" class="paginate">
+                <%= will_paginate @ending_inventories, param_name: 'page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+            </td>
+        </tr>
+    </tbody>
+</table>
