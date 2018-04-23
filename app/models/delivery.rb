@@ -1,8 +1,13 @@
 class Delivery < ApplicationRecord
+  # Entity relationships
   belongs_to :store
   has_many :delivery_products
   has_one :transfer
   accepts_nested_attributes_for :delivery_products, reject_if: :all_blank,allow_destroy: true
+
+  # Validation
+  validates :store, :description, :delivery_products, presence: true
+
 
   def items 
     total_items = 0

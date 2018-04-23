@@ -1,9 +1,14 @@
 class Pullout < ApplicationRecord
+  # Entity Relationship
   belongs_to :store
   has_many :pullout_products
   has_one :transfer
   accepts_nested_attributes_for :pullout_products, reject_if: :all_blank, allow_destroy: true
 
+  # Validation
+  validates :store, :description, :pullout_product, presence: true
+
+  # Instance Methods
   def items 
     total_items = 0
     pullout_products.each do |dp|

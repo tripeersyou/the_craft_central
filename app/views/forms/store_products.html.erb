@@ -2,11 +2,50 @@
 <form action="/forms/store_products" method="get" class="ui form">
     <div class="fields">
         <div class="ten wide field">
-            <div class="ui left icon input">
-                <input type="text" placeholder="Search a store" name="query">
-                <i class="search icon"></i>
-            </div>
+            <select type="text" placeholder="Search a store" name="store_id" class="ui search drpdown">
+                <option value=" ">Store Name</option>
+                <% @stores.each do |store|%>
+                    <% if params[:store_id].to_i == store.id%>
+                        <option value="<%=store.id%>" selected="selected"><%= store.name %></option>
+                    <% else %>
+                        <option value="<%=store.id%>"><%= store.name %></option>                    
+                    <% end %>
+                <% end %>
+            </select>
         </div>
         <button type="submit" class="ui button primary">SUBMIT</button>
     </div>
 </form>
+
+<table class="ui very basic table show-table">
+    <thead>
+        <tr>
+            <th colspan="5" style="text-align:center;">
+                <h3>The Craft Central Product List</h3>
+            </th>
+            <th colspan="1">
+                <%= link_to "PRINT LIST", products_path(format: :xls), class: 'ui basic primary button'%>
+            </th>
+        </tr>
+        <tr>
+            <th>SKU</th>
+            <th>Name</th>
+            <th>Store</th>
+            <th>Stocks Left</th>
+            <th>COGS</th>
+            <th>Sales</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @store_products.each do |product| %>
+        <tr>
+            <td><%= product.product.sku %></td>
+            <td><%= product.product.name %></td>
+            <td><%= product.store.name %></td>
+            <td><%= product.inventory %></td>
+            <td>Php <%= '%.2f' % product.cogs %></td>
+            <td>Php <%= '%.2f' % product.sales %></td>
+        </tr>
+        <%end%>
+    </tbody>
+</table>

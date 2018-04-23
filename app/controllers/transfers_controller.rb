@@ -43,7 +43,8 @@ class TransfersController < ApplicationController
         delivery.total_cost = delivery.cost
         delivery.total_price = delivery.price  
         delivery.description = "Product transfer from #{@store.name} to #{@transfer.store_to.name}"
-
+        
+        pullout.description = "Product transfer from #{@store.name} to #{@transfer.store_to.name}"
         pullout.total_items = pullout.items
         pullout.total_cost = pullout.cost
         pullout.total_price = pullout.price  

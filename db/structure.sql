@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS `admins`;
-
 CREATE TABLE `admins` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
@@ -20,7 +19,7 @@ CREATE TABLE `admins` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_admins_on_email` (`email`),
   UNIQUE KEY `index_admins_on_reset_password_token` (`reset_password_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `ar_internal_metadata`;
 CREATE TABLE `ar_internal_metadata` (
@@ -31,26 +30,7 @@ CREATE TABLE `ar_internal_metadata` (
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `beginning_inventory_products`;
-
-CREATE TABLE `beginning_inventory_products` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) DEFAULT NULL,
-  `ending_inventory_id` bigint(20) DEFAULT NULL,
-  `price` decimal(2,0) NOT NULL,
-  `cost` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_beginning_inventory_products_on_product_id` (`product_id`),
-  KEY `index_beginning_inventory_products_on_ending_inventory_id` (`ending_inventory_id`),
-  CONSTRAINT `fk_rails_90683eef0d` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  CONSTRAINT `fk_rails_d7dcf11baf` FOREIGN KEY (`ending_inventory_id`) REFERENCES `ending_inventories` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 DROP TABLE IF EXISTS `brands`;
-
 CREATE TABLE `brands` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -60,7 +40,6 @@ CREATE TABLE `brands` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `deliveries`;
-
 CREATE TABLE `deliveries` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `store_id` bigint(20) DEFAULT NULL,
@@ -77,7 +56,6 @@ CREATE TABLE `deliveries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `delivery_products`;
-
 CREATE TABLE `delivery_products` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `delivery_id` bigint(20) DEFAULT NULL,
@@ -95,7 +73,6 @@ CREATE TABLE `delivery_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `ending_inventories`;
-
 CREATE TABLE `ending_inventories` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `store_id` bigint(20) DEFAULT NULL,
@@ -109,12 +86,14 @@ CREATE TABLE `ending_inventories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `ending_inventory_products`;
-
 CREATE TABLE `ending_inventory_products` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) DEFAULT NULL,
   `ending_inventory_id` bigint(20) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
+  `beginning_quantity` int(11) DEFAULT NULL,
+  `ending_quantity` int(11) DEFAULT NULL,
+  `price` decimal(2,0) DEFAULT NULL,
+  `cost` decimal(2,0) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -125,7 +104,6 @@ CREATE TABLE `ending_inventory_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `order_products`;
-
 CREATE TABLE `order_products` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `order_id` bigint(20) DEFAULT NULL,
@@ -141,7 +119,6 @@ CREATE TABLE `order_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `orders`;
-
 CREATE TABLE `orders` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `supplier_id` bigint(20) DEFAULT NULL,
@@ -154,7 +131,6 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `products`;
-
 CREATE TABLE `products` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `sku` varchar(255) NOT NULL,
@@ -174,7 +150,6 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `pullout_products`;
-
 CREATE TABLE `pullout_products` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `pullout_id` bigint(20) DEFAULT NULL,
@@ -192,7 +167,6 @@ CREATE TABLE `pullout_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `pullouts`;
-
 CREATE TABLE `pullouts` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `store_id` bigint(20) DEFAULT NULL,
@@ -208,14 +182,12 @@ CREATE TABLE `pullouts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `schema_migrations`;
-
 CREATE TABLE `schema_migrations` (
   `version` varchar(255) NOT NULL,
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `staffs`;
-
 CREATE TABLE `staffs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
@@ -235,10 +207,9 @@ CREATE TABLE `staffs` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_staffs_on_email` (`email`),
   UNIQUE KEY `index_staffs_on_reset_password_token` (`reset_password_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `store_products`;
-
 CREATE TABLE `store_products` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `store_id` bigint(20) DEFAULT NULL,
@@ -254,7 +225,6 @@ CREATE TABLE `store_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `stores`;
-
 CREATE TABLE `stores` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -268,7 +238,6 @@ CREATE TABLE `stores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `supplier_products`;
-
 CREATE TABLE `supplier_products` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `supplier_id` bigint(20) DEFAULT NULL,
@@ -283,10 +252,10 @@ CREATE TABLE `supplier_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `suppliers`;
-
 CREATE TABLE `suppliers` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `address` text,
   `contact_person` varchar(255) DEFAULT NULL,
   `contact_number` varchar(255) DEFAULT NULL,
@@ -296,7 +265,6 @@ CREATE TABLE `suppliers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `transfer_products`;
-
 CREATE TABLE `transfer_products` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `transfer_id` bigint(20) DEFAULT NULL,
@@ -312,11 +280,10 @@ CREATE TABLE `transfer_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `transfers`;
-
 CREATE TABLE `transfers` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `store_to_id` bigint(20) DEFAULT NULL,
-  `store_from_id` bigint(20) DEFAULT NULL,
+  `store_to_id` bigint(20) NOT NULL,
+  `store_from_id` bigint(20) NOT NULL,
   `pullout_id` bigint(20) DEFAULT NULL,
   `delivery_id` bigint(20) DEFAULT NULL,
   `created_at` datetime NOT NULL,
@@ -345,7 +312,6 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20180212083741'),
 ('20180212084304'),
 ('20180212084826'),
-('20180212085044'),
 ('20180212124737'),
 ('20180212125109'),
 ('20180212125216'),

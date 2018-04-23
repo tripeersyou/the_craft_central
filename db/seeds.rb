@@ -8,14 +8,14 @@
 
 if Admin.all.empty?
     puts "Seeding default Admin"
-    Admin.create({first_name: 'Nix', last_name: 'Cabrera', email:'admin@example.com', password: 'password', password_confirmation: 'password', status: true})
+    Admin.create({first_name: 'Alexis Dianne', last_name: 'Ventura', email:'admin@example.com', password: 'password', password_confirmation: 'password', status: true})
 else
     puts "Default Admin seeded"
 end
 
 if Staff.all.empty?
     puts "Seeding default Staff"
-    Staff.create({first_name: 'Nix', last_name: 'Cabrera', email:'staff@example.com', password: 'password', password_confirmation: 'password'})
+    Staff.create({first_name: 'Alexis Dianne', last_name: 'Ventura', email:'staff@example.com', password: 'password', password_confirmation: 'password'})
 else
     puts "Default Staff seeded"
 end

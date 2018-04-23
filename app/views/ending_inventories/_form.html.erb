@@ -1,3 +1,4 @@
+<input type="hidden" name="store_id" id="store_id" value="<%= @store.id %>">
 <div class="ui grid">
     <div class="seven wide column">
         <%= simple_form_for([@store, @ending_inventory], html: {class: 'ui form'}) do |f| %>
@@ -14,3 +15,53 @@
         <% end %>
     </div>
 </div>
+<script>
+$(document).on('turbolinks:load', function () {
+    var field_number = 1;
+    $('form').on('cocoon:after-insert', function (e, ending_inventory_product) {
+        ending_inventory_product.find('select').addClass('ajax_field');
+        ending_inventory_product.find('select').attr('field_number', field_number);
+        ending_inventory_product.find('input').addClass('nested_input ' + field_number);
+        ending_inventory_product.find('input').attr('field_number', field_number);
+        field_number++;
+        $('.nested_input').change(function () {
+            var field_number = this.getAttribute('field_number');
+            var select = $('[field_number='+field_number+']');
+            var number = select.attr('field_number');
+            var value = this.value;
+            var store_id = $('#store_id').val();
+            console.log(value);
+            if (select.val() != "") {
+                $.getJSON('/api/store_product?id=' + select.val() + '&store=' + store_id , function(product){
+                    if (product.inventory < value || value < 0) {
+                        $("input[type='submit']").addClass('disabled');
+                    } else {
+                        $("input[type='submit']").removeClass('disabled');
+                    }
+                });
+            } else {
+                $("input[type='submit']").addClass('disabled');   
+            }
+        });
+        $('.nested_input').keyup(function () {
+            var field_number = this.getAttribute('field_number');
+            var select = $('[field_number='+field_number+']');
+            var number = select.attr('field_number');
+            var value = this.value;
+            var store_id = $('#store_id').val();
+            console.log(value);
+            if (select.val() != "") {
+                $.getJSON('/api/store_product?id=' + select.val() + '&store=' + store_id, function(product){
+                    if (product.inventory < value || value < 0) {
+                        $("input[type='submit']").addClass('disabled');
+                    } else {
+                        $("input[type='submit']").removeClass('disabled');
+                    }
+                });
+            } else {
+                $("input[type='submit']").addClass('disabled');   
+            }
+        });
+    });
+}); 
+</script>

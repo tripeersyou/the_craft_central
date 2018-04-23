@@ -1,4 +1,5 @@
 class Store < ApplicationRecord
+    # Entity realationships
     has_many :store_products
     has_many :products, through: :store_products
     has_many :deliveries
@@ -6,18 +7,10 @@ class Store < ApplicationRecord
     has_many :ending_inventories
     accepts_nested_attributes_for :store_products, reject_if: :all_blank, allow_destroy: true
 
+    # Validation
+    validates :name, :address, :email, :contact_person, :contact_number, presence: true
 
-    def clean_up
-        to_clean = []
-        store_products.each do |store_product|
-            to_clean << store_product if store_product.inventory <= 0
-        end
-
-        to_clean.each do |store_product|
-            store_products.delete store_product
-        end
-    end
-
+    # Instance methods
     def transfers
         Transfer.all.where(store_from_id: id)
     end
@@ -51,17 +44,14 @@ class Store < ApplicationRecord
         if !ending_inventories.empty?
             ending_inventories.each do |ending_inventory|
                 ending_inventory.ending_inventory_products.each do |ending_inventory_product|
-                    ending_inventory.beginning_inventory_products.each do |beginning_inventory_product|
-                        if beginning_inventory_product.product == ending_inventory_product.product
-                            sold_items += beginning_inventory_product.quantity - ending_inventory_product.quantity
-                        end
-                    end
+                    sold_items += ending_inventory_product.beginning_quantity - ending_inventory_product.ending_quantity
                 end
             end
         end
         sold_items
     end
 
+    # Static Methods
     def self.total_sales
         @store = Store.all
         total_sales = 0.0

@@ -19,19 +19,18 @@ class FormsController < ApplicationController
     def products
         if params[:query]
             q_string = '%'+params[:query]+'%'
-            @products = Product.where('name LIKE ? or sku LIKE ?', q_string, q_string)
-            puts @products
+            @products = Product.paginate(page: params[:page], per_page: 15).where('name LIKE ? or sku LIKE ?', q_string, q_string)
         else
-            @products = Product.all
+            @products = Product.paginate(page: params[:page], per_page: 15)
         end
     end
     def store_products
         @stores = Store.all
-        if params[:store_id]
+        if params[:store_id] and params[:store_id] != " "
             store = Store.find(params[:store_id])
-            @store_products = store.store_products
+            @store_products = store.store_products.paginate(page: params[:page], per_page: 15).where('store_id NOT NULL')
         else
-            @store_products = StoreProduct.all
+            @store_products = StoreProduct.paginate(page: params[:page], per_page: 15).where('store_id NOT NULL')
         end
     end
 end

@@ -32,18 +32,6 @@ ActiveRecord::Schema.define(version: 20180212125601) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "beginning_inventory_products", force: :cascade do |t|
-    t.integer "product_id"
-    t.integer "ending_inventory_id"
-    t.decimal "price", precision: 2, null: false
-    t.integer "cost", null: false
-    t.integer "quantity", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ending_inventory_id"], name: "index_beginning_inventory_products_on_ending_inventory_id"
-    t.index ["product_id"], name: "index_beginning_inventory_products_on_product_id"
-  end
-
   create_table "brands", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -86,7 +74,10 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   create_table "ending_inventory_products", force: :cascade do |t|
     t.integer "product_id"
     t.integer "ending_inventory_id"
-    t.integer "quantity"
+    t.integer "beginning_quantity"
+    t.integer "ending_quantity"
+    t.decimal "price", precision: 2
+    t.decimal "cost", precision: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ending_inventory_id"], name: "index_ending_inventory_products_on_ending_inventory_id"

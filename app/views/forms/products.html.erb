@@ -10,3 +10,44 @@
         <button type="submit" class="ui button primary">SUBMIT</button>
     </div>
 </form>
+
+<table class="ui very basic table show-table">
+    <thead>
+        <tr>
+            <th colspan="7" style="text-align:center;">
+                <h3>The Craft Central Product List</h3>
+            </th>
+            <th colspan="2">
+                <%= link_to "PRINT LIST", products_path(format: :xls), class: 'ui basic primary button'%>
+            </th>
+        </tr>
+        <tr>
+            <th>SKU</th>
+            <th>Name</th>
+            <th>Quantity Sold</th>
+            <th>Stocks Left</th>
+            <th>COGS</th>
+            <th>Sales</th>
+            <th colspan="2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @products.each do |product| %>
+        <tr>
+            <td><%= product.sku%></td>
+            <td><%= product.name %></td>
+            <td><%= product.quantity_sold%> units</td>
+            <td><%= product.stocks_left %> units</td>
+            <td>Php <%= '%.2f' % product.cogs %></td>
+            <td>Php <%= '%.2f' % product.sales %></td>
+            <td><%= link_to 'View', product_path(product) %></td>
+            <td><%= link_to 'Edit', edit_product_path(product), style: 'color:#7a828a;'%></td>
+        </tr>            
+        <% end %>
+        <tr>
+            <td colspan="8">
+                <%= will_paginate @products, param_name: 'page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+            </td>
+        </tr>
+    </tbody>
+</table>

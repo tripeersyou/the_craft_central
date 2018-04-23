@@ -48,6 +48,12 @@ Rails.application.routes.draw do
           get 'store_products', to: 'forms#store_products'
         end
       end
+      resources :api, only: [] do
+        collection do 
+          get 'product', to: 'api#products'
+          get 'store_product', to: 'api#store_products'
+        end
+      end
     end
   end
 

@@ -1,4 +1,5 @@
 class Transfer < ApplicationRecord
+  # Entity Relationship
   belongs_to :store_to, 
     foreign_key: 'store_to_id',
     class_name: 'Store'
@@ -9,6 +10,10 @@ class Transfer < ApplicationRecord
   belongs_to :delivery
   has_many :transfer_products
   accepts_nested_attributes_for :transfer_products, reject_if: :all_blank,allow_destroy: true
+  
+  # Validation
+  validates :store_from, :store_to, presence: true
+
   def total_items
 	total_items = 0
 	transfer_products.each do |transfer_product|

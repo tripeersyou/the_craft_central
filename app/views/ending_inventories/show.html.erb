@@ -14,23 +14,19 @@
     </thead>
     <tbody>
         <% @ending_inventory.ending_inventory_products.each do |ending_inventory_product| %>
-            <% @ending_inventory.beginning_inventory_products.each do |beginning_inventory_product| %>
-                <% if ending_inventory_product.product == beginning_inventory_product.product %>
-				<tr>
-                    <% difference = beginning_inventory_product.quantity - ending_inventory_product.quantity %>                
-                    <td><%= ending_inventory_product.product.sku %></td>
-                    <td><%= ending_inventory_product.product.name %></td>
-                    <td><%= "Php %.2f" % (beginning_inventory_product.cost * (beginning_inventory_product.quantity - ending_inventory_product.quantity)) %></td>
-                    <td><%= "Php %.2f" % (beginning_inventory_product.price * (beginning_inventory_product.quantity - ending_inventory_product.quantity)) %></td>
-                    <td><%= beginning_inventory_product.quantity - ending_inventory_product.quantity %> units</td>
-                    <% if difference >= 5 %>
-                        <td style="color:green;">Moving</td>
-                    <% else %>
-                        <td style="color:red;">Not moving</td>
-                    <% end %>
-				</tr>
+            <tr>
+                <% difference = ending_inventory_product.beginning_quantity - ending_inventory_product.ending_quantity %>                
+                <td><%= ending_inventory_product.product.sku %></td>
+                <td><%= ending_inventory_product.product.name %></td>
+                <td><%= "Php %.2f" % (ending_inventory_product.cost * (difference)) %></td>
+                <td><%= "Php %.2f" % (ending_inventory_product.price * (difference)) %></td>
+                <td><%= difference %> units</td>
+                <% if difference >= 5 %>
+                    <td style="color:green;">Moving</td>
+                <% else %>
+                    <td style="color:red;">Not moving</td>
                 <% end %>
-            <% end %>        
+            </tr>
         <% end %>
         <tr>
             <td colspan="2"></td>

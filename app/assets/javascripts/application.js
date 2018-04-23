@@ -21,6 +21,7 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function () {
+    $('#loader').css('display', 'none');
     $('.message .close').on('click', function () {
         $(this).closest('.message').transition('fade');
     });
@@ -31,4 +32,11 @@ $(document).on('turbolinks:load', function () {
     $('.basic.button').mouseleave(function () {
         $(this).addClass('basic')
     });
-})
+    $('input[type="submit"]').click(function(){
+        $('#loader').css('display', 'block');
+    });
+});
+
+$(document).on('turbolinks:request-start', function(){
+    $('#loader').css('display', 'block');
+});

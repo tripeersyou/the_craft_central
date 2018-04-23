@@ -12,6 +12,14 @@
 --- 
 
 ## Changelog and Development Log
+* April 23, 2018
+    * Added back-end validation for a ton of models.
+* April 18, 2018
+    * Revamped the database and fixed all code regarding `beginning_inventory_products`
+    * Generated `APIs Controller`
+    * Finished the screens
+* April 17, 2018
+    * Generated `rspec-rails` helper files
 * April 16, 2018
     * Added functionality for 'forms#index'
     * Added `forms/index.html.erb` index code.
