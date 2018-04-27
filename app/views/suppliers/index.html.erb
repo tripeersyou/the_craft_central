@@ -19,7 +19,7 @@
     </div>
 </form>
 <% if !@suppliers.empty? %>
-  <div class="ui card" style="width:100%">
+  <div class="ui card" style="width:70%">
     <div class="content">
         <h2>List of All Suppliers</h2>
         <table class="ui very basic table">
@@ -27,6 +27,8 @@
                 <tr>
                     <th>Name</th>
                     <th>Product Count</th>
+                    <th>Order Count</th>
+                    <th>Products Delivered</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -36,6 +38,8 @@
                 <tr>
                     <td><%= supplier.name %></td>
                     <td><%= supplier.products.count %> units</td>
+                    <td><%= supplier.orders.size %> orders</td>
+                    <td><%= supplier.products_delivered %> units</td>
                     <td></td>
                     <td><%= link_to 'See Details', supplier_path(supplier) %></td>
                 </tr>

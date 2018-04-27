@@ -1,3 +1,4 @@
+<%= link_to("< Go Back to #{@pullout.store.name}", store_path(@pullout.store), style: 'color:#7a828a;') %>
 <h1>Pullout to <%= @pullout.store.name %></h1>
 <p><%= @pullout.created_at.strftime("%B %d, %Y") %></p>
 
@@ -20,9 +21,9 @@
   			<td><%= pullout_product.product.name %></td>
   			<td><%= "Php %.2f" %  pullout_product.product.cost %></td>
   			<td><%= "Php %.2f" % pullout_product.product.price %></td>
-  			<td><%= link_to "View", product_path(pullout_product.product) %></td>
-  		</tr>                                                                
-		<% end %>                                                                
+  			<td><%= link_to "View Product", product_path(pullout_product.product) %></td>
+  		</tr>                                         
+		<% end %>
 		<tr>
 			<td colspan="2"><b>Total: </b></td>
 			<td><b><%= "Php %.2f" % @pullout.total_cost %></b></td>

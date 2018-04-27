@@ -12,19 +12,27 @@
 --- 
 
 ## Changelog and Development Log
+
+* April 27, 2018
+    * Edited `_form.html.erb` for the edit page.
+    * Completed server-side validation.
+    * Added the `roo` gem.
+* April 26, 2018
+    * Created the `structure.sql` for each DBMS.
+    * Created `production_setup` shell script.
 * April 23, 2018
     * Added back-end validation for a ton of models.
 * April 18, 2018
     * Revamped the database and fixed all code regarding `beginning_inventory_products`
-    * Generated `APIs Controller`
+    * Generated `ApiController`
     * Finished the screens
 * April 17, 2018
     * Generated `rspec-rails` helper files
 * April 16, 2018
-    * Added functionality for 'forms#index'
+    * Added functionality for `forms#index`
     * Added `forms/index.html.erb` index code.
 * April 13, 2018
-    * Created the forms controller
+    * Created the `FormsController`
     * Added routes for forms page
 * March 30, 2018
     * Added the `.xls.erb` template files

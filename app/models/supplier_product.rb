@@ -4,5 +4,5 @@ class SupplierProduct < ApplicationRecord
   belongs_to :product
 
   # Validation
-  validates :product, :presence: true
+  validates :product, presence: true
 end

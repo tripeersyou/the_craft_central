@@ -7,4 +7,25 @@ class Supplier < ApplicationRecord
     
     # Validation
     validates :name, :address, :email, :contact_person, :contact_number, presence: true
+    validate :supplier_products_unique
+
+    def supplier_products_unique
+        products = []
+        supplier_products.each do |supplier_product|
+            products << supplier_product.product
+        end
+        if products.size != products.uniq.size
+            errors.add(:supplier_products,'Supplier products must be unique.')
+        end
+    end
+
+    def products_delivered
+        products_delivered = 0
+        orders.each do |order|
+            order.order_products.each do |order_product|
+                products_delivered += order_product.quantity
+            end
+        end
+        products_delivered
+    end
 end

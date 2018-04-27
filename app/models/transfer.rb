@@ -13,12 +13,23 @@ class Transfer < ApplicationRecord
   
   # Validation
   validates :store_from, :store_to, presence: true
+  validate :transfer_products_unique
+
+  def transfer_products_unique
+    products = []
+    transfer_products.each do |transfer_product|
+        products << transfer_product.product
+    end
+    if products.size != products.uniq.size
+        errors.add(:store_to,'Supplier products must be unique.')
+    end
+  end
 
   def total_items
-	total_items = 0
-	transfer_products.each do |transfer_product|
-		total_items += transfer_product.quantity
-	end
-	total_items
+	  total_items = 0
+	  transfer_products.each do |transfer_product|
+	  	total_items += transfer_product.quantity
+	  end
+	  total_items
   end
 end

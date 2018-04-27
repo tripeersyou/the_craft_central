@@ -6,7 +6,18 @@ class Pullout < ApplicationRecord
   accepts_nested_attributes_for :pullout_products, reject_if: :all_blank, allow_destroy: true
 
   # Validation
-  validates :store, :description, :pullout_product, presence: true
+  validates :store, :description, :pullout_products, presence: true
+  validate :pullout_products_unique
+
+  def pullout_products_unique
+    products = []
+    pullout_products.each do |pullout_product|
+        products << pullout_product.product
+    end
+    if products.size != products.uniq.size
+        errors.add(:pullout_products,'Supplier products must be unique.')
+    end
+  end
 
   # Instance Methods
   def items 

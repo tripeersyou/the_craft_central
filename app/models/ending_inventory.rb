@@ -3,7 +3,19 @@ class EndingInventory < ApplicationRecord
   has_many :ending_inventory_products
   accepts_nested_attributes_for :ending_inventory_products, reject_if: :all_blank, allow_destroy: true
 
-  validates :ending_inventory_product, presence: true
+  # Validation
+  validates :ending_inventory_products, presence: true
+  validate :ending_inventory_products_unique
+
+  def ending_inventory_products_unique
+    products = []
+    ending_inventory_products.each do |ending_inventory_product|
+        products << ending_inventory_product.product
+    end
+    if products.size != products.uniq.size
+        errors.add(:ending_inventory_products,'Supplier products must be unique.')
+    end
+  end
 
   def total_sales
     total_sales = 0.0

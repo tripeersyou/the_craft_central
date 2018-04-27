@@ -6,10 +6,10 @@ class DeliveryProduct < ApplicationRecord
   # Validation
   validate :delivery_product_must_be_valid
   validates :product, :quantity, presence: true
-  validates :quantity, numericality: {greater_than: 0}
+  validates :quantity, numericality: {greater_than: 0, allow_nil: false}
 
   def delivery_product_must_be_valid
-    if !transfer.nil?
+    if !delivery.transfer.nil?
       if quantity > product.limit
         errors.add(:quantity, "can't be greater than the specified product limit.")
       else

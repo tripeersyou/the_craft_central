@@ -28,9 +28,9 @@ class FormsController < ApplicationController
         @stores = Store.all
         if params[:store_id] and params[:store_id] != " "
             store = Store.find(params[:store_id])
-            @store_products = store.store_products.paginate(page: params[:page], per_page: 15).where('store_id NOT NULL')
+            @store_products = store.store_products.paginate(page: params[:page], per_page: 15)
         else
-            @store_products = StoreProduct.paginate(page: params[:page], per_page: 15).where('store_id NOT NULL')
+            @store_products = StoreProduct.paginate(page: params[:page], per_page: 15)
         end
     end
 end

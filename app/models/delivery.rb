@@ -7,7 +7,17 @@ class Delivery < ApplicationRecord
 
   # Validation
   validates :store, :description, :delivery_products, presence: true
+  validate :delivery_products_unique
 
+  def delivery_products_unique
+    products = []
+    delivery_products.each do |delivery_product|
+        products << delivery_product.product
+    end
+    if products.size != products.uniq.size
+        errors.add(:delivery_products,'Supplier products must be unique.')
+    end
+  end
 
   def items 
     total_items = 0

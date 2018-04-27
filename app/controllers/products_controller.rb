@@ -13,20 +13,20 @@ class ProductsController < ApplicationController
     end
 
     def create
-        brand = Brand.all.where(id: product_params[:brand_id]).first
-        if brand.nil?
-            brand = Brand.new({name: product_params[:brand_id]})
-            brand.save
-            product = Product.new(product_params)
-            product.brand = brand
-            if product.save
+        @brand = Brand.all.where(id: product_params[:brand_id]).first
+        if @brand.nil?
+            @brand = Brand.new({name: product_params[:brand_id]})
+            @brand.save
+            @product = Product.new(product_params)
+            @product.brand = @brand
+            if @product.save
                 redirect_to products_path
             else
                 render :new
             end
         else
-            product = Product.new(product_params)
-            if product.save
+            @product = Product.new(product_params)
+            if @product.save
                 redirect_to products_path
             else
                 render :new

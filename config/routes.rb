@@ -57,6 +57,8 @@ Rails.application.routes.draw do
     end
   end
 
+  if Rails.env.development?
+    visualize
+  end
   root 'devise/sessions#new'
-
 end

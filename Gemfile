@@ -30,7 +30,8 @@ gem 'jbuilder', '~> 2.5'
 gem "select2-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+# Parse CSV and .xls files with roo
+gem 'roo'
 # Use jQuery-Rails to add jQuery to the Asset Pipeline
 gem 'jquery-rails'
 # Devise for user authentication

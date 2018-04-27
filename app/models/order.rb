@@ -3,6 +3,20 @@ class Order < ApplicationRecord
   has_many :order_products
   accepts_nested_attributes_for :order_products, reject_if: :all_blank,allow_destroy: true
 
+  # Validation
+  validates :order_products, presence: true
+  validate :order_products_unique
+
+  def order_products_unique
+    products = []
+    order_products.each do |order_product|
+        products << order_product.product
+    end
+    if products.size != products.uniq.size
+        errors.add(:order_products,'Supplier products must be unique.')
+    end
+  end
+
   def total_quantity
     total_items = 0
     order_products.each do |order_product|

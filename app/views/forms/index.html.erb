@@ -28,7 +28,7 @@
                 <i class="calendar alternate icon"></i>
             </div>
         </div>
-        <button type="submit" class="ui button primary">Submit</button>
+        <button type="submit" class="ui button primary">SEARCH</button>
     </div>
 </form>
 <table class="ui very basic table show-table">
@@ -55,7 +55,7 @@
         </tr>    
         <% end %>
         <tr>
-            <td colspan="6" class="paginate">
+            <td colspan="7" class="paginate">
                 <%= will_paginate @ending_inventories, param_name: 'page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
             </td>
         </tr>

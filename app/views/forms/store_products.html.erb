@@ -8,12 +8,12 @@
                     <% if params[:store_id].to_i == store.id%>
                         <option value="<%=store.id%>" selected="selected"><%= store.name %></option>
                     <% else %>
-                        <option value="<%=store.id%>"><%= store.name %></option>                    
+                        <option value="<%=store.id%>"><%= store.name %></option>
                     <% end %>
                 <% end %>
             </select>
         </div>
-        <button type="submit" class="ui button primary">SUBMIT</button>
+        <button type="submit" class="ui button primary">SEARCH PRODUCT LIST</button>
     </div>
 </form>
 
@@ -21,7 +21,11 @@
     <thead>
         <tr>
             <th colspan="5" style="text-align:center;">
-                <h3>The Craft Central Product List</h3>
+                <% if params[:store_id] && params[:store_id] != ' ' %>
+                    <h3><%= Store.find(params[:store_id]).name %> Consigned Products</h3>
+                <% else %>
+                    <h3>The Craft Central Product List</h3>                
+                <% end %>
             </th>
             <th colspan="1">
                 <%= link_to "PRINT LIST", products_path(format: :xls), class: 'ui basic primary button'%>

@@ -54,7 +54,6 @@ class TransfersController < ApplicationController
 
         @transfer.delivery = delivery
         @transfer.pullout = pullout
-        puts @transfer.inspect
         if @transfer.save
             redirect_to store_path(@store)
         else

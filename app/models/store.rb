@@ -9,6 +9,17 @@ class Store < ApplicationRecord
 
     # Validation
     validates :name, :address, :email, :contact_person, :contact_number, presence: true
+    validate :store_products_unique
+
+    def store_products_unique
+        products = []
+        store_products.each do |store_product|        
+            products << store_product.product
+        end
+        if products.size != products.uniq.size
+            errors.add(:name,'Consignment store products must be unique.')
+        end 
+    end
 
     # Instance methods
     def transfers

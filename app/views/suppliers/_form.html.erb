@@ -28,7 +28,11 @@
             </div>
         <%end%>
         <br>
-        <%= f.button :submit, class: 'ui button primary' %>
+        <% if params[:action] == 'new' %>
+            <%= f.button :submit, class: 'ui button primary' %>
+        <% else %>
+            <%= f.button :submit, class: 'ui button positive' %>
+        <% end %>
     <% end %>
     </div>
 </div>

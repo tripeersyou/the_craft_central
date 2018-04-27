@@ -5,8 +5,8 @@ class CreateEndingInventoryProducts < ActiveRecord::Migration[5.1]
       t.references :ending_inventory, foreign_key: true
       t.integer :beginning_quantity
       t.integer :ending_quantity
-      t.decimal :price, precision: 2
-      t.decimal :cost, precision: 2
+      t.decimal :price, precision: 10, scale: 2
+      t.decimal :cost, precision: 10, scale: 2
 
       t.timestamps
     end
