@@ -40,7 +40,7 @@ class StoresController < ApplicationController
 
         respond_to do |format|
             format.xls do
-                headers["Content-Disposition"] =  "attachment; filename=\"Pullout #{@store.name} - #{DateTime.now.strftime('%B %d %Y')}.xls\""
+                headers["Content-Disposition"] =  "attachment; filename=\"Store Products #{@store.name} - #{DateTime.now.strftime('%B %d %Y')}.xls\""
             end
             format.html
         end

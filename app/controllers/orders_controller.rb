@@ -2,6 +2,13 @@ class OrdersController < ApplicationController
     before_action :set_supplier
     def show
         @order = Order.find(params[:id])
+
+        respond_to do |format|
+            format.xls do
+                headers["Content-Disposition"] =  "attachment; filename=\"Order from #{@order.supplier.name} - #{@order.created_at.strftime('%B %d %Y')}.xls\""
+            end
+            format.html
+        end
     end
     def new
         @order = @supplier.orders.new
