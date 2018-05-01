@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   create_table "deliveries", force: :cascade do |t|
     t.integer "store_id"
     t.integer "total_items", null: false
-    t.decimal "total_cost", precision: 2, null: false
-    t.decimal "total_price", precision: 2, null: false
+    t.decimal "total_cost", precision: 10, scale: 2, null: false
+    t.decimal "total_price", precision: 10, scale: 2, null: false
     t.text "description", null: false
     t.boolean "status", default: false
     t.datetime "created_at", null: false
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
     t.integer "delivery_id"
     t.integer "product_id"
     t.integer "quantity", null: false
-    t.decimal "price", precision: 2, null: false
-    t.decimal "cost", precision: 2, null: false
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.decimal "cost", precision: 10, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["delivery_id"], name: "index_delivery_products_on_delivery_id"
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
 
   create_table "ending_inventories", force: :cascade do |t|
     t.integer "store_id"
-    t.decimal "sales", precision: 2
-    t.decimal "cogs", precision: 2
+    t.decimal "sales", precision: 10, scale: 2
+    t.decimal "cogs", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_ending_inventories_on_store_id"
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
     t.integer "ending_inventory_id"
     t.integer "beginning_quantity"
     t.integer "ending_quantity"
-    t.decimal "price", precision: 2
-    t.decimal "cost", precision: 2
+    t.decimal "price", precision: 10, scale: 2
+    t.decimal "cost", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ending_inventory_id"], name: "index_ending_inventory_products_on_ending_inventory_id"
@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
     t.integer "brand_id"
     t.text "description"
     t.integer "limit", null: false
-    t.decimal "price", precision: 2, null: false
-    t.decimal "cost", precision: 2, null: false
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.decimal "cost", precision: 10, scale: 2, null: false
     t.integer "inventory", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -121,8 +121,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
     t.integer "pullout_id"
     t.integer "product_id"
     t.integer "quantity", null: false
-    t.decimal "price", precision: 2, null: false
-    t.decimal "cost", precision: 2, null: false
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.decimal "cost", precision: 10, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_pullout_products_on_product_id"
@@ -132,8 +132,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   create_table "pullouts", force: :cascade do |t|
     t.integer "store_id"
     t.integer "total_items", null: false
-    t.decimal "total_cost", precision: 2, null: false
-    t.decimal "total_price", precision: 2, null: false
+    t.decimal "total_cost", precision: 10, scale: 2, null: false
+    t.decimal "total_price", precision: 10, scale: 2, null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -172,9 +172,9 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   create_table "stores", force: :cascade do |t|
     t.string "name", null: false
     t.text "address"
-    t.string "email"
+    t.string "email", default: ""
     t.string "contact_person", default: ""
-    t.string "contact_number", limit: 11
+    t.string "contact_number", limit: 20, default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

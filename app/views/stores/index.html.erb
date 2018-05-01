@@ -5,7 +5,7 @@
             <input type="text" name="store_search" id="store_search" placeholder="Search for stores" style="width: 20em">
         </div>
         <div class="field">
-            <select name="product_sort" id="store_sort" class="ui dropdown">
+            <select name="store_sort" id="store_sort" class="ui dropdown">
                 <option value="">Sort by</option>
                 <option value="name">Name</option>
                 <option value="created_at">Created At</option>
@@ -44,5 +44,5 @@
     <br>
     <%= will_paginate @stores,renderer: WillPaginateSemanticUi::ActionView::Renderer %> 
 <% else %>
-  <h2>No Stores Yet</h2>
+  <h2>No Stores.</h2>
 <% end %>

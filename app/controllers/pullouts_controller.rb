@@ -46,6 +46,13 @@ class PulloutsController < ApplicationController
 
     def show
         @pullout = Pullout.find(params[:id])
+
+        respond_to do |format|
+            format.xls do 
+                headers["Content-Disposition"] =  "attachment; filename=\"Pullout #{@pullout.store.name} - #{@pullout.created_at.strftime('%B %d %Y')}.xls\""
+            end
+            format.html
+        end
     end
     private
         def pullout_params

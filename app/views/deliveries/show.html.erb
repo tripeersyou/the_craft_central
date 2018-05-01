@@ -1,3 +1,4 @@
+<%= link_to("< Go Back to #{@delivery.store.name}", store_path(@delivery.store), style: 'color:#7a828a;') %>
 <h1>Delivery to <%= @delivery.store.name %></h1>
 <p><%= @delivery.created_at.strftime("%B %d, %Y") %></p>
 

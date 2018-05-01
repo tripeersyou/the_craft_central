@@ -9,21 +9,19 @@
                 <Cell><Data ss:Type="String">Product Name</Data></Cell>
                 <Cell><Data ss:Type="String">Cost</Data></Cell>
                 <Cell><Data ss:Type="String">Price</Data></Cell>
+                <Cell><Data ss:Type="String">Limit</Data></Cell>
+                <Cell><Data ss:Type="String">Stocks</Data></Cell>
             </Row>
-            <% @pullout.pullout_products.each do |pullout_product| %>
+            <% @xls_products.each do |product| %>
             <Row>
-                <Cell><Data ss:Type="String"><%= pullout_product.product.sku %></Data></Cell>
-                <Cell><Data ss:Type="String"><%= pullout_product.product.name %></Data></Cell>
-                <Cell><Data ss:Type="Number"><%= pullout_product.product.cost %></Data></Cell>
-                <Cell><Data ss:Type="Number"><%= pullout_product.product.price %></Data></Cell>
+                <Cell><Data ss:Type="String"><%= product.sku %></Data></Cell>
+                <Cell><Data ss:Type="String"><%= product.name %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= product.cost %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= product.price %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= product.limit %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= product.inventory %></Data></Cell>
             </Row>
             <% end %>
-            <Row>
-                <Cell><Data ss:Type="String"></Data></Cell>
-                <Cell><Data ss:Type="String"></Data></Cell>
-                <Cell><Data ss:Type="Number"><%= @pullout.total_cost %></Data></Cell>
-                <Cell><Data ss:Type="Number"><%= @pullout.total_price %></Data></Cell>
-            </Row>
         </Table>
     </Worksheet>
 </Workbook>

@@ -12,8 +12,15 @@ class Transfer < ApplicationRecord
   accepts_nested_attributes_for :transfer_products, reject_if: :all_blank,allow_destroy: true
   
   # Validation
-  validates :store_from, :store_to, presence: true
+  validates :store_to, presence: true
+  validate :store_to_not_empty
   validate :transfer_products_unique
+
+  def store_to_not_empty
+    if Store.find(store_to_id).nil?
+      errors.add(:store_to, 'Store destination must be defined.')
+    end
+  end
 
   def transfer_products_unique
     products = []

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
+    <Worksheet ss:Name="Sheet1">
+        <Table>
+        <Column ss:Index="1" ss:AutoFitWidth="0" ss:Width="110"/>
+            <Row>
+                <Cell><Data ss:Type="String">SKU</Data></Cell>
+                <Cell><Data ss:Type="String">Product</Data></Cell>
+                <Cell><Data ss:Type="String">Cost</Data></Cell>
+                <Cell><Data ss:Type="String">Price</Data></Cell>
+                <Cell><Data ss:Type="String">Quantity Sold</Data></Cell>
+                <Cell><Data ss:Type="String">Movement</Data></Cell>
+            </Row>
+            <% @ending_inventory.ending_inventory_products.each do |ending_inventory_product| %>
+            <Row>
+                <% difference = ending_inventory_product.beginning_quantity - ending_inventory_product.ending_quantity %>
+                <Cell><Data ss:Type="String"><%= ending_inventory_product.product.sku %></Data></Cell>
+                <Cell><Data ss:Type="String"><%= ending_inventory_product.product.name %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= '%.2f' % (ending_inventory_product.cost * (difference)) %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= '%.2f' % (ending_inventory_product.price * (difference))%></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= difference %></Data></Cell>
+                <% if difference >= 5 %>
+                <Cell><Data ss:Type="String">Moving</Data></Cell>
+                <% else %>
+                <Cell><Data ss:Type="String">Not moving</Data></Cell>
+                <% end %>
+            </Row>
+            <% end %>
+            <Row>
+                <Cell><Data ss:Type="String">Total</Data></Cell>
+                <Cell><Data ss:Type="String"></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= '%.2f' % @ending_inventory.total_cogs %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= '%.2f' % @ending_inventory.total_sales %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= @ending_inventory.total_items %></Data></Cell>
+            </Row>
+        </Table>
+    </Worksheet>
+</Workbook>

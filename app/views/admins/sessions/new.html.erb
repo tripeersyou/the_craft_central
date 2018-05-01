@@ -5,7 +5,7 @@
   
       <%= simple_form_for(resource, html: {class: "ui form"}, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= image_tag('logo.png')%>
-        <%= render 'layouts/popups' %>               
+        <%= render 'layouts/popups' %>
         <div class="field">
           <%= f.input :email, required: false, autofocus: true %>
         </div>

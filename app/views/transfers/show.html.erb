@@ -1,7 +1,9 @@
+<%= link_to("< Go Back to #{@transfer.store_from.name}", store_path(@transfer.store_from), style: 'color:#7a828a;') %>
 <h1>Product Transfer from <%= @transfer.store_from.name %> to <%= @transfer.store_to.name %></h1>
 <p><%= @transfer.created_at.strftime("%B %d, %Y") %></p>
 <table class="ui very basic table">
 	<tr>
+		<td><%= link_to 'Download XLS', store_transfers_path(@transfer.store_from, format: :xls) %></td>
 		<td><%= link_to 'View Delivery', store_delivery_path(@transfer.store_to, @transfer.delivery) %></td>
 		<td><%= link_to 'View Pullout', store_pullout_path(@transfer.store_from, @transfer.pullout) %></td>
 	</tr>

@@ -1,3 +1,4 @@
+<%= link_to("< Go Back to #{@ending_inventory.store.name}", store_path(@ending_inventory.store), style: 'color:#7a828a;') %>
 <h1>Sales Report for <%= @ending_inventory.store.name %></h1>
 <p><%= @ending_inventory.created_at.strftime("%B %d, %Y") %></p>
 <%= link_to 'Download', store_ending_inventory_path(@ending_inventory, format: :xls) %>

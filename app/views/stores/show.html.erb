@@ -14,7 +14,7 @@
             <% if admin_signed_in? %>
                 <a href="/stores/<%= @store.id %>/edit#products" class="ui button primary">ADD PRODUCT</a>
                 <%= link_to 'ADD ENDING INVENTORY', new_store_ending_inventory_path(@store), class: 'ui button green' %>
-                <% if !Store.all.where('id != ' + @store.id.to_s).empty? %>
+                <% if !Store.all.where('id != ' + @store.id.to_s).empty? && !@store.store_products.empty? %>
                     <%= link_to 'CREATE PRODUCT TRANSFER', new_store_transfer_path(@store), class: 'ui button red' %>
                 <% end %>                
             <% end %>
@@ -22,7 +22,7 @@
     </tr>
 </table>
 
-<p>Store Address: <%= @store.address %></p>
+<p>Store Address: <%= @store.address.html_safe %></p>
 <p>Email Address: <%= @store.email %></p>
 <p>Contact Person: <%= @store.contact_person %></p>
 <p>Contact Number: <%= @store.contact_number %></p>

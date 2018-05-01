@@ -8,7 +8,7 @@ class Store < ApplicationRecord
     accepts_nested_attributes_for :store_products, reject_if: :all_blank, allow_destroy: true
 
     # Validation
-    validates :name, :address, :email, :contact_person, :contact_number, presence: true
+    validates :name, :address, :contact_number, presence: true
     validate :store_products_unique
 
     def store_products_unique

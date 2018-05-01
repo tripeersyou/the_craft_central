@@ -69,18 +69,18 @@
     <table class="ui very basic table show-table">
         <thead>
             <tr>
-                <th colspan='3'>
+                <th colspan='4'>
                     <h2>List of Supplier Orders</h2>  
                 </th>
                 <th style="text-align:center;">
-                    <%= link_to 'PRINT', supplier_path(@supplier, format: 'xls'), class: 'ui basic positive button' %>
+                    <%= link_to 'ADD ORDER', new_supplier_order_path(@supplier), class: 'ui basic positive button' %>
                 </th>
             </tr>
             <tr>
                 <th>Date</th>
                 <th>Quantity</th>
                 <th>Total Cost</th>
-                <th>Action</th>
+                <th colspan="2">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -90,10 +90,11 @@
                 <td><%= order.total_quantity %></td>
                 <td><%= 'Php %.2f' % order.total_cost %></td>
                 <td><%= link_to 'View', supplier_order_path(@supplier,order) %></td>
+                <td><%= link_to 'Print', supplier_order_path(@supplier,order, format: :xls), style: 'color:#7a828a' %></td>
             </tr>
             <% end %>
             <tr>
-                <td colspan='4'class='paginate'>
+                <td colspan='5'class='paginate'>
                     <%= will_paginate @orders, param_name: 'orders_page', renderer: WillPaginateSemanticUi::ActionView::Renderer %>
                 </td>
             </tr>

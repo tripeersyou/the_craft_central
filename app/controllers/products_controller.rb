@@ -2,9 +2,27 @@ class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :edit, :update]
     def index
         if !params[:sort_by]
-            @products = Product.paginate(page: params[:page], per_page: 14).order('updated_at DESC')            
+            if params[:product_search]
+                q_string = '%'+params[:product_search]+'%'
+                @products = Product.paginate(page: params[:page], per_page: 14).where('name LIKE ? or sku LIKE ?', q_string,q_string).order('updated_at DESC')
+            else
+                @products = Product.paginate(page: params[:page], per_page: 14).order('updated_at DESC')
+            end
         else
-            @products = Product.paginate(page: params[:page], per_page: 14).order(params[:sort_by] + ' DESC')
+            if params[:product_search]
+                q_string = '%'+params[:product_search]+'%'
+                @products = Product.paginate(page: params[:page], per_page: 14).where('name LIKE ? or sku LIKE ?', q_string, q_string).order(params[:sort_by] + ' DESC')
+            else
+                @products = Product.paginate(page: params[:page], per_page: 14).order(params[:sort_by] + ' DESC')
+            end
+        end
+        
+        respond_to do |format|
+            format.xls do
+                @xls_products = Product.all
+                headers["Content-Disposition"] =  "attachment; filename=\"Products - #{DateTime.now.strftime('%B %d %Y')}.xls\""
+            end
+            format.html
         end
     end
 

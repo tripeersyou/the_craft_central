@@ -1,10 +1,20 @@
 class StoresController < ApplicationController
     before_action :set_store, only: [:show, :edit, :update]
     def index
-        if !params[:sort_by]
-            @stores = Store.paginate(page: params[:page], per_page: 9)
+        if !params[:product_sort]
+            if params[:store_search]
+                q_string = '%'+params[:store_search]+'%'
+                @stores = Store.paginate(page: params[:page], per_page: 9).where('name LIKE ?', q_string)
+            else
+                @stores = Store.paginate(page: params[:page], per_page: 9)
+            end
         else
-            @stores = Store.paginate(page: params[:page], per_page: 9).order(params[:sort_by] + ' ASC')
+            if params[:store_search]
+                q_string = '%'+params[:store_search]+'%'
+                @stores = Store.paginate(page: params[:page], per_page: 9).where('name LIKE ?', q_string).order(params[:store_search] + ' ASC')
+            else
+                @stores = Store.paginate(page: params[:page], per_page: 9).order(params[:store_search] + ' ASC')
+            end
         end
     end
 
@@ -28,6 +38,12 @@ class StoresController < ApplicationController
         @transfers = @store.transfers.paginate(page: params[:transfers_page], per_page: 5).order('created_at DESC')
         @ending_inventories = @store.ending_inventories.paginate(page: params[:ending_inventories_page], per_page: 5).order('created_at DESC')
 
+        respond_to do |format|
+            format.xls do
+                headers["Content-Disposition"] =  "attachment; filename=\"Pullout #{@store.name} - #{DateTime.now.strftime('%B %d %Y')}.xls\""
+            end
+            format.html
+        end
     end
     
     def edit

@@ -27,10 +27,17 @@ class FormsController < ApplicationController
     def store_products
         @stores = Store.all
         if params[:store_id] and params[:store_id] != " "
-            store = Store.find(params[:store_id])
-            @store_products = store.store_products.paginate(page: params[:page], per_page: 15)
+            @store = Store.find(params[:store_id])
+            @store_products = @store.store_products.paginate(page: params[:page], per_page: 15)
         else
             @store_products = StoreProduct.paginate(page: params[:page], per_page: 15)
+        end
+
+        respond_to do |format|
+            format.xls do
+                headers["Content-Disposition"] =  "attachment; filename=\"Store Products - #{DateTime.now.strftime('%B %d %Y')}.xls\""
+            end
+            format.html
         end
     end
 end

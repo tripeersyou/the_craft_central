@@ -12,14 +12,19 @@
 --- 
 
 ## Changelog and Development Log
-
+* May 1, 2018
+    * Finished all the templates for the `.xls.erb` files
+* April 30, 2018
+    * Added the search functionality for `stores/index.html.erb` and `products/index.html.erb`
+    * `TransfersController` bug fixes.
+    * Added the xlsx for stores and products to the seeds.rb
 * April 27, 2018
     * Edited `_form.html.erb` for the edit page.
     * Completed server-side validation.
     * Added the `roo` gem.
 * April 26, 2018
     * Created the `structure.sql` for each DBMS.
-    * Created `production_setup` shell script.
+    * Created `production_setup.sh` shell script.
 * April 23, 2018
     * Added back-end validation for a ton of models.
 * April 18, 2018

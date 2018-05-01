@@ -25,60 +25,60 @@
 </div>
 
 <script>
-# $(document).on('turbolinks:load', function () {
-#     var field_number = 1;
-#     $('form').on('cocoon:after-insert', function (e, delivery_product) {
-#         delivery_product.find('select').addClass('ajax_field');
-#         delivery_product.find('select').attr('field_number', field_number);
-#         delivery_product.find('input').addClass('nested_input ' + field_number);
-#         delivery_product.find('input').attr('field_number', field_number);
-#         field_number++;
-#         $('.nested_input').change(function () {
-#             var field_number = this.getAttribute('field_number');
-#             var select = $('[field_number='+field_number+']');
-#             var number = select.attr('field_number');
-#             var value = this.value;
-#             console.log(value);
-#             if (select.val() != "") {
-#                 $.getJSON('/api/product?id=' + select.val() , function(product){
-#                     if (product.limit < value || value <= 0) {
-#                         if (product.inventory < value) {
-#                             $("input[type='submit']").addClass('disabled');
-#                         } else {
-#                             $("input[type='submit']").removeClass('disabled');
-#                         }
-#                         $("input[type='submit']").addClass('disabled');
-#                     } else {
-#                         $("input[type='submit']").removeClass('disabled');
-#                     }
-#                 });
-#             } else {
-#                 $("input[type='submit']").addClass('disabled');   
-#             }
-#         });
-#         $('.nested_input').keyup(function () {
-#             var field_number = this.getAttribute('field_number');
-#             var select = $('[field_number='+field_number+']');
-#             var number = select.attr('field_number');
-#             var value = this.value;
-#             console.log(value);
-#             if (select.val() != "") {
-#                 $.getJSON('/api/product?id=' + select.val() , function(product){
-#                     if (product.limit < value || value <= 0) {
-#                         if (product.inventory < value) {
-#                             $("input[type='submit']").addClass('disabled');
-#                         } else {
-#                             $("input[type='submit']").removeClass('disabled');
-#                         }
-#                         $("input[type='submit']").addClass('disabled');
-#                     } else {
-#                         $("input[type='submit']").removeClass('disabled');
-#                     }
-#                 });
-#             } else {
-#                 $("input[type='submit']").addClass('disabled');   
-#             }
-#         });
-#     });
-# }); 
+$(document).on('turbolinks:load', function () {
+    var field_number = 1;
+    $('form').on('cocoon:after-insert', function (e, delivery_product) {
+        delivery_product.find('select').addClass('ajax_field');
+        delivery_product.find('select').attr('field_number', field_number);
+        delivery_product.find('input').addClass('nested_input ' + field_number);
+        delivery_product.find('input').attr('field_number', field_number);
+        field_number++;
+        $('.nested_input').change(function () {
+            var field_number = this.getAttribute('field_number');
+            var select = $('[field_number='+field_number+']');
+            var number = select.attr('field_number');
+            var value = this.value;
+            console.log(value);
+            if (select.val() != "") {
+                $.getJSON('/api/product?id=' + select.val() , function(product){
+                    if (product.limit < value || value <= 0) {
+                        if (product.inventory < value) {
+                            $("input[type='submit']").addClass('disabled');
+                        } else {
+                            $("input[type='submit']").removeClass('disabled');
+                        }
+                        $("input[type='submit']").addClass('disabled');
+                    } else {
+                        $("input[type='submit']").removeClass('disabled');
+                    }
+                });
+            } else {
+                $("input[type='submit']").addClass('disabled');   
+            }
+        });
+        $('.nested_input').keyup(function () {
+            var field_number = this.getAttribute('field_number');
+            var select = $('[field_number='+field_number+']');
+            var number = select.attr('field_number');
+            var value = this.value;
+            console.log(value);
+            if (select.val() != "") {
+                $.getJSON('/api/product?id=' + select.val() , function(product){
+                    if (product.limit < value || value <= 0) {
+                        if (product.inventory < value) {
+                            $("input[type='submit']").addClass('disabled');
+                        } else {
+                            $("input[type='submit']").removeClass('disabled');
+                        }
+                        $("input[type='submit']").addClass('disabled');
+                    } else {
+                        $("input[type='submit']").removeClass('disabled');
+                    }
+                });
+            } else {
+                $("input[type='submit']").addClass('disabled');   
+            }
+        });
+    });
+}); 
 </script>

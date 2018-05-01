@@ -27,6 +27,13 @@ class EndingInventoriesController < ApplicationController
     end
     def show
         @ending_inventory = EndingInventory.find(params[:id])
+        
+        respond_to do |format|
+            format.xls do
+                headers["Content-Disposition"] =  "attachment; filename=\"Sales Report #{@ending_inventory.store.name} - #{@ending_inventory.created_at.strftime('%B %d %Y')}.xls\""
+            end
+            format.html
+        end
     end
 
     private

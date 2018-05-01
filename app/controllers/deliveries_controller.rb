@@ -1,4 +1,4 @@
-class DeliveriesController < ApplicationController
+ class DeliveriesController < ApplicationController
     before_action :set_store
 
     def new
@@ -57,7 +57,9 @@ class DeliveriesController < ApplicationController
     def show
         @delivery = Delivery.find(params[:id])
         respond_to do |format|
-            format.xls
+            format.xls do
+                headers["Content-Disposition"] =  "attachment; filename=\"Delivery #{@delivery.store.name} - #{@delivery.created_at.strftime('%B %d %Y')}.xls\""
+            end
             format.html
         end
     end

@@ -13,8 +13,8 @@ class Product < ApplicationRecord
 
     # Validation
     validates :sku, :name, :brand, :description, :limit, :price, :cost, :inventory, presence: true
-
-    validates :limit, :price, :cost, :inventory, numericality: { greater_than: 0, allow_nil: false }
+    validates :limit, :price, :cost, numericality: { greater_than: 0, allow_nil: false }
+    validates :inventory, numericality: {greater_than_or_equal_to: 0, allow_nil: false}
 
     # Instance methods
     def to_s
