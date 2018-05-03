@@ -100,7 +100,7 @@ Using the RSpec Gem
 
 * Create a  database in the `test` environment
 ```
-$ rails db:drop:_unsafe db:create db:migrate RAILS_ENV=test
+$ rails db:drop:_unsafe db:create db:migrate db:seed RAILS_ENV=test
 ```
 * Running the test specs:
 ```
