@@ -41,6 +41,8 @@ class EndingInventoriesController < ApplicationController
             @store = Store.find(params[:store_id])
         end
         def ending_inventory_params
-            params.require(:ending_inventory).permit!
+            if !params[:ending_inventory].nil?
+                params.require(:ending_inventory).permit!
+            end
         end
 end

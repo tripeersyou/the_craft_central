@@ -1,2 +1,3 @@
+<%= link_to("< Go Back to #{@ending_inventory.store.name}", store_path(@ending_inventory.store), style: 'color:#7a828a;') %>
 <h1>Create Ending Inventory for <%= @store.name %></h1>
 <%= render 'form' %>

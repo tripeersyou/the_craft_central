@@ -30,7 +30,9 @@ class OrdersController < ApplicationController
     end
     private
         def order_params
-            params.require(:order).permit!
+            if !params[:order].nil?
+                params.require(:order).permit!
+            end
         end 
         def set_supplier
             @supplier = Supplier.find(params[:supplier_id])

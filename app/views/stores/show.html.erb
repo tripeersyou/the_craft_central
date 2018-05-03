@@ -13,7 +13,9 @@
         <td style="text-align:right;">
             <% if admin_signed_in? %>
                 <a href="/stores/<%= @store.id %>/edit#products" class="ui button primary">ADD PRODUCT</a>
-                <%= link_to 'ADD ENDING INVENTORY', new_store_ending_inventory_path(@store), class: 'ui button green' %>
+                <% if !@store.store_products.empty? %>
+                    <%= link_to 'ADD ENDING INVENTORY', new_store_ending_inventory_path(@store), class: 'ui button green' %>
+                <% end %>
                 <% if !Store.all.where('id != ' + @store.id.to_s).empty? && !@store.store_products.empty? %>
                     <%= link_to 'CREATE PRODUCT TRANSFER', new_store_transfer_path(@store), class: 'ui button red' %>
                 <% end %>                

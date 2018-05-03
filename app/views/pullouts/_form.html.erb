@@ -3,8 +3,8 @@
     <div class="seven wide column">
         <%= simple_form_for([@store, @pullout], html: {class: 'ui form'}) do |f| %>
             <div id="products">
-                <%= f.simple_fields_for :pullout_products do |f| %>
-                    <%= render 'pullout_product_fields', f, :pullout_products %>
+                <%= f.simple_fields_for :pullout_products do |pp| %>
+                    <%= render 'pullout_product_fields', f: pp %>
                 <% end %>            
             </div>
             <div class="links">

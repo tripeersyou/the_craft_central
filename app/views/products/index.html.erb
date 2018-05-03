@@ -25,7 +25,7 @@
     </div>
 </form>
 <% if !@products.empty? %>
-  <div class="ui card" style="width:85%">
+  <div class="ui card" style="width:67%">
     <div class="content">
         <h2>Recently Updated Products</h2>
         <table class="ui very basic table">
@@ -48,9 +48,9 @@
             <% end %>
             </tbody> 
         </table>
-        <%= will_paginate @products,renderer: WillPaginateSemanticUi::ActionView::Renderer %> 
     </div>
   </div>
+  <%= will_paginate @products,renderer: WillPaginateSemanticUi::ActionView::Renderer %>   
 <% else %>
     <h2>No Products.</h2>
 <% end %>
