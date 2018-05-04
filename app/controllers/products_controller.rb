@@ -64,6 +64,12 @@ class ProductsController < ApplicationController
         end
     end
 
+    def import
+        Product.import(params[:file])
+
+        redirect_to products_path, notice: "Products have been imported."
+    end 
+
     private
         def product_params
             params.require(:product).permit!

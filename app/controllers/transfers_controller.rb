@@ -5,7 +5,7 @@ class TransfersController < ApplicationController
     end
     def create
         @transfer = Transfer.new(transfer_params)
-        if @transfer.store_to.nil?
+        if @transfer.store_to_id.nil?
             render :new
         else
             @transfer.store_from_id = @store.id

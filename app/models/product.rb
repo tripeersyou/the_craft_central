@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+    require 'csv'
     # Entity relationships
     belongs_to :brand
     has_many :delivery_products
@@ -19,6 +20,29 @@ class Product < ApplicationRecord
     # Instance methods
     def to_s
         name
+    end
+
+    def self.import(file)
+        CSV.foreach(file.path, headers: true) do |row|
+            products = []
+            product = {}
+            product[:sku]= row[0]
+            product[:name] = row[1]
+            brand = Brand.find_by_name(row[2])
+            if !brand.nil?
+                product[:brand] = brand
+            else
+                brand = Brand.create({name: row[2]})
+                product[:brand] = brand
+            end
+            product[:description] = row[3]
+            product[:price] = row[4]
+            product[:limit] = row[5]
+            product[:cost] = row[6]
+            product[:inventory] = row[7]
+            products << product
+        end
+        Product.create(products)
     end
 
     def stocks_left

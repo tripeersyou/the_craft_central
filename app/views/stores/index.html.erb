@@ -30,6 +30,9 @@
                     Total Items Sold: <%= store.sold_items %> <br>
                     Total Items Consigned: <%= store.total_products %> <br>
                     Total Sales: <%= 'Php %.2f' % store.total_sales %> <br>
+                    <% if !store.deliveries.where('status = ?', false).empty?%>
+                        Pending Deliveries: <%= store.deliveries.where('status = ?', false).count %>
+                    <% end %>
                 </div>
             </div>
             <% if admin_signed_in? %>

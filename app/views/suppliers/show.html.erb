@@ -90,7 +90,7 @@
                 <td><%= order.total_quantity %></td>
                 <td><%= 'Php %.2f' % order.total_cost %></td>
                 <td><%= link_to 'View', supplier_order_path(@supplier,order) %></td>
-                <td><%= link_to 'Print', supplier_order_path(@supplier,order, format: :xls), style: 'color:#7a828a' %></td>
+                <td><%= link_to 'Download', supplier_order_path(@supplier,order, format: :xls), style: 'color:#7a828a' %></td>
             </tr>
             <% end %>
             <tr>

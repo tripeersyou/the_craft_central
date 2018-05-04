@@ -18,9 +18,9 @@
                             <td><%= admin.first_name + ' ' + admin.last_name %></td>
                             <td><%= admin.email %></td>
                             <% if admin.status %>
-                                <td><%= link_to 'Unauthorize' %></td>  
+                                <td><%= link_to 'Unauthorize', authorize_admin_manage_accounts_path(admin), method: :put %></td>  
                             <% else %>
-                                <td><%= link_to 'Authorize' %></td>                                      
+                                <td><%= link_to 'Authorize', authorize_admin_manage_accounts_path(admin), method: :put %></td>
                             <% end %>
                             <td><%= link_to 'Delete Account' %></td>
                         </tr>

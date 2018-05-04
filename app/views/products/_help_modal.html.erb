@@ -1,0 +1,71 @@
+<div class="ui modal">
+  <div class="ui icon header">
+    <i class="file icon"></i>
+    CSV Import Specifications
+  </div>
+  <div class="content">
+    <ol>
+        <li>The file must be a CSV file.</li>
+        <li>The CSV file's first line should be a header row.</li>
+        <li>It should follow the format below.</li>
+        <table class="ui table">
+            <tr>
+                <td>SKU</td>
+                <td>Name</td>
+                <td>Brand</td>
+                <td>Description</td>
+                <td>Price</td>
+                <td>Limit</td>
+                <td>Cost</td>
+                <td>Quantity</td>
+            </tr>
+            <tr>
+                <td>4080001000999</td>
+                <td>TCC x Hobbes Workshp</td>
+                <td>TCC</td>
+                <td>TCC x Hobbes Workshp</td>
+                <td>1800</td>
+                <td>1800</td>
+                <td>1800</td>
+                <td>1800</td>
+            </tr>
+            <tr>
+                <td>4080001000001</td>
+                <td>NIBS - Hunt 99</td>
+                <td>Nibs</td>
+                <td>NIBS - Hunt 99</td>
+                <td>90</td>
+                <td>90</td>
+                <td>90</td>
+                <td>90</td>
+            </tr>
+            <tr>
+                <td>4080001000003</td>
+                <td>NIBS - Leonardt 300</td>
+                <td>Nibs</td>
+                <td>NIBS - Leonardt 300</td>
+                <td>90</td>
+                <td>90</td>
+                <td>90</td>
+                <td>90</td>
+            </tr>
+            <tr>
+                <td colspan="8" style="text-align:center;">
+                    <%= form_tag import_products_path, multipart: true, class: 'ui form' do %>
+                        <div class="inline field">
+                            <%= file_field_tag :file %>
+                            <%= submit_tag "Import", class: 'ui button secondary' %>                                
+                        </div>
+                    <% end %>  
+                </td>
+            </tr>
+        </table>
+
+    </ol>
+  </div>
+  <div class="actions">
+    <div class="ui green ok inverted button">
+      Okay!
+    </div>
+  </div>
+</div>

@@ -12,6 +12,9 @@
 --- 
 
 ## Changelog and Development Log
+* May 4, 2018
+    * Added the import function for the products
+    * Bug fixes
 * May 1, 2018
     * Finished all the templates for the `.xls.erb` files
 * April 30, 2018

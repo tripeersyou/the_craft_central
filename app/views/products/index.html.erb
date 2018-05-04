@@ -9,7 +9,7 @@
                 <option value="">Sort by</option>
                 <option value="sku">SKU</option>
                 <option value="name">Name</option>
-                <option value="brand_id">Brand</option>
+                <option value="brand_id">Category</option>
                 <option value="cost">Cost</option>
                 <option value="price">Price</option>
                 <option value="inventory">Inventory</option>
@@ -22,18 +22,26 @@
                 <%= link_to 'CREATE PRODUCT', new_product_path, class: 'ui button primary' %>
             </div>
         <% end %>
+        <button type="button" class="ui button positive" id="import_help">
+            IMPORT
+        </button>
     </div>
 </form>
 <% if !@products.empty? %>
-  <div class="ui card" style="width:67%">
+  <div class="ui card" style="width:90%">
     <div class="content">
-        <h2>Recently Updated Products</h2>
         <table class="ui very basic table">
             <thead>
                 <tr>
+                    <th colspan="5">
+                        <h2>Recently Updated Products</h2>
+                    </th>
+                </tr>
+                <tr>
                     <th>SKU</th>
                     <th>Name</th>
-                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Category</th>
                     <th></th>
                 </tr>
             </thead>
@@ -42,6 +50,7 @@
                 <tr>
                     <td><%= product.sku %></td>
                     <td><%= product.name %></td>
+                    <td><%= 'Php %.2f' % product.price %></td>
                     <td><%= product.brand.name %></td>
                     <td><%= link_to 'See Details', product_path(product) %></td>
                 </tr>
@@ -54,3 +63,4 @@
 <% else %>
     <h2>No Products.</h2>
 <% end %>
+<%= render 'help_modal' %>

@@ -39,7 +39,7 @@
                     <h2>List of All Store Products</h2>  
                 </th>
                 <th style="text-align:center;">
-                    <%= link_to 'PRINT', store_path(@store, format: 'xls'), class: 'ui basic positive button' %>
+                    <%= link_to 'Download', store_path(@store, format: 'xls'), class: 'ui basic positive button' %>
                 </th>
             </tr>
             <tr>
@@ -102,7 +102,7 @@
 				<td><%= link_to 'View', store_transfer_path(@store, transfer) %></td>
 				<td><%= link_to 'View Delivery', store_delivery_path(transfer.store_to, transfer.delivery) %></td>
 				<td><%= link_to 'View Pullout', store_pullout_path(transfer.store_from, transfer.pullout) %></td>
-				<td><%= link_to 'Print', store_transfer_path(@store, transfer, format: :xls), style: 'color:#7a828a' %></td>
+				<td><%= link_to 'Download', store_transfer_path(@store, transfer, format: :xls), style: 'color:#7a828a' %></td>
 			</tr>
 			<% end %>
 			<tr>
@@ -155,7 +155,7 @@
                 <% end %>
                 <td><%= '%.2f' % delivery.total_price %></td>            
                 <td><%= link_to 'View', store_delivery_path(@store, delivery) %></td>
-                <td><%= link_to 'Print', store_delivery_path(@store, delivery, format: 'xls'), style: 'color:#7a828a' %></td>                     
+                <td><%= link_to 'Download', store_delivery_path(@store, delivery, format: 'xls'), style: 'color:#7a828a' %></td>                     
                 <% if admin_signed_in? %>
                     <% if delivery.status %>
                         <td style="color:#08bf1b">Change Status</td>                        
@@ -209,7 +209,7 @@
                 <td><%= pullout.total_items %></td>
                 <td><%= '%.2f' % pullout.total_price %></td>            
                 <td><%= link_to 'View', store_pullout_path(@store, pullout) %></td>
-                <td><%= link_to 'Print', store_pullout_path(@store, pullout, format: 'xls'), style: 'color:#7a828a' %></td>                   
+                <td><%= link_to 'Download', store_pullout_path(@store, pullout, format: 'xls'), style: 'color:#7a828a' %></td>                   
             </tr>
             <% end %>
             <tr>
@@ -254,7 +254,7 @@
                 <td><%= '%.2f' % ending_inventory.total_sales %></td>            
                 <td><%= '%.2f' % ending_inventory.total_cogs %></td>            
                 <td><%= link_to 'View', store_ending_inventory_path(@store, ending_inventory) %></td>
-                <td><%= link_to 'Print', store_ending_inventory_path(@store, ending_inventory, format: 'xls'), style: 'color:#7a828a' %></td>
+                <td><%= link_to 'Download', store_ending_inventory_path(@store, ending_inventory, format: 'xls'), style: 'color:#7a828a' %></td>
             </tr>
             <% end %>
             <tr>

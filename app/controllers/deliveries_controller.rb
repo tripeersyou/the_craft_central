@@ -84,6 +84,8 @@
             end
             delivery.save
             redirect_to store_path(@store)
+        else
+            redirect_to store_path(@store)
         end
     end
 

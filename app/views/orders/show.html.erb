@@ -1,7 +1,7 @@
 <%= link_to("< Go Back to #{@order.supplier.name}", supplier_path(@order.supplier), style: 'color:#7a828a;') %>
 <h1>Order from <%= @order.supplier.name %></h1>
 <p>Created at <%= @order.created_at.strftime("%B %d, %Y") %></p>
-<%= link_to 'Download', supplier_order_path(@order, format: :xls) %>
+<%= link_to 'Download XLS', supplier_order_path(@order, format: :xls) %>
 <table class="ui very basic table show-table">
 	<thead>
 		<tr>

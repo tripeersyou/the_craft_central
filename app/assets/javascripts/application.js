@@ -21,6 +21,9 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function () {
+    $('#import_help').click(function () {
+        $('.ui.modal').modal('show');
+    });
     $('#loader').css('display', 'none');
     $('.message .close').on('click', function () {
         $(this).closest('.message').transition('fade');

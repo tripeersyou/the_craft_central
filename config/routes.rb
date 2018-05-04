@@ -29,7 +29,11 @@ Rails.application.routes.draw do
     authenticated :admin do
       root 'pages#dashboard', as: :admin_root
       get 'account', to: 'pages#account', as: 'accounts'
-      resources :products, except: [:destroy]
+      resources :products, except: [:destroy] do
+        collection do
+          post 'import', to: 'products#import'
+        end
+      end
       resources :suppliers, except: [:destroy] do
         resources :orders, except: [:destroy, :update, :edit, :index]
       end
@@ -39,7 +43,11 @@ Rails.application.routes.draw do
         resources :transfers, except: [:destroy, :edit, :update, :index]
         resources :ending_inventories, except: [:destroy, :index, :edit, :update]
       end
-      resources :manage_accounts, only: [:index]
+      resources :manage_accounts, only: [:index] do
+        collection do
+          put 'authorize_account/:admin_id', to: 'manage_accounts#authorize', as: 'authorize_admin'
+        end
+      end
       resources :staffs, except: [:index, :show]
       resources :admins, only: [:update, :destroy]
       resources :forms, only: [:index] do
