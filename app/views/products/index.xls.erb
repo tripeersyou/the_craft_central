@@ -6,19 +6,23 @@
         <Column ss:Index="1" ss:AutoFitWidth="0" ss:Width="110"/>
             <Row>
                 <Cell><Data ss:Type="String">SKU</Data></Cell>
-                <Cell><Data ss:Type="String">Product Name</Data></Cell>
-                <Cell><Data ss:Type="String">Cost</Data></Cell>
+                <Cell><Data ss:Type="String">Name</Data></Cell>
+                <Cell><Data ss:Type="String">Brand</Data></Cell>
+                <Cell><Data ss:Type="String">Description</Data></Cell>
                 <Cell><Data ss:Type="String">Price</Data></Cell>
                 <Cell><Data ss:Type="String">Limit</Data></Cell>
-                <Cell><Data ss:Type="String">Stocks</Data></Cell>
+                <Cell><Data ss:Type="String">Cost</Data></Cell>
+                <Cell><Data ss:Type="String">Quantity</Data></Cell>
             </Row>
             <% @xls_products.each do |product| %>
             <Row>
                 <Cell><Data ss:Type="String"><%= product.sku %></Data></Cell>
                 <Cell><Data ss:Type="String"><%= product.name %></Data></Cell>
-                <Cell><Data ss:Type="Number"><%= product.cost %></Data></Cell>
+                <Cell><Data ss:Type="String"><%= product.brand.name %></Data></Cell>
+                <Cell><Data ss:Type="String"><%= product.description %></Data></Cell>
                 <Cell><Data ss:Type="Number"><%= product.price %></Data></Cell>
                 <Cell><Data ss:Type="Number"><%= product.limit %></Data></Cell>
+                <Cell><Data ss:Type="Number"><%= product.cost %></Data></Cell>
                 <Cell><Data ss:Type="Number"><%= product.inventory %></Data></Cell>
             </Row>
             <% end %>

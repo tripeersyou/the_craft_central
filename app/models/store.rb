@@ -8,8 +8,17 @@ class Store < ApplicationRecord
     accepts_nested_attributes_for :store_products, reject_if: :all_blank, allow_destroy: true
 
     # Validation
+    validate :contact_number_valid_length
     validates :name, :address, :contact_number, presence: true
     validate :store_products_unique
+    
+    def contact_number_valid_length
+        if !contact_number.nil?
+            if contact_number.length > 20
+                errors.add(:contact_number, 'Contact number should not exceed 20 characters')
+            end
+        end
+    end
 
     def store_products_unique
         products = []

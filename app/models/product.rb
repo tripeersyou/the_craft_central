@@ -16,7 +16,19 @@ class Product < ApplicationRecord
     validates :sku, :name, :brand, :description, :limit, :price, :cost, :inventory, presence: true
     validates :limit, :price, :cost, numericality: { greater_than: 0, allow_nil: false }
     validates :inventory, numericality: {greater_than_or_equal_to: 0, allow_nil: false}
-
+    validate :sku_must_be_unique
+    
+    def sku_must_be_unique
+       skus = []
+       Product.all.each do |product|
+           skus << product.sku
+       end
+       
+       if skus.include? sku
+            errors.add(:sku, 'SKU must be unique'); 
+       end
+    end
+    
     # Instance methods
     def to_s
         name
@@ -24,25 +36,24 @@ class Product < ApplicationRecord
 
     def self.import(file)
         CSV.foreach(file.path, headers: true) do |row|
-            products = []
-            product = {}
-            product[:sku]= row[0]
-            product[:name] = row[1]
+            product = Product.new
+            product.sku = row[0]
+            product.name = row[1]
             brand = Brand.find_by_name(row[2])
             if !brand.nil?
-                product[:brand] = brand
+                product.brand = brand
             else
                 brand = Brand.create({name: row[2]})
-                product[:brand] = brand
+                product.brand = brand
             end
-            product[:description] = row[3]
-            product[:price] = row[4]
-            product[:limit] = row[5]
-            product[:cost] = row[6]
-            product[:inventory] = row[7]
-            products << product
+            product.description = row[3]
+            product.price = row[4]
+            product.limit = row[5]
+            product.cost = row[6]
+            product.inventory = row[7]
+            puts product
+            product.save
         end
-        Product.create(products)
     end
 
     def stocks_left

@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Brand, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  it "should have name" do
+    brand = Brand.new({name: nil})
+    expect(brand).to_not be_valid
+  end
+  
 end

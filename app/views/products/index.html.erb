@@ -21,10 +21,10 @@
             <div class="field">
                 <%= link_to 'CREATE PRODUCT', new_product_path, class: 'ui button primary' %>
             </div>
+            <button type="button" class="ui button positive" id="import_help">
+                IMPORT
+            </button>
         <% end %>
-        <button type="button" class="ui button positive" id="import_help">
-            IMPORT
-        </button>
     </div>
 </form>
 <% if !@products.empty? %>
@@ -63,4 +63,7 @@
 <% else %>
     <h2>No Products.</h2>
 <% end %>
-<%= render 'help_modal' %>
+
+<% if admin_signed_in? %>
+    <%= render 'help_modal' %>
+<% end %>
