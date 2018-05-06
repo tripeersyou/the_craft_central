@@ -65,9 +65,12 @@ class ProductsController < ApplicationController
     end
 
     def import
-        Product.import(params[:file])
-
-        redirect_to products_path, notice: "Products have been imported."
+        if File.extname(params[:file].original_filename) == '.csv' and params[:file].content_type == 'text/csv'
+            Product.import(params[:file])
+            redirect_to products_path, notice: "Products have been imported."
+        else
+            redirect_to products_path, alert: "File given is invalid."
+        end
     end 
 
     private

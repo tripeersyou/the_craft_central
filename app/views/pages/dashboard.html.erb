@@ -1,31 +1,91 @@
+<form class="ui form">
+    <div class="fields">
+        <div class="two wide field" style="margin-top:0.75em; text-align:right;">
+            Graph Range:
+        </div>
+        <div class="four wide field">
+            <select name="range" id="date_range" class="ui dropdown">
+            <% if params[:range] == 'monthly' || params[:range] == nil %>
+                <option value=""></option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly" selected>Monthly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="yearly">Yearly</option>
+            <% elsif params[:range] == 'weekly' %>
+                <option value=""></option>
+                <option value="weekly" selected>Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="yearly">Yearly</option>
+            <% elsif params[:range] == 'quarterly' %>
+                <option value=""></option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="quarterly" selected>Quarterly</option>
+                <option value="yearly">Yearly</option>
+            <% else %>
+                <option value=""></option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="yearly" selected>Yearly</option>
+            <% end %>
+            </select>
+        </div>
+        <div class="three wide field" style="margin-top:0.75em; text-align:right;">
+            Summary Range:
+        </div>
+        <div class="four wide field">
+            <div class="ui left icon input">
+                <input type="date" name="start_date" id="start_date" value="<%= params[:start_date]%>">
+                <i class="calendar alternate icon"></i>
+            </div>
+        </div>
+        <div class="field" style="margin-top:0.5em;">
+            to
+        </div>
+        <div class="four wide field">
+            <div class="ui left icon input">
+                <input type="date" name="end_date" id="end_date" value="<%= params[:end_date]%>">
+                <i class="calendar alternate icon"></i>
+            </div>
+        </div>
+        <button type="sumbit" class="ui button primary">
+            GO
+        </button>
+    </div>
+</form>
 <div class="ui three column grid">
     <div class="column">
         <div class="ui card">
             <div class="content">
-                <h1>Total Sales</h1>
-                <h2><%= 'P %.2f' % Store.total_sales %></h2>
+                <h1 class="dashboard_title">Total Sales</h1>
+                <div class="meta"><%= @start_of_month %> - <%= @today %></div>
+                <h2 class="dashboard_value"><%= 'Php %.2f' % @total_sales %></h2>
             </div>
         </div>
     </div>
     <div class="column">
         <div class="ui card">
             <div class="content">
-                <h1>Total Revenue</h1>
-                    <h2><%= 'P %.2f' % (Store.total_sales - Store.total_cogs) %></h2>
-                </div>
-            </div>
-        </div>
-    <div class="column">
-        <div class="ui card">
-            <div class="content">
-                <h1>Total COGS</h1>
-                    <h2><%= 'P %.2f' % Store.total_cogs %></h2>
-                </div>
+                <h1 class="dashboard_title">Total Revenue</h1>
+                <div class="meta"><%= @start_of_month %> - <%= @today %></div>
+                <h2 class="dashboard_value"><%= 'Php %.2f' % @total_revenue %></h2>
             </div>
         </div>
     </div>
-    <br><br><br>
-    <div class="ui grid">
+    <div class="column">
+        <div class="ui card">
+            <div class="content">
+                <h1 class="dashboard_title">Total COGS</h1>
+                <div class="meta"><%= @start_of_month %> - <%= @today %></div>
+                <h2 class="dashboard_value"><%= 'Php %.2f' % @total_cogs %></h2>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+<div class="ui grid">
     <div class="twelve wide column">
         <% if params[:range] == 'monthly' || params[:range] == nil %>
             <h1>Monthly Sales:</h1>
@@ -37,42 +97,6 @@
             <h1>Yearly Sales:</h1>
         <% end %>
     </div>
-    <div class="three wide column">
-        <form action="/" method="get" class="ui form" id="datetime_picker">
-            <div class="fields">
-                <div class="field">
-                    <select name="product_sort" id="date_range" class="ui dropdown">
-                    <% if params[:range] == 'monthly' || params[:range] == nil %>
-                        <option value=""></option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly" selected>Monthly</option>
-                        <option value="quarterly">Quarterly</option>
-                        <option value="yearly">Yearly</option>
-                    <% elsif params[:range] == 'weekly' %>
-                        <option value=""></option>
-                        <option value="weekly" selected>Weekly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="quarterly">Quarterly</option>
-                        <option value="yearly">Yearly</option>
-                    <% elsif params[:range] == 'quarterly' %>
-                        <option value=""></option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="quarterly" selected>Quarterly</option>
-                        <option value="yearly">Yearly</option>
-                    <% else %>
-                        <option value=""></option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="quarterly">Quarterly</option>
-                        <option value="yearly" selected>Yearly</option>
-                    <% end %>
-                    </select>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
     <% if params[:range] == 'monthly' || params[:range] == nil %>
         <%= column_chart EndingInventory.group_by_month(:created_at, format: '%B %Y').sum(:sales) %>
     <% elsif params[:range] == 'weekly' %>

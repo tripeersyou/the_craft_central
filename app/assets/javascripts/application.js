@@ -20,6 +20,12 @@
 //= require semantic-ui
 //= require_tree .
 
+Array.prototype.sample = function(){
+    return this[Math.floor(Math.random()*this.length)];
+}
+
+var loadingText = ['Crafting', 'Cooking', 'Brewing'];
+
 $(document).on('turbolinks:load', function () {
     $('#import_help').click(function () {
         $('.ui.modal').modal('show');
@@ -41,5 +47,6 @@ $(document).on('turbolinks:load', function () {
 });
 
 $(document).on('turbolinks:request-start', function(){
+    $('#load_text').text(loadingText.sample());
     $('#loader').css('display', 'block');
 });

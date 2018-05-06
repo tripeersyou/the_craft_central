@@ -12,6 +12,10 @@
 --- 
 
 ## Changelog and Development Log
+* May 6, 2018
+    * Polished the front-end especially the dashboard for performance.
+* May 5, 2018
+    * Started adding test specs for 7 models
 * May 4, 2018
     * Added the import function for the products
     * Bug fixes

@@ -41,15 +41,44 @@ class EndingInventory < ApplicationRecord
     total_cogs
   end
 
+  def self.total_sales_time(start_time, end_time)
+    ending_inventories = EndingInventory.where('created_at BETWEEN ? AND ?', start_time, end_time)
+    total_sales = 0.00
+    ending_inventories.each do |ending_inventory|
+      ending_inventory.ending_inventory_products.each do |ending_inventory_product|
+          total_sales += ending_inventory.total_items * ending_inventory_product.price
+      end
+    end
+    total_sales
+  end
+
+  def self.total_cogs_time(start_time, end_time)
+    ending_inventories = EndingInventory.where('created_at BETWEEN ? AND ?', start_time, end_time)
+    total_cogs = 0.00
+    ending_inventories.each do |ending_inventory|
+      total_cogs = ending_inventory.total_cogs
+    end
+    total_cogs
+  end
+
   def self.total_sales
     ending_inventories = EndingInventory.all
     total_sales = 0.00
     ending_inventories.each do |ending_inventory|
       ending_inventory.ending_inventory_products.each do |ending_inventory_product|
-          total_sales += ending_inventory_product.total_items * beginning_inventory_product.price
+          total_sales += ending_inventory.total_items * ending_inventory_product.price
       end
     end
     total_sales
+  end
+
+  def self.total_cogs
+    ending_inventories = EndingInventory.all
+    total_cogs = 0.00
+    ending_inventories.each do |ending_inventory|
+      total_cogs += ending_inventory.total_cogs
+    end
+    total_cogs
   end
 
 end
