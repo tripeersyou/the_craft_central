@@ -16,17 +16,7 @@
         <div class="field">
             <%= f.input :contact_number, label: 'Contact Number' %>
         </div>
-        <div id="products">
-            <%= f.simple_fields_for :supplier_products do |sp| %>
-                <% render 'supplier_product_fields', f: sp %>
-            <% end %>
-        </div>
-        <br>
-        <% if !Product.all.empty? %>
-            <div class="links">
-                <%= link_to_add_association 'Add Product', f, :supplier_products %>
-            </div>
-        <%end%>
+        <%= f.association :products, collection: Product.all, input_html: {multiple: "multiple"}, include_hidden: false %>
         <br>
         <% if params[:action] == 'new' %>
             <%= f.button :submit, class: 'ui button primary' %>

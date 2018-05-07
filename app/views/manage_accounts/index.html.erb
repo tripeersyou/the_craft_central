@@ -22,7 +22,7 @@
                             <% else %>
                                 <td><%= link_to 'Authorize', authorize_admin_manage_accounts_path(admin), method: :put %></td>
                             <% end %>
-                            <td><%= link_to 'Delete Account' %></td>
+                            <td><%= link_to 'Delete Account', delete_admin_manage_accounts_path(admin), method: :delete, data: {confirm: 'Are you sure? This can\'t be undone.'} %></td>
                         </tr>
                     <% end %>
                 <% end %>

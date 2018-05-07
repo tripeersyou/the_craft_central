@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       resources :manage_accounts, only: [:index] do
         collection do
           put 'authorize_account/:admin_id', to: 'manage_accounts#authorize', as: 'authorize_admin'
+          delete 'delete_account/:admin_id', to: 'manage_accounts#delete', as: 'delete_admin'
         end
       end
       resources :staffs, except: [:index, :show]

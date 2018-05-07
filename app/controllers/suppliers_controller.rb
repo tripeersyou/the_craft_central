@@ -13,7 +13,7 @@ class SuppliersController < ApplicationController
     def create
         @supplier = Supplier.new(supplier_params)
         if @supplier.save
-            redirect_to supplier_path(@supplier)
+            redirect_to supplier_path(@supplier), notice: "#{@supplier.name} successfully created"
         else
             render :new
         end
@@ -26,7 +26,7 @@ class SuppliersController < ApplicationController
     end
     def update
         if @supplier.update(supplier_params)
-            redirect_to supplier_path(@supplier)
+            redirect_to supplier_path(@supplier), notice: "#{@supplier.name} successfully updated" 
         else
             render :new
         end

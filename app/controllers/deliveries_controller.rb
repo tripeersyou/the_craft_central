@@ -48,7 +48,7 @@
         end
 
         if @delivery.save
-            redirect_to store_path(@store)
+            redirect_to store_path(@store), notice: 'Delivery successfully created'
         else
             render :new
         end
@@ -83,7 +83,7 @@
                 end 
             end
             delivery.save
-            redirect_to store_path(@store)
+            redirect_to store_path(@store), notice: 'Successfully updated the delivery'
         else
             redirect_to store_path(@store)
         end

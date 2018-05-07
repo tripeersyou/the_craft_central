@@ -1,7 +1,7 @@
 <div class="nested-fields">
     <div class="fields">
         <div class="field">
-            <%= f.association :product, collection: @store.products %>
+            <%= f.association :product, collection: @store.products.where('store_products.inventory > 0') %>
         </div>
         <div class="field">
             <%= f.input :ending_quantity %>

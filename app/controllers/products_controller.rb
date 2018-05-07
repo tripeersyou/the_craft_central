@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
         else
             @product = Product.new(product_params)
             if @product.save
-                redirect_to products_path
+                redirect_to products_path, notice: "#{@product.name} successfully created."
             else
                 render :new
             end
@@ -60,7 +60,9 @@ class ProductsController < ApplicationController
 
     def update
         if @product.update(product_params)
-            redirect_to product_path(@product)
+            redirect_to product_path(@product), notice: "#{@product.name} successfully updated."
+        else
+            render :edit
         end
     end
 

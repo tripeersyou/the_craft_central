@@ -25,7 +25,7 @@ class StoresController < ApplicationController
     def create
         @store = Store.new(store_params)
         if @store.save
-            redirect_to store_path(@store)
+            redirect_to store_path(@store), notice: "#{@store.name} successfully created"
         else
             render :new
         end
@@ -51,7 +51,7 @@ class StoresController < ApplicationController
     
     def update
         if @store.update(store_params)
-            redirect_to store_path(@store)
+            redirect_to store_path(@store), notice: "#{@store.name} successfully updated"
         else
             render :edit
         end

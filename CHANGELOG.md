@@ -13,6 +13,8 @@
 
 ## Changelog and Development Log
 * May 6, 2018
+    * Bug fixes and more polishing
+    * Added a bunch of notices when resources are created/edited.
     * Polished the front-end especially the dashboard for performance.
 * May 5, 2018
     * Started adding test specs for 7 models

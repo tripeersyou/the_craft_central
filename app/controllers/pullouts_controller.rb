@@ -1,16 +1,20 @@
 class PulloutsController < ApplicationController
     before_action :set_store
     def new
-        @pullout = @store.pullouts.new
+        if @store.total_products == 0
+            redirect_to store_path(@store), notice: "#{@store.name} currently has 0 products."
+        else
+            @pullout = @store.pullouts.new
+        end
     end
 
     def create
-        pullout = @store.pullouts.new(pullout_params)
+        @pullout = @store.pullouts.new(pullout_params)
         total_items = 0
         total_price = 0.0
         total_cost = 0.0
 
-        pullout.pullout_products.each do |pullout_product|
+        @pullout.pullout_products.each do |pullout_product|
             pullout_product.price = pullout_product.quantity * pullout_product.product.price
             pullout_product.cost = pullout_product.quantity * pullout_product.product.cost
             pullout_product.product.inventory += pullout_product.quantity
@@ -20,15 +24,15 @@ class PulloutsController < ApplicationController
             total_cost += pullout_product.quantity * pullout_product.product.cost
         end
 
-        pullout.total_cost = total_cost
-        pullout.total_items = total_items
-        pullout.total_price = total_price
+        @pullout.total_cost = total_cost
+        @pullout.total_items = total_items
+        @pullout.total_price = total_price
 
-        pullout.pullout_products.each do |pullout_product|
+        @pullout.pullout_products.each do |pullout_product|
             pullout_product.save
         end
 
-        pullout.pullout_products.each do |pullout_product|
+        @pullout.pullout_products.each do |pullout_product|
             @store.store_products.each do |store_product|
                 if pullout_product.product == store_product.product
                     store_product.inventory -= pullout_product.quantity
@@ -37,8 +41,8 @@ class PulloutsController < ApplicationController
             end
         end
 
-        if pullout.save
-            redirect_to store_path(@store)
+        if @pullout.save
+            redirect_to store_path(@store), notice: 'Pullout successfully created'
         else
             render :new
         end

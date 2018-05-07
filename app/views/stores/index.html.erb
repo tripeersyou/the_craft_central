@@ -37,7 +37,7 @@
             </div>
             <% if admin_signed_in? %>
                 <div class="extra content">
-                    <% if !store.store_products.empty? %>
+                    <% if store.total_products > 0 %>
                         <%= link_to 'PULL-OUT', new_store_pullout_path(store), class: 'ui basic default button'  %>
                     <% end %>
                     <%= link_to 'ADD DELIVERY', new_store_delivery_path(store), class: 'ui basic green button'%>

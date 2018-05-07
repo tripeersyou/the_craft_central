@@ -12,6 +12,13 @@ class ManageAccountsController < ApplicationController
         admin.status = true
        end
        admin.save
-       redirect_to manage_accounts_path
+       redirect_to manage_accounts_path, notice: "Changed the authorization level of #{admin.first_name}"
+    end
+
+    def delete
+        admin = Admin.find(params[:admin_id])
+        name = admin.first_name
+        admin.delete
+        redirect_to manage_accounts_path, notice: "#{name}'s account has been deleted."
     end
 end

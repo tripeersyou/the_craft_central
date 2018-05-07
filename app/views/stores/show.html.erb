@@ -13,10 +13,10 @@
         <td style="text-align:right;">
             <% if admin_signed_in? %>
                 <a href="/stores/<%= @store.id %>/edit#products" class="ui button primary">ADD PRODUCT</a>
-                <% if !@store.store_products.empty? %>
+                <% if @store.total_products > 0 %>
                     <%= link_to 'ADD ENDING INVENTORY', new_store_ending_inventory_path(@store), class: 'ui button green' %>
                 <% end %>
-                <% if !Store.all.where('id != ' + @store.id.to_s).empty? && !@store.store_products.empty? %>
+                <% if !Store.all.where('id != ' + @store.id.to_s).empty? && @store.total_products > 0 %>
                     <%= link_to 'CREATE PRODUCT TRANSFER', new_store_transfer_path(@store), class: 'ui button red' %>
                 <% end %>                
             <% end %>
@@ -39,7 +39,7 @@
                     <h2>List of All Store Products</h2>  
                 </th>
                 <th style="text-align:center;">
-                    <%= link_to 'Download', store_path(@store, format: 'xls'), class: 'ui basic positive button' %>
+                    <%= link_to 'DOWNLOAD', store_path(@store, format: 'xls'), class: 'ui basic positive button' %>
                 </th>
             </tr>
             <tr>
@@ -78,7 +78,9 @@
 						<h2>List of all Product Transfers</h2>
 					</th>
 					<th style="text-align:center;">
+                    <% if !Store.all.where('id != ' + @store.id.to_s).empty? && @store.total_products > 0 %>
 						<%= link_to 'CREATE TRANSFER', new_store_transfer_path(@store), class: 'ui basic red button' %>
+                    <% end %>
 					</th>
 				<% else %>					
 					<th colspan='6'>
@@ -185,7 +187,9 @@
                         <h2>List of Store Pullouts</h2>  
                     </th>
                     <th style="text-align:center;">
-                        <%= link_to 'ADD PULLOUT', new_store_pullout_path(@store), class: 'ui basic primary button' %>
+                        <% if @store.total_products > 0 %>
+                            <%= link_to 'ADD PULLOUT', new_store_pullout_path(@store), class: 'ui basic primary button' %>
+                        <% end %>
                     </th>
                 <% else %>
                     <th colspan='6'>
@@ -232,7 +236,9 @@
                         <h2>List of Sales Reports</h2>  
                     </th>
                     <th style="text-align:center;">
-                        <%= link_to 'ADD ENDING INVENTORY', new_store_ending_inventory_path(@store), class: 'ui basic primary button' %>
+                        <% if @store.total_products > 0 %>
+                            <%= link_to 'ADD ENDING INVENTORY', new_store_ending_inventory_path(@store), class: 'ui basic primary button' %>
+                        <% end %>
                     </th>
                 <% else %>
                     <th colspan='5'>

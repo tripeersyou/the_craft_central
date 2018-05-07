@@ -16,19 +16,8 @@ class Product < ApplicationRecord
     validates :sku, :name, :brand, :description, :limit, :price, :cost, :inventory, presence: true
     validates :limit, :price, :cost, numericality: { greater_than: 0, allow_nil: false }
     validates :inventory, numericality: {greater_than_or_equal_to: 0, allow_nil: false}
-    validate :sku_must_be_unique
-    
-    def sku_must_be_unique
-       skus = []
-       Product.all.each do |product|
-           skus << product.sku
-       end
-       
-       if skus.include? sku
-            errors.add(:sku, 'SKU must be unique'); 
-       end
-    end
-    
+    validates :sku, uniqueness: true
+        
     # Instance methods
     def to_s
         name

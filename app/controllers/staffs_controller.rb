@@ -6,7 +6,7 @@ class StaffsController < ApplicationController
     def create
         @staff = Staff.new(staff_params)
         if @staff.save
-            redirect_to manage_accounts_path
+            redirect_to manage_accounts_path, notice: "Staff Account: #{@staff.email} has been successfully created."
         else
             render :new
         end
@@ -15,15 +15,16 @@ class StaffsController < ApplicationController
     end
     def update
         if @staff.update(staff_params)
-            redirect_to manage_accounts_path
+            redirect_to manage_accounts_path, notice: "Staff Account: #{@staff.email} has been successfully updated."
         else
             render :edit
         end
     end
     def destroy
         if @staff.present?
+            name = @staff.first_name
             @staff.delete
-            redirect_to manage_accounts_path
+            redirect_to manage_accounts_path, notice: "#{name}'s account has been deleted'"
         else
             redirect_to manage_accounts_path
         end

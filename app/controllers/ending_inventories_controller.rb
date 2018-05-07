@@ -1,7 +1,11 @@
 class EndingInventoriesController < ApplicationController
     before_action :set_store
     def new
-        @ending_inventory = @store.ending_inventories.new
+        if @store.total_products > 0 
+            @ending_inventory = @store.ending_inventories.new
+        else
+            redirect_to store_path(@store), notice: "#{@store.name} currently has 0 products."
+        end
     end
     def create
         @ending_inventory = @store.ending_inventories.new(ending_inventory_params)
@@ -20,7 +24,7 @@ class EndingInventoriesController < ApplicationController
         @ending_inventory.sales = @ending_inventory.total_sales
         @ending_inventory.cogs = @ending_inventory.total_cogs
         if @ending_inventory.save
-            redirect_to store_path(@store)
+            redirect_to store_path(@store), notice: 'Sales report successfully created.'
         else
             render :new
         end

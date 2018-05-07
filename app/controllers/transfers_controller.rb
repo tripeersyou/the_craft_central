@@ -1,7 +1,11 @@
 class TransfersController < ApplicationController
     before_action :set_store
     def new
-        @transfer = Transfer.new({store_from_id: @store.id})
+        if !Store.all.where('id != ' + @store.id.to_s).empty? && @store.total_products > 0
+            @transfer = Transfer.new({store_from_id: @store.id})
+        else
+            redirect_to store_path(@store), notice: "#{@store.name} currently has 0 products/There are no other stores."
+        end
     end
     def create
         @transfer = Transfer.new(transfer_params)
@@ -59,7 +63,7 @@ class TransfersController < ApplicationController
             @transfer.pullout = pullout
         end
         if @transfer.save
-            redirect_to store_path(@store)
+            redirect_to store_path(@store), notice: 'Transfer successfully created'
         else
             render :new
         end

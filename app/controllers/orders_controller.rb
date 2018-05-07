@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
     end
     def new
         @order = @supplier.orders.new
+        @order.order_products.build
     end
     def create
         @order = @supplier.orders.new(order_params)
@@ -23,7 +24,7 @@ class OrdersController < ApplicationController
         end 
 
         if @order.save 
-            redirect_to supplier_path(@supplier)
+            redirect_to supplier_path(@supplier), notice: 'Successfully created a new order.'
         else
             render :new
         end
