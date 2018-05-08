@@ -84,17 +84,17 @@
         </div>
     </div>
 </div>
-<br><br>
+<br>
 <div class="ui grid">
     <div class="twelve wide column">
         <% if params[:range] == 'monthly' || params[:range] == nil %>
-            <h1>Monthly Sales</h1>
+            <h1>Monthly Sales &amp; COGS</h1>
         <% elsif params[:range] == 'weekly' %>
-            <h1>Weekly Sales</h1>
+            <h1>Weekly Sales &amp; COGS</h1>
         <% elsif params[:range] == 'quarterly' %>
-            <h1>Quarterly Sales</h1>
+            <h1>Quarterly Sales &amp; COGS</h1>
         <% else %>
-            <h1>Yearly Sales</h1>
+            <h1>Yearly Sales &amp; COGS</h1>
         <% end %>
     </div>
     <% if params[:range] == 'monthly' || params[:range] == nil %>
@@ -126,12 +126,12 @@
             <div class="content">
                 <h1 class="dashboard_title">Top 10 Products</h1>
                 <div class="meta"><%= Date.parse(@start_of_month[0..10]).strftime('%B %d, %Y') %> to <%= Date.parse(@today[0..10]).strftime('%B %d, %Y') %></div>
-                <table class="ui table">
+                <table class="ui very basic table">
                     <tr>
                         <th></th>
                         <th>Product Name</th>
-                        <th>Sales</th>
-                        <th>Units</th>
+                        <th style="text-align:center;">Sales</th>
+                        <th style="text-align:center;">Units</th>
                         <th></th>
                     </tr>
                     <% @products.each_with_index do |product, index| %>
@@ -139,7 +139,7 @@
                         <td><%= index+1 %></td>
                         <td><%= product.name %></td>
                         <td style="text-align:right;"><%= "Php %.2f" % product.sales(@start_of_month, @today) %></td>
-                        <td><%= product.quantity_sold(@start_of_month, @today) %> units</td>
+                        <td style="text-align:right;"><%= product.quantity_sold(@start_of_month, @today) %> units</td>
                         <td><%= link_to 'View', product_path(product) %></td>
                     </tr>
                     <% end %>
@@ -152,11 +152,11 @@
             <div class="content">
                 <h1 class="dashboard_title">Top 10 Stores</h1>
                 <div class="meta"><%= Date.parse(@start_of_month[0..10]).strftime('%B %d, %Y') %> to <%= Date.parse(@today[0..10]).strftime('%B %d, %Y') %></div>
-                <table class="ui table">
+                <table class="ui very basic table">
                     <tr>
                         <th></th>
                         <th>Store Name</th>
-                        <th>Sales</th>
+                        <th style="text-align:center;">Sales</th>
                     </tr>
                      <% @stores.each_with_index do |store, index| %>
                     <tr>
