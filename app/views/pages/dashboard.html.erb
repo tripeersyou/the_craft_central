@@ -84,26 +84,90 @@
         </div>
     </div>
 </div>
-<br><br><br>
+<br><br>
 <div class="ui grid">
     <div class="twelve wide column">
         <% if params[:range] == 'monthly' || params[:range] == nil %>
-            <h1>Monthly Sales:</h1>
+            <h1>Monthly Sales</h1>
         <% elsif params[:range] == 'weekly' %>
-            <h1>Weekly Sales:</h1>
+            <h1>Weekly Sales</h1>
         <% elsif params[:range] == 'quarterly' %>
-            <h1>Quarterly Sales:</h1>
+            <h1>Quarterly Sales</h1>
         <% else %>
-            <h1>Yearly Sales:</h1>
+            <h1>Yearly Sales</h1>
         <% end %>
     </div>
     <% if params[:range] == 'monthly' || params[:range] == nil %>
-        <%= area_chart EndingInventory.group_by_month(:created_at, format: '%B %Y').sum(:sales), prefix: 'Php ' %>
+        <%= line_chart [ 
+                {name: "Sales", data:  EndingInventory.group_by_month(:created_at, last: 6, format: '%B %Y').sum(:sales)}, 
+                {name: "COGS", data: EndingInventory.group_by_month(:created_at, last: 6, format: '%B %Y').sum(:cogs)}
+            ],prefix: 'Php ',thousands: ',', min: nil, curve: true %>
     <% elsif params[:range] == 'weekly' %>
-        <%= area_chart EndingInventory.group_by_week(:created_at, format: 'Week of %b %d').sum(:sales), prefix: 'Php ' %>
+        <%= line_chart [ 
+                {name: "Sales", data:  EndingInventory.group_by_week(:created_at, last: 12, format: 'Week of %b %d %Y').sum(:sales)}, 
+                {name: "COGS", data: EndingInventory.group_by_week(:created_at, last: 12, format: 'Week of %b %d %Y').sum(:cogs)}
+            ],prefix: 'Php ',thousands: ',', min: nil, curve: true %>
     <% elsif params[:range] == 'quarterly' %>
-        <%= area_chart EndingInventory.group_by_quarter(:created_at, format: 'Qtr of %b %Y').sum(:sales), prefix: 'Php ' %>
+        <%= column_chart [ 
+                {name: "Sales", data:  EndingInventory.group_by_quarter(:created_at, last: 4,format: 'Qtr of %b %Y').sum(:sales)}, 
+                {name: "COGS", data: EndingInventory.group_by_quarter(:created_at, last: 4, format: 'Qtr of %b %Y').sum(:cogs)}
+            ],prefix: 'Php ',thousands: ',', min: nil, curve: true %>
     <% else %>
-        <%= area_chart EndingInventory.group_by_year(:created_at, format: '%Y').sum(:sales), prefix: 'Php ' %>
+        <%= column_chart [ 
+                {name: "Sales", data:  EndingInventory.group_by_year(:created_at, last: 4, format: '%Y').sum(:sales)}, 
+                {name: "COGS", data: EndingInventory.group_by_year(:created_at, last: 4, format: '%Y').sum(:cogs)}
+            ],prefix: 'Php ',thousands: ',', min: nil, curve: true %>
     <% end %>
+</div>
+<br><br>
+<div class="ui two column grid">
+    <div class="column">
+        <div class="ui card" style="width:100%;">
+            <div class="content">
+                <h1 class="dashboard_title">Top 10 Products</h1>
+                <div class="meta"><%= Date.parse(@start_of_month[0..10]).strftime('%B %d, %Y') %> to <%= Date.parse(@today[0..10]).strftime('%B %d, %Y') %></div>
+                <table class="ui table">
+                    <tr>
+                        <th></th>
+                        <th>Product Name</th>
+                        <th>Sales</th>
+                        <th>Units</th>
+                        <th></th>
+                    </tr>
+                    <% @products.each_with_index do |product, index| %>
+                    <tr>
+                        <td><%= index+1 %></td>
+                        <td><%= product.name %></td>
+                        <td style="text-align:right;"><%= "Php %.2f" % product.sales(@start_of_month, @today) %></td>
+                        <td><%= product.quantity_sold(@start_of_month, @today) %> units</td>
+                        <td><%= link_to 'View', product_path(product) %></td>
+                    </tr>
+                    <% end %>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui card" style="width:100%;">
+            <div class="content">
+                <h1 class="dashboard_title">Top 10 Stores</h1>
+                <div class="meta"><%= Date.parse(@start_of_month[0..10]).strftime('%B %d, %Y') %> to <%= Date.parse(@today[0..10]).strftime('%B %d, %Y') %></div>
+                <table class="ui table">
+                    <tr>
+                        <th></th>
+                        <th>Store Name</th>
+                        <th>Sales</th>
+                    </tr>
+                     <% @stores.each_with_index do |store, index| %>
+                    <tr>
+                        <td><%= index+1 %></td>
+                        <td><%= store.name %></td>
+                        <td style="text-align:right;"><%= "Php %.2f" % store.total_sales(@start_of_month, @today) %></td>
+                        <td><%= link_to 'View', store_path(store) %></td>
+                    </tr>
+                    <% end %>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

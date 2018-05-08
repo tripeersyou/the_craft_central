@@ -63,27 +63,44 @@ class Product < ApplicationRecord
         cogs
     end
 
-    def quantity_sold
+    def quantity_sold(start_date = nil, end_date = nil)
         quantity_sold = 0
-        EndingInventory.all.each do |ending_inventory|
-            ending_inventory.ending_inventory_products.each do |ending_inventory_product|
-                if id == ending_inventory_product.product.id
-                    quantity_sold += (ending_inventory_product.beginning_quantity - ending_inventory_product.ending_quantity)
-                end
+
+        if start_date && end_date
+            ending_inventory_products.where('created_at BETWEEN ? AND ?', start_date, end_date).each do |ending_inventory_product|
+                quantity_sold += (ending_inventory_product.beginning_quantity - ending_inventory_product.ending_quantity)
+            end
+        else
+            ending_inventory_products.each do |ending_inventory_product|
+                quantity_sold += (ending_inventory_product.beginning_quantity - ending_inventory_product.ending_quantity)
             end
         end
         quantity_sold
     end
 
-    def sales
+    def sales(start_date = nil, end_date = nil)
         sales = 0.0
-        EndingInventory.all.each do |ending_inventory|
-            ending_inventory.ending_inventory_products.each do |ending_inventory_product|
-                if id == ending_inventory_product.product.id
-                    sales += ((ending_inventory_product.beginning_quantity - ending_inventory_product.ending_quantity) * ending_inventory_product.price)
-                end
+        if start_date != nil && end_date != nil
+            ending_inventory_products.where('created_at BETWEEN ? AND ?', start_date, end_date).each do |ending_inventory_product|
+                sales += ((ending_inventory_product.beginning_quantity - ending_inventory_product.ending_quantity) * ending_inventory_product.price)
+            end
+        else
+            ending_inventory_products.each do |ending_inventory_product|
+                sales += ((ending_inventory_product.beginning_quantity - ending_inventory_product.ending_quantity) * ending_inventory_product.price)
             end
         end
         sales
+    end
+
+    def self.sort_by_sales(start_date=nil, end_date=nil)
+        if !start_date.nil? && !end_date.nil?
+            Product.all.sort_by{|product| product.sales(start_date,end_date)}.reverse.take(10)
+        else
+            Product.all.sort_by(&:sales).reverse.take(10)
+        end
+    end
+
+    def self.sort_by_quantity
+        Product.all.sort_by(&:quantity_sold).reverse.take(10)
     end
 end

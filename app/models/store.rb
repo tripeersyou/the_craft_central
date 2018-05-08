@@ -35,10 +35,16 @@ class Store < ApplicationRecord
         Transfer.all.where(store_from_id: id)
     end
 
-    def total_sales
+    def total_sales(start_date = nil, end_date = nil)
         total_sales = 0.0
-        ending_inventories.each do |ending_inventory|
-            total_sales += ending_inventory.total_sales
+        if start_date != nil && end_date != nil
+            ending_inventories.where('created_at BETWEEN ? AND ?', start_date, end_date).each do |ending_inventory|
+                total_sales += ending_inventory.total_sales
+            end
+        else
+            ending_inventories.each do |ending_inventory|
+                total_sales += ending_inventory.total_sales
+            end
         end
         total_sales
     end
@@ -88,5 +94,13 @@ class Store < ApplicationRecord
             total_cogs += store.total_cogs
         end
         total_cogs
+    end
+
+    def self.sort_by_sales(start_date=nil, end_date=nil)
+        if !start_date.nil? && !end_date.nil?
+            Store.all.sort_by{ |store| store.total_sales(start_date, end_date)}.reverse.take(10)
+        else
+            Store.all.sort_by(&:total_sales).reverse.take(10)
+        end
     end
 end
