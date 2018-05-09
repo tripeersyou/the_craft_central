@@ -35,6 +35,14 @@ class Store < ApplicationRecord
         Transfer.all.where(store_from_id: id)
     end
 
+    def clean
+        store_products.each do |product|
+            if product.inventory == 0
+                product.delete
+            end
+        end
+    end
+
     def total_sales(start_date = nil, end_date = nil)
         total_sales = 0.0
         if start_date != nil && end_date != nil

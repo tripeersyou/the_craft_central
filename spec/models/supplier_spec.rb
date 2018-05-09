@@ -7,7 +7,7 @@ RSpec.describe Supplier, type: :model do
       expect(supplier).to_not be_valid
   end
   
-  it "should have a address" do
+  it "should have an address" do
       supplier = Supplier.new({name: "Tester", address: nil, email: "test@example.com", contact_person: "Tester Lester", contact_number: "09123456789"})
       expect(supplier).to_not be_valid
   end

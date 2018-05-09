@@ -42,6 +42,7 @@ class PulloutsController < ApplicationController
         end
 
         if @pullout.save
+            @store.clean
             redirect_to store_path(@store), notice: 'Pullout successfully created'
         else
             render :new
