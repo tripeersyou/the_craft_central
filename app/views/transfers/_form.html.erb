@@ -3,7 +3,7 @@
     <div class="seven wide column">
         <%= simple_form_for([@store, @transfer], html: {class: 'ui form'}) do |f| %>
             <div class="field">
-                <%= f.association :store_to, collection: Store.all.where('id != ' + @store.id.to_s) %>
+                <%= f.association :store_to, collection: Store.all.where('id != ' + @store.id.to_s), include_blank: false %>
             </div>
             <div id="products">
                 <%= f.simple_fields_for :transfer_products do |dp| %>

@@ -13,14 +13,8 @@ class Transfer < ApplicationRecord
   
   # Validation
   validates :store_to, presence: true
-  validate :store_to_not_empty
+  validates :transfer_products, presence: true
   validate :transfer_products_unique
-
-  def store_to_not_empty
-    if Store.find(store_to_id).nil?
-      errors.add(:store_to, 'Store destination must be defined.')
-    end
-  end
 
   def transfer_products_unique
     products = []

@@ -102,7 +102,7 @@
 				<td><%= transfer.store_to.name %></td>
 				<td><%= transfer.total_items %> units</td>
 				<td><%= link_to 'View', store_transfer_path(@store, transfer) %></td>
-				<td><%= link_to 'View Delivery', store_delivery_path(transfer.store_to, transfer.delivery) %></td>
+				<td><%= link_to 'View Delivery', store_delivery_path(@store, transfer.delivery) %></td>
 				<td><%= link_to 'View Pullout', store_pullout_path(transfer.store_from, transfer.pullout) %></td>
 				<td><%= link_to 'Download', store_transfer_path(@store, transfer, format: :xls), style: 'color:#7a828a' %></td>
 			</tr>
