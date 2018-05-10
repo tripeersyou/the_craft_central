@@ -7,5 +7,14 @@ RSpec.describe EndingInventory, type: :model do
     expect(ending_inventory).to_not be_valid
   end
   
+  it "should not have cogs less than 0" do
+    ending_inventory = EndingInventory.new({store: Store.first, sales: 99999.0, cogs: -9999.0})
+    expect(ending_inventory).to_not be_valid
+  end
+  
+  it "should not have sales less than 0" do
+    ending_inventory = EndingInventory.new({store: Store.first, sales: -99999.0, cogs: 9999.0})
+    expect(ending_inventory).to_not be_valid
+  end
   
 end

@@ -9,7 +9,7 @@ RSpec.describe Delivery, type: :model do
     expect(delivery).to_not be_valid
   end
   
-  it "should have a valid store id" do
+  it "should have a valid store id" do 
     delivery = Delivery.new({store: Store.first, total_items: 10, total_cost: 99999.0, total_price: 9999.0, description: "test", status: true})
     delivery_product = DeliveryProduct.new({quantity: 10, product: Product.first})
     delivery.delivery_products << delivery_product
@@ -29,5 +29,12 @@ RSpec.describe Delivery, type: :model do
     delivery.delivery_products << delivery_product
     expect(delivery).to be_valid
   end
+  
+  it "should have at least 1 product to deliver" do
+    delivery = Delivery.new({store: Store.first, total_items: 10, total_cost: 99999.0, total_price: 9999.0, description: "test", status: true})
+    expect(delivery).to_not be_valid
+  end
+  
+  
   
 end
