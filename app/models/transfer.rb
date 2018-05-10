@@ -14,6 +14,7 @@ class Transfer < ApplicationRecord
   # Validation
   validates :store_to, presence: true
   validates :transfer_products, presence: true
+  validates :delivery, :pullout, presence: true
   validate :transfer_products_unique
 
   def transfer_products_unique

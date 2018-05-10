@@ -60,6 +60,7 @@ class TransfersController < ApplicationController
         @transfer.delivery = delivery
         @transfer.pullout = pullout
         if @transfer.save
+            @store.clean
             redirect_to store_path(@store), notice: 'Transfer successfully created'
         else
             render :new

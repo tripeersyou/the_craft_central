@@ -12,6 +12,10 @@
 --- 
 
 ## Changelog and Development Log
+* May 10, 2018
+    * Fixed a bug in the transfer#create.
+* May 9, 2018
+    * Added more test scripts in delivery
 * May 6, 2018
     * Bug fixes and more polishing
     * Added a bunch of notices when resources are created/edited.
