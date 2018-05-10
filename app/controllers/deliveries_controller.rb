@@ -47,6 +47,7 @@
                     end
                 end
             end
+            @delivery.save
             redirect_to store_path(@store), notice: 'Delivery successfully created'
         else
             render :new

@@ -23,8 +23,9 @@ class EndingInventoriesController < ApplicationController
                     end
                 end
             end
-            @ending_inventory.sales = @ending_inventory.total_sales
+                @ending_inventory.sales = @ending_inventory.total_sales
             @ending_inventory.cogs = @ending_inventory.total_cogs
+            @ending_inventory.save
             @store.clean
             redirect_to store_path(@store), notice: 'Sales report successfully created.'
         else

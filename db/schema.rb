@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 20180212125601) do
 
   create_table "deliveries", force: :cascade do |t|
     t.integer "store_id"
-    t.integer "total_items", null: false
-    t.decimal "total_cost", precision: 10, scale: 2, null: false
-    t.decimal "total_price", precision: 10, scale: 2, null: false
+    t.integer "total_items"
+    t.decimal "total_cost", precision: 10, scale: 2
+    t.decimal "total_price", precision: 10, scale: 2
     t.text "description", null: false
     t.boolean "status", default: false
     t.datetime "created_at", null: false
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   create_table "delivery_products", force: :cascade do |t|
     t.integer "delivery_id"
     t.integer "product_id"
-    t.integer "quantity", null: false
-    t.decimal "price", precision: 10, scale: 2, null: false
-    t.decimal "cost", precision: 10, scale: 2, null: false
+    t.integer "quantity"
+    t.decimal "price", precision: 10, scale: 2
+    t.decimal "cost", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["delivery_id"], name: "index_delivery_products_on_delivery_id"
@@ -121,8 +121,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
     t.integer "pullout_id"
     t.integer "product_id"
     t.integer "quantity", null: false
-    t.decimal "price", precision: 10, scale: 2, null: false
-    t.decimal "cost", precision: 10, scale: 2, null: false
+    t.decimal "price", precision: 10, scale: 2
+    t.decimal "cost", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_pullout_products_on_product_id"
@@ -131,9 +131,9 @@ ActiveRecord::Schema.define(version: 20180212125601) do
 
   create_table "pullouts", force: :cascade do |t|
     t.integer "store_id"
-    t.integer "total_items", null: false
-    t.decimal "total_cost", precision: 10, scale: 2, null: false
-    t.decimal "total_price", precision: 10, scale: 2, null: false
+    t.integer "total_items"
+    t.decimal "total_cost", precision: 10, scale: 2
+    t.decimal "total_price", precision: 10, scale: 2
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
