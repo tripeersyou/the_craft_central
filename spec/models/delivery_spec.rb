@@ -35,6 +35,11 @@ RSpec.describe Delivery, type: :model do
     expect(delivery).to_not be_valid
   end
   
-  
+  it "should have a description" do
+    delivery = Delivery.new({store: Store.first, total_items: 10, total_cost: 99999.0, total_price: 9999.0, description: nil, status: true})
+    delivery_product = DeliveryProduct.new({quantity: 10, product: Product.first})
+    delivery.delivery_products << delivery_product
+    expect(delivery).to_not be_valid
+  end
   
 end
