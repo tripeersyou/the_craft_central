@@ -16,14 +16,13 @@ class OrdersController < ApplicationController
     end
     def create
         @order = @supplier.orders.new(order_params)
-        @order.total_items = @order.total_quantity
 
-        @order.order_products.each do |order_product|
-            order_product.product.inventory += order_product.quantity
-            order_product.product.save
-        end 
-
-        if @order.save 
+        if @order.save
+            @order.total_items = @order.total_quantity
+            @order.order_products.each do |order_product|
+                order_product.product.inventory += order_product.quantity
+                order_product.product.save
+            end 
             redirect_to supplier_path(@supplier), notice: 'Successfully created a new order.'
         else
             render :new
