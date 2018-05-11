@@ -49,7 +49,9 @@ gem 'cocoon'
 gem 'chartkick'
 # Groupdate for grouping the graph data
 gem 'groupdate'
-
+# Generate simulated data
+gem 'faker'
+gem 'populator'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -60,8 +62,7 @@ group :development, :test do
   gem 'rspec-rails'
   # Use sqlite3 as the database for Active Record for Development and Test
   gem 'sqlite3'
-  # Generate simulated data
-  gem 'faker'
+
 end
 
 group :development do

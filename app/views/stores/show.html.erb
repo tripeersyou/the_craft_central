@@ -257,8 +257,8 @@
             <% @ending_inventories.each do |ending_inventory| %>
             <tr>
                 <td><%= ending_inventory.created_at.strftime('%d-%b-%y') %></td>
-                <td><%= '%.2f' % ending_inventory.total_sales %></td>            
-                <td><%= '%.2f' % ending_inventory.total_cogs %></td>            
+                <td><%= 'Php %.2f' % ending_inventory.total_sales %></td>            
+                <td><%= 'Php %.2f' % ending_inventory.total_cogs %></td>            
                 <td><%= link_to 'View', store_ending_inventory_path(@store, ending_inventory) %></td>
                 <td><%= link_to 'Download', store_ending_inventory_path(@store, ending_inventory, format: 'xls'), style: 'color:#7a828a' %></td>
             </tr>
