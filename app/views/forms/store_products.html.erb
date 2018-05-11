@@ -51,5 +51,10 @@
             <td>Php <%= '%.2f' % product.sales %></td>
         </tr>
         <%end%>
+        <tr>
+            <td colspan="6">
+                <%= will_paginate @store_products, param_name: 'page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+            </td>
+        </tr>
     </tbody>
 </table>
