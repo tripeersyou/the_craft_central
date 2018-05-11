@@ -23,7 +23,9 @@ class StoreProduct < ApplicationRecord
       sales = 0.0
       store.ending_inventories.each do |ending_inventory|
         ending_inventory.ending_inventory_products.each do |ending_inventory_product|
-          sales += ((ending_inventory_product.beginning_quantity - ending_inventory_product.ending_quantity) * ending_inventory_product.price)
+          if product == ending_inventory_product.product
+            sales += ((ending_inventory_product.beginning_quantity - ending_inventory_product.ending_quantity) * ending_inventory_product.price)
+          end
         end
       end
       sales
