@@ -62,7 +62,6 @@ group :development, :test do
   gem 'sqlite3'
   # Generate simulated data
   gem 'faker'
-  gem 'populator'
 end
 
 group :development do

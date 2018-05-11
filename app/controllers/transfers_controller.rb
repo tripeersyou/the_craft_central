@@ -9,8 +9,8 @@ class TransfersController < ApplicationController
     end
     def create
         @transfer = Transfer.new(transfer_params)
+        @transfer.store_from_id = @store.id        
         if @transfer.save
-            @transfer.store_from_id = @store.id
             delivery = Delivery.new({store: @transfer.store_to, status: false})
             pullout = Pullout.new({store: @store})
     

@@ -12,6 +12,9 @@
 --- 
 
 ## Changelog and Development Log
+* May 11, 2018
+    * Fixed bugs in Transfers
+    * Created dummy data script in the seed file for the development enrvironment
 * May 10, 2018
     * Fixed a bug in the transfer#create.
 * May 9, 2018

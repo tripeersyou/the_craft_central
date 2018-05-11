@@ -3,20 +3,37 @@ xlsx = Roo::Excelx.new('./db/products.xlsx')
 stores = Roo::Excelx.new('./db/stores.xlsx')
 header = [xlsx.sheet(0).row(1),xlsx.sheet(0).row(2)]
 
-if Admin.all.empty?
-    puts "Seeding default Admin"
-    Admin.create({first_name: 'Admin', last_name: 'Account', email:'admin@example.com', password: 'password', password_confirmation: 'password', status: true})
-else
-    puts "Default Admin seeded"
+if Rails.env.development? || Rails.env.test?
+    if Admin.all.empty?
+        puts "Seeding default Admin for development/test"
+        Admin.create({first_name: 'Admin', last_name: 'Account', email:'admin@example.com', password: 'password', password_confirmation: 'password', status: true})
+    else
+        puts "Default Admin seeded"
+    end
+
+    if Staff.all.empty?
+        puts "Seeding default Staff development/test"
+        Staff.create({first_name: 'Staff', last_name: 'Account', email:'staff@example.com', password: 'password', password_confirmation: 'password'})
+    else
+        puts "Default Staff seeded"
+    end
 end
 
-if Staff.all.empty?
-    puts "Seeding default Staff"
-    Staff.create({first_name: 'Staff', last_name: 'Account', email:'staff@example.com', password: 'password', password_confirmation: 'password'})
-else
-    puts "Default Staff seeded"
-end
+if Rails.env.production?
+    if Admin.all.empty?
+        puts "Seeding default Admin for production"
+        Admin.create({first_name: 'Admin', last_name: 'Account', email:'admin@example.com', password: 'strawberrypie', password_confirmation: 'strawberrypie', status: true})
+    else
+        puts "Default Admin seeded"
+    end
 
+    if Staff.all.empty?
+        puts "Seeding default Staff for production"
+        Staff.create({first_name: 'Staff', last_name: 'Account', email:'staff@example.com', password: 'strawberrypie', password_confirmation: 'strawberrypie'})
+    else
+        puts "Default Staff seeded"
+    end
+end
 puts ""
 
 if Brand.all.empty?
@@ -91,115 +108,118 @@ else
     puts "Stores have been seeded."
 end
 
-puts ""
-puts "Seeding Fake Data . . ."
-puts ""
-puts "Seeding Store Products"
-puts ""
 
-Store.all.each do |store|
-    30.times do
-        store_product = StoreProduct.new
-        store_product.product = Product.all.sample
-        store_product.inventory = rand(1..100)
-        store.store_products << store_product
-        store.save
-        puts "Store Product ##{store_product.id}: #{store_product.product.name} has been seeded to #{store.name}"
+if Rails.env.development?
+    puts ""
+    puts "Seeding Fake Data . . ."
+    puts ""
+    puts "Seeding Store Products"
+    puts ""
+
+    Store.all.each do |store|
+        30.times do
+            store_product = StoreProduct.new
+            store_product.product = Product.all.sample
+            store_product.inventory = rand(1..100)
+            store.store_products << store_product
+            store.save
+            puts "Store Product ##{store_product.id}: #{store_product.product.name} has been seeded to #{store.name}"
+        end
     end
-end
 
-puts ""
-puts "Seeding Store Deliveries"
-puts ""
+    puts ""
+    puts "Seeding Store Deliveries"
+    puts ""
 
-while(Delivery.all.count < 200) do
-    delivery = Delivery.new
-    date = Faker::Time.between(3.year.ago, Date.today)
-    delivery.store = Store.all.sample
-    delivery.status = true
-    delivery.description = Populator.sentences(1)
-    delivery.created_at = date
-    delivery.updated_at = date
-    15.times do 
-        product = Product.all.sample
-        quantity = rand(1 .. product.limit)
-        delivery_product = DeliveryProduct.new
-        delivery_product.product = product
-        delivery_product.quantity = quantity
-        delivery_product.cost = quantity * product.cost
-        delivery_product.price = quantity * product.price
-        delivery_product.created_at = date
-        delivery_product.updated_at = date
-        delivery.delivery_products << delivery_product
+    while(Delivery.all.count < 200) do
+        delivery = Delivery.new
+        date = Faker::Time.between(3.year.ago, Date.today)
+        delivery.store = Store.all.sample
+        delivery.status = true
+        delivery.description = Populator.sentences(1)
+        delivery.created_at = date
+        delivery.updated_at = date
+        15.times do 
+            product = Product.all.sample
+            quantity = rand(1 .. product.limit)
+            delivery_product = DeliveryProduct.new
+            delivery_product.product = product
+            delivery_product.quantity = quantity
+            delivery_product.cost = quantity * product.cost
+            delivery_product.price = quantity * product.price
+            delivery_product.created_at = date
+            delivery_product.updated_at = date
+            delivery.delivery_products << delivery_product
+        end
+        delivery.total_items = delivery.items
+        delivery.total_cost = delivery.cost
+        delivery.total_price = delivery.price
+        if delivery.save
+            puts "Delivery ##{delivery.id} to #{delivery.store.name} with a total price of #{delivery.total_price} has been seeded."
+        end
     end
-    delivery.total_items = delivery.items
-    delivery.total_cost = delivery.cost
-    delivery.total_price = delivery.price
-    if delivery.save
-        puts "Delivery ##{delivery.id} to #{delivery.store.name} with a total price of #{delivery.total_price} has been seeded."
-    end
-end
 
-puts ""
-puts "Seeding Store Pullouts"
-puts ""
+    puts ""
+    puts "Seeding Store Pullouts"
+    puts ""
 
-while(Pullout.all.count < 200) do
-    pullout = Pullout.new
-    date = Faker::Time.between(3.year.ago, Date.today)
-    pullout.store = Store.all.sample
-    pullout.description = Populator.sentences(1)
-    pullout.created_at = date
-    pullout.updated_at = date
-    15.times do 
-        product = Product.all.sample
-        quantity = rand(1 .. product.limit)
-        pullout_product = PulloutProduct.new
-        pullout_product.product = product
-        pullout_product.quantity = quantity
-        pullout_product.cost = quantity * product.cost
-        pullout_product.price = quantity * product.price
-        pullout_product.created_at = date
-        pullout_product.updated_at = date
-        pullout.pullout_products << pullout_product
+    while(Pullout.all.count < 200) do
+        pullout = Pullout.new
+        date = Faker::Time.between(3.year.ago, Date.today)
+        pullout.store = Store.all.sample
+        pullout.description = Populator.sentences(1)
+        pullout.created_at = date
+        pullout.updated_at = date
+        15.times do 
+            product = Product.all.sample
+            quantity = rand(1 .. product.limit)
+            pullout_product = PulloutProduct.new
+            pullout_product.product = product
+            pullout_product.quantity = quantity
+            pullout_product.cost = quantity * product.cost
+            pullout_product.price = quantity * product.price
+            pullout_product.created_at = date
+            pullout_product.updated_at = date
+            pullout.pullout_products << pullout_product
+        end
+        pullout.total_items = pullout.items
+        pullout.total_cost = pullout.cost
+        pullout.total_price = pullout.price
+        if pullout.save
+            puts "Pullout ##{pullout.id} to #{pullout.store.name} with a total price of #{pullout.total_price} has been seeded."
+        end
     end
-    pullout.total_items = pullout.items
-    pullout.total_cost = pullout.cost
-    pullout.total_price = pullout.price
-    if pullout.save
-        puts "Pullout ##{pullout.id} to #{pullout.store.name} with a total price of #{pullout.total_price} has been seeded."
-    end
-end
 
-puts ""
-puts "Seeding Store EndingInventories"
-puts ""
+    puts ""
+    puts "Seeding Store EndingInventories"
+    puts ""
 
-while(EndingInventory.all.count < 200) do
-    ending_inventory = EndingInventory.new
-    date = Faker::Time.between(3.year.ago, Date.today)
-    ending_inventory.store = Store.all.sample
-    ending_inventory.created_at = date
-    ending_inventory.updated_at = date
-    6.times do
-        ending_inventory_product = EndingInventoryProduct.new
-        product = ending_inventory.store.products.sample
-        b_product = StoreProduct.where('store_id = ? AND product_id = ?', ending_inventory.store.id, product.id).first        
-        b_inventory = b_product.inventory
-        ending_inventory_product.product = product
-        ending_inventory_product.beginning_quantity = b_inventory
-        ending_inventory_product.ending_quantity = rand(0 .. b_inventory)
-        b_product.inventory = ending_inventory_product.ending_inventory
-        b_product.save
-        ending_inventory_product.price = product.price
-        ending_inventory_product.cost = product.cost
-        ending_inventory_product.created_at = date
-        ending_inventory_product.updated_at = date
-        ending_inventory.ending_inventory_products << ending_inventory_product
-    end
-    ending_inventory.cogs = ending_inventory.total_cogs
-    ending_inventory.sales = ending_inventory.total_sales
-    if ending_inventory.save
-        puts "Ending Inventory ##{ending_inventory.id} to #{ending_inventory.store.name} with a total sales of #{ending_inventory.sales} has been seeded."
+    while(EndingInventory.all.count < 200) do
+        ending_inventory = EndingInventory.new
+        date = Faker::Time.between(3.year.ago, Date.today)
+        ending_inventory.store = Store.all.sample
+        ending_inventory.created_at = date
+        ending_inventory.updated_at = date
+        6.times do
+            ending_inventory_product = EndingInventoryProduct.new
+            product = ending_inventory.store.products.sample
+            b_product = StoreProduct.where('store_id = ? AND product_id = ?', ending_inventory.store.id, product.id).first        
+            b_inventory = b_product.inventory
+            ending_inventory_product.product = product
+            ending_inventory_product.beginning_quantity = b_inventory
+            ending_inventory_product.ending_quantity = rand(0 .. b_inventory)
+            b_product.inventory = ending_inventory_product.ending_inventory
+            b_product.save
+            ending_inventory_product.price = product.price
+            ending_inventory_product.cost = product.cost
+            ending_inventory_product.created_at = date
+            ending_inventory_product.updated_at = date
+            ending_inventory.ending_inventory_products << ending_inventory_product
+        end
+        ending_inventory.cogs = ending_inventory.total_cogs
+        ending_inventory.sales = ending_inventory.total_sales
+        if ending_inventory.save
+            puts "Ending Inventory ##{ending_inventory.id} to #{ending_inventory.store.name} with a total sales of #{ending_inventory.sales} has been seeded."
+        end
     end
 end
