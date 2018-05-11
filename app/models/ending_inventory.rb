@@ -45,9 +45,7 @@ class EndingInventory < ApplicationRecord
     ending_inventories = EndingInventory.where('created_at BETWEEN ? AND ?', start_time, end_time)
     total_sales = 0.00
     ending_inventories.each do |ending_inventory|
-      ending_inventory.ending_inventory_products.each do |ending_inventory_product|
-          total_sales += ending_inventory.total_items * ending_inventory_product.price
-      end
+      total_sales += ending_inventory.total_sales
     end
     total_sales
   end

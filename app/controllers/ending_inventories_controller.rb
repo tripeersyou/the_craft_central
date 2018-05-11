@@ -23,7 +23,7 @@ class EndingInventoriesController < ApplicationController
                     end
                 end
             end
-                @ending_inventory.sales = @ending_inventory.total_sales
+            @ending_inventory.sales = @ending_inventory.total_sales
             @ending_inventory.cogs = @ending_inventory.total_cogs
             @ending_inventory.save
             @store.clean

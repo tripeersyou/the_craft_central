@@ -60,6 +60,9 @@ group :development, :test do
   gem 'rspec-rails'
   # Use sqlite3 as the database for Active Record for Development and Test
   gem 'sqlite3'
+  # Generate simulated data
+  gem 'faker'
+  gem 'populator'
 end
 
 group :development do
