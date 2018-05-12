@@ -12,6 +12,8 @@
 --- 
 
 ## Changelog and Development Log
+* May 12, 2018
+    * Edited the `seeds.rb` file to simulate 2 years of data.
 * May 11, 2018
     * Fixed bugs in Transfers
     * Created dummy data script in the seed file for the development enrvironment

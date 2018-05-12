@@ -131,7 +131,7 @@ if Rails.env.development?
     puts "Seeding Store Deliveries"
     puts ""
 
-    while(Delivery.all.count < 200) do
+    while(Delivery.all.count < 816) do
         delivery = Delivery.new
         date = Faker::Time.between(3.year.ago, Date.today)
         delivery.store = Store.all.sample
@@ -163,7 +163,7 @@ if Rails.env.development?
     puts "Seeding Store Pullouts"
     puts ""
 
-    while(Pullout.all.count < 200) do
+    while(Pullout.all.count < 400) do
         pullout = Pullout.new
         date = Faker::Time.between(3.year.ago, Date.today)
         pullout.store = Store.all.sample
@@ -194,7 +194,7 @@ if Rails.env.development?
     puts "Seeding Store EndingInventories"
     puts ""
 
-    while(EndingInventory.all.count < 200) do
+    while(EndingInventory.all.count < 816) do
         ending_inventory = EndingInventory.new
         date = Faker::Time.between(3.year.ago, Date.today)
         ending_inventory.store = Store.all.sample
