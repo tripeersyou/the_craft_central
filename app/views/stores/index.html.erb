@@ -1,24 +1,24 @@
 <h1>All Stores</h1>
 <form class="ui form" id="index_form">
     <div class="fields">
-        <div class="field">
-            <input type="text" name="store_search" id="store_search" placeholder="Search for stores" style="width: 20em">
+        <div class="field" id="store_search">
+            <input type="text" name="store_search" placeholder="Search for stores">
         </div>
-        <div class="field">
-            <select name="store_sort" id="store_sort" class="ui dropdown">
+        <div class="field" id="store_sort">
+            <select name="store_sort" class="ui dropdown">
                 <option value="">Sort by</option>
                 <option value="name">Name</option>
                 <option value="created_at">Created At</option>
                 <option value="updated_at">Updated At</option>
             </select>
         </div>
+        <button class="ui button secondary" id="store_search_button">SEARCH</button>
         <% if admin_signed_in? %>
-            <div class="field">
-                <%= link_to 'CREATE STORE', new_store_path, class: 'ui button primary' %>
-            </div>
+            <%= link_to 'CREATE STORE', new_store_path, class: 'ui button primary', id: 'create_store_button' %>
         <% end %>
     </div>
 </form>
+<br>
 <% if !@stores.empty? %>
     <div class="ui three stackable cards">
     <% @stores.each do |store| %>

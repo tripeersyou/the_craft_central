@@ -1,7 +1,8 @@
 <div class="nested-fields">
     <div class="fields">
         <div class="field">
-            <%= f.association :product, collection: @supplier.products %>
+            <%= f.label :product, style: 'font-weight: 100'%>
+            <%= f.association :product, collection: @supplier.products, label: false %>
         </div>
         <div class="field">
             <%= f.input :quantity %>

@@ -9,7 +9,7 @@
                 <i class="calendar alternate icon"></i>
             </div>
         </div>
-        <div class="field" style="margin-top:0.5em;">
+        <div class="field" style="margin:auto; text-align:center;">
             to
         </div>
         <div class="four wide field">
@@ -18,7 +18,7 @@
                 <i class="calendar alternate icon"></i>
             </div>
         </div>
-        <div class="two wide field" style="margin-top:0.75em; text-align:right;">
+        <div class="two wide field" style="margin-top:0.75em; text-align:center;">
             Graph Range:
         </div>
         <div class="four wide field">
@@ -50,14 +50,14 @@
             <% end %>
             </select>
         </div>
-        <button type="sumbit" class="ui button primary">
+        <button type="sumbit" class="ui button primary" style="margin:auto;" id="dashboard_submit">
             GO
         </button>
     </div>
 </form>
-<div class="ui three column grid">
+<div class="ui three column stackable grid" style="margin: auto;">
     <div class="column">
-        <div class="ui card">
+        <div class="ui centered card">
             <div class="content">
                 <h1 class="dashboard_title">Total Sales</h1>
                 <div class="meta"><%= Date.parse(@start_of_month[0..10]).strftime('%B %d, %Y') %> to <%= Date.parse(@today[0..10]).strftime('%B %d, %Y') %></div>
@@ -66,7 +66,7 @@
         </div>
     </div>
     <div class="column">
-        <div class="ui card">
+        <div class="ui centered card">
             <div class="content">
                 <h1 class="dashboard_title">Total Revenue</h1>
                 <div class="meta"><%= Date.parse(@start_of_month[0..10]).strftime('%B %d, %Y') %> to <%= Date.parse(@today[0..10]).strftime('%B %d, %Y') %></div>
@@ -75,7 +75,7 @@
         </div>
     </div>
     <div class="column">
-        <div class="ui card">
+        <div class="ui centered card">
             <div class="content">
                 <h1 class="dashboard_title">Total COGS</h1>
                 <div class="meta"><%= Date.parse(@start_of_month[0..10]).strftime('%B %d, %Y') %> to <%= Date.parse(@today[0..10]).strftime('%B %d, %Y') %></div>
@@ -85,7 +85,7 @@
     </div>
 </div>
 <br>
-<div class="ui grid">
+<div class="ui stackable grid">
     <div class="twelve wide column">
         <% if params[:range] == 'monthly' || params[:range] == nil %>
             <h1>Monthly Sales &amp; COGS</h1>
@@ -120,7 +120,7 @@
     <% end %>
 </div>
 <br><br>
-<div class="ui two column grid">
+<div class="ui two column stackable grid">
     <div class="column">
         <div class="ui card" style="width:100%;">
             <div class="content">
@@ -130,16 +130,16 @@
                     <tr>
                         <th></th>
                         <th>Product Name</th>
-                        <th style="text-align:center;">Sales</th>
-                        <th style="text-align:center;">Units</th>
+                        <th>Sales</th>
+                        <th>Units</th>
                         <th></th>
                     </tr>
                     <% @products.each_with_index do |product, index| %>
                     <tr>
                         <td><%= index+1 %></td>
                         <td><%= product.name %></td>
-                        <td style="text-align:right;"><%= "Php %.2f" % product.sales(@start_of_month, @today) %></td>
-                        <td style="text-align:right;"><%= product.quantity_sold(@start_of_month, @today) %> units</td>
+                        <td><%= "Php %.2f" % product.sales(@start_of_month, @today) %></td>
+                        <td><%= product.quantity_sold(@start_of_month, @today) %> units</td>
                         <td><%= link_to 'View', product_path(product) %></td>
                     </tr>
                     <% end %>
@@ -156,14 +156,13 @@
                     <tr>
                         <th></th>
                         <th>Store Name</th>
-                        <th style="text-align:center;">Sales</th>
+                        <th>Sales</th>
                     </tr>
                      <% @stores.each_with_index do |store, index| %>
                     <tr>
                         <td><%= index+1 %></td>
                         <td><%= store.name %></td>
-                        <td 
-                        style="text-align:right;"><%= "Php %.2f" % store.total_sales(@start_of_month, @today) %></td>
+                        <td><%= "Php %.2f" % store.total_sales(@start_of_month, @today) %></td>
                         <td><%= link_to 'View', store_path(store) %></td>
                     </tr>
                     <% end %>

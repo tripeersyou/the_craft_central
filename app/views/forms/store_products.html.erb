@@ -13,7 +13,9 @@
                 <% end %>
             </select>
         </div>
-        <button type="submit" class="ui button primary">SEARCH PRODUCT LIST</button>
+        <div class="field" id="store_products_search">
+            <button type="submit" class="ui button primary" style="width:100%;">SEARCH PRODUCT LIST</button>        
+        </div>
     </div>
 </form>
 
@@ -53,7 +55,7 @@
         <%end%>
         <tr>
             <td colspan="6">
-                <%= will_paginate @store_products, param_name: 'page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+                <%= will_paginate @store_products, inner_window: 1, param_name: 'page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
             </td>
         </tr>
     </tbody>

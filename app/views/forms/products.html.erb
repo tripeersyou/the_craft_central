@@ -7,7 +7,9 @@
                 <i class="search icon"></i>
             </div>
         </div>
-        <button type="submit" class="ui button primary">SEARCH PRODUCT</button>
+        <div class="field" id="forms_product">
+            <button type="submit" class="ui button primary" style="width:100%;">SEARCH  PRODUCT</button>
+        </div>
     </div>
 </form>
 
@@ -46,7 +48,7 @@
         <% end %>
         <tr>
             <td colspan="8">
-                <%= will_paginate @products, param_name: 'page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+                <%= will_paginate @products, inner_window: 1, param_name: 'page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
             </td>
         </tr>
     </tbody>

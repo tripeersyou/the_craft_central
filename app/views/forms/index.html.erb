@@ -19,7 +19,7 @@
                 <i class="calendar alternate icon"></i>
             </div>
         </div>
-        <div class="field" style="margin-top:0.5em;">
+        <div class="field" style="margin: auto; text-align:center;">
             to
         </div>
         <div class="four wide field">
@@ -28,7 +28,9 @@
                 <i class="calendar alternate icon"></i>
             </div>
         </div>
-        <button type="submit" class="ui button primary">SEARCH</button>
+        <div class="field" id="sales_search">
+            <button type="submit" class="ui button primary" style="margin:auto; width: 100%">SEARCH</button>        
+        </div>
     </div>
 </form>
 <table class="ui very basic table show-table">
@@ -56,7 +58,7 @@
         <% end %>
         <tr>
             <td colspan="7">
-                <%= will_paginate @ending_inventories, param_name: 'page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+                <%= will_paginate @ending_inventories, inner_window: 0,param_name: 'page',renderer: WillPaginateSemanticUi::ActionView::Renderer %>
             </td>
         </tr>
     </tbody>

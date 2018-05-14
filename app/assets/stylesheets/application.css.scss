@@ -86,7 +86,12 @@ body {
 
 //********************************//
 //**************HEADING***********//
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 300;
 }
 
@@ -94,8 +99,65 @@ span.error {
     color: red;
 }
 
+#supplier_table {
+    width: 70%;
+}
+
+#product_table {
+    width: 90%;
+}
+
+#supplier_search {
+    width: 20em;
+}
+
+#create_product {
+    width: 18%;
+}
+
+#import_help {
+    width: 14%;
+}
+.ui.bottom.fixed.five.item.menu {
+    display: none;
+}
+
 @media only screen and (max-width: 768px) {
+    .ui.bottom.fixed.five.item.menu {
+        display: flex;
+    }
+    #content {
+        padding-bottom: 5em;
+    }
+    #login_side {
+        display: none;
+    }
     .ui.left.fixed.vertical.menu {
         display: none;
+    }
+    #dashboard_submit,
+    #products_submit,
+    #store_search,
+    #store_sort,
+    #store_search_button,
+    #create_store_button,
+    #sales_search,
+    #submit_supplier,
+    #supplier_sort,
+    #create_supplier,
+    #supplier_search,
+    #forms_product,
+    #store_products_search {
+        width: 100%;
+        margin: auto;
+    }
+    #create_product,
+    #import_help {
+        width: 50%;
+        display: inline;
+    }
+    #supplier_table,
+    #product_table {
+        width: 100%;
     }
 }

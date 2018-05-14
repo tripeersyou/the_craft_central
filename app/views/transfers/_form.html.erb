@@ -1,5 +1,5 @@
 <input type="hidden" name="store_id" id="store_id" value="<%= @store.id %>">
-<div class="ui grid">
+<div class="ui stackable grid">
     <div class="seven wide column">
         <%= simple_form_for([@store, @transfer], html: {class: 'ui form'}) do |f| %>
             <div class="field">

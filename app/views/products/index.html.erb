@@ -1,10 +1,10 @@
 <h1>Products Page</h1>
 <form class="ui form" id="index_form">
     <div class="fields">
-        <div class="field">
-            <input type="text" name="product_search" id="product_search" placeholder="Search for products" style="width: 20em">
+        <div class="field" style="width:100%;">
+            <input type="text" name="product_search" id="product_search" placeholder="Search for products">
         </div>
-        <div class="field">
+        <div class="field" style="width:100%;">
             <select name="product_sort" id="product_sort" class="ui dropdown">
                 <option value="">Sort by</option>
                 <option value="sku">SKU</option>
@@ -17,18 +17,26 @@
                 <option value="updated_at">Updated Date</option>
             </select>
         </div>
-        <% if admin_signed_in? %>
-            <div class="field">
-                <%= link_to 'CREATE PRODUCT', new_product_path, class: 'ui button primary' %>
-            </div>
-            <button type="button" class="ui button positive" id="import_help">
-                IMPORT
-            </button>
-        <% end %>
+        <br>
+        <div class="field" id="products_submit">
+            <button type="submit" class="ui button secondary" style="margin: auto; width: 100%;">SUBMIT</button>
+        </div>
     </div>
 </form>
+<% if admin_signed_in? %>
+    <form class="ui form">
+        <div class="fields">
+            <div class="field" id ='create_product'>
+                <%= link_to 'CREATE PRODUCT', new_product_path, class: 'ui button primary', style: "width:100%;" %>
+            </div>
+            <div class="field" id="import_help">
+                <button type="button" class="ui button positive" style="width:100%;">IMPORT</button>
+            </div>
+        </div>
+    </form>
+<% end %>
 <% if !@products.empty? %>
-  <div class="ui card" style="width:90%">
+  <div class="ui card" id="product_table">
     <div class="content">
         <table class="ui very basic table">
             <thead>
@@ -59,7 +67,7 @@
         </table>
     </div>
   </div>
-  <%= will_paginate @products,renderer: WillPaginateSemanticUi::ActionView::Renderer %>   
+  <%= will_paginate @products, inner_window: 1, renderer: WillPaginateSemanticUi::ActionView::Renderer %>   
 <% else %>
     <h2>No Products.</h2>
 <% end %>
