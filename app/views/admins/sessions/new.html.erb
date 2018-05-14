@@ -4,7 +4,9 @@
   <div class="eight wide column" id="login">
   
       <%= simple_form_for(resource, html: {class: "ui form"}, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <%= image_tag('logo.png', style: 'text-align:center;') %>
+        <div class="ui image">
+          <%= image_tag('logo.png', style: 'text-align:center;') %>          
+        </div>
         <%= render 'layouts/popups' %>
         <div class="field">
           <%= f.input :email, required: false, autofocus: true %>

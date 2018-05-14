@@ -80,7 +80,8 @@ body {
 //***********************************//
 //**************CONTENT*************//
 #content {
-    padding-top: 5em;
+    padding-top: 6em !important;
+    // padding-right: 0 !important;    
     padding-right: 7em;
 }
 
@@ -122,17 +123,30 @@ span.error {
     display: none;
 }
 
+#new_admin, #new_staff {
+    margin-top: 3em !important;
+}
+
 @media only screen and (max-width: 768px) {
+    #new_admin, #new_staff{
+        padding: 0 !important;
+        margin-top: 3em !important;
+    }
     .ui.bottom.fixed.five.item.menu {
         display: flex;
     }
+    .ui.fluid.container {
+        margin: none;
+    }
     #content {
-        padding-bottom: 5em;
+        padding-bottom: 4em !important;
+        padding-right: 0 !important;
+        padding-top: 4em !important;
     }
     #login_side {
         display: none;
     }
-    .ui.left.fixed.vertical.menu {
+    .ui.left.fixed.vertical.menu, .three.wide.column {
         display: none;
     }
     #dashboard_submit,

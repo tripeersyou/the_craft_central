@@ -5,8 +5,8 @@
   
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'ui form'}) do |f| %>
         <%= f.error_notification %>
-        <%= image_tag('logo.png', style: 'padding-top:2em;')%>
-
+        <div class="ui image">
+          <%= image_tag('logo.png', style: 'text-align:center;') %>
         <div class="field">
           <%= f.input :first_name, required: true, autofocus: true %>
         </div> 

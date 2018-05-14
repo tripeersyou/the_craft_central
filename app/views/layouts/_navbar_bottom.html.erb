@@ -1,0 +1,32 @@
+<div class="ui bottom fixed five item menu" style="z-index: 99999;">
+  <% if params[:action] == 'dashboard' %>
+    <a href="/" class="item" style="color:#517fff;"> <%= image_tag('icons/dashboard-active.png', size: '30x30')%></a>
+  <% else %>
+    <a href="/" class="item"> <%= image_tag('icons/dashboard-dark.png', size: '30x30')%></a>
+  <% end %>
+
+  <% if params[:controller] == 'products'%>
+    <a href="/products" class="item" style="color:#517fff;"> <%= image_tag('icons/products-active.png', size: '30x30')%></a>        
+  <% else %>
+    <a href="/products" class="item"> <%= image_tag('icons/productsdark.png', size: '30x30')%></a>
+  <% end %>
+
+  <% if params[:controller] == 'stores' || params[:controller] == 'deliveries' || params[:controller] == 'pullouts' || params[:controller] == 'ending_inventories' || params[:controller] == 'transfers' %>
+    <a class="item" href="/stores" style="color:#517fff;"> <%= image_tag('icons/store-active.png', size: '30x30')%></a>
+  <% else %>
+    <a class="item" href="/stores"> <%= image_tag('icons/store-dark.png', size: '30x30')%></a>
+  <% end %>
+
+  <% if params[:controller] == 'forms' %>
+    <a class="item" href="/forms" style="color:#517fff;"> <%= image_tag('icons/copy-active.png', size: '30x30')%></a>
+  <% else %>
+    <a class="item" href="/forms"> <%= image_tag('icons/copy.png', size: '30x30')%></a>
+  <% end %>
+
+  <% if params[:controller] == 'suppliers' || params[:controller] == 'orders' %>
+    <a class="item" href="/suppliers" style="color:#517fff;"> <%= image_tag('icons/shopping-cart-active.png', size: '30x30')%></a>
+  <% else %>
+    <a class="item" href="/suppliers" > <%= image_tag('icons/shopping-cart.png', size: '30x30')%>
+    </a>    
+  <% end %>
+</div>
