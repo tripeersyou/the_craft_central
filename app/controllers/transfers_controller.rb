@@ -8,12 +8,14 @@ class TransfersController < ApplicationController
         end
     end
     def create
+        puts params.inspect
         @transfer = Transfer.new(transfer_params)
-        @transfer.store_from_id = @store.id        
+        @transfer.store_from_id = @store.id
+        delivery = Delivery.new({store: @transfer.store_to, status: false})
+        pullout = Pullout.new({store: @store})
+        @transfer.delivery = delivery
+        @transfer.pullout = pullout
         if @transfer.save
-            delivery = Delivery.new({store: @transfer.store_to, status: false})
-            pullout = Pullout.new({store: @store})
-    
             @transfer.transfer_products.each do |transfer_product|
                 delivery.delivery_products << DeliveryProduct.new({
                     product: transfer_product.product, 
@@ -28,7 +30,6 @@ class TransfersController < ApplicationController
                     cost: (transfer_product.product.cost * transfer_product.quantity)
                 })
             end
-    
             pullout.pullout_products.each do |pullout_product|
                 Product.all.each do |product|
                     if pullout_product.product == product

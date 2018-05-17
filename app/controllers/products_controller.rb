@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :edit, :update]
     def index
-        if !params[:sort_by]
+        if !params[:product_sort]
             if params[:product_search]
                 q_string = '%'+params[:product_search]+'%'
                 @products = Product.paginate(page: params[:page], per_page: 14).where('name LIKE ? or sku LIKE ?', q_string,q_string).order('updated_at DESC')
@@ -11,9 +11,9 @@ class ProductsController < ApplicationController
         else
             if params[:product_search]
                 q_string = '%'+params[:product_search]+'%'
-                @products = Product.paginate(page: params[:page], per_page: 14).where('name LIKE ? or sku LIKE ?', q_string, q_string).order(params[:sort_by] + ' DESC')
+                @products = Product.paginate(page: params[:page], per_page: 14).where('name LIKE ? or sku LIKE ?', q_string, q_string).order(params[:product_sort] + ' ASC')
             else
-                @products = Product.paginate(page: params[:page], per_page: 14).order(params[:sort_by] + ' DESC')
+                @products = Product.paginate(page: params[:page], per_page: 14).order(params[:product_sort] + ' ASC')
             end
         end
         
@@ -67,7 +67,7 @@ class ProductsController < ApplicationController
     end
 
     def import
-        if File.extname(params[:file].original_filename) == '.csv' and params[:file].content_type == 'text/csv'
+        if File.extname(params[:file].original_filename) == '.csv' and params[:file].content_type == 'text/csv' or params[:file].content_type == 'application/vnd.ms-excel'
             Product.import(params[:file])
             redirect_to products_path, notice: "Products have been imported."
         else
