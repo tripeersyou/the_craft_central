@@ -1,19 +1,19 @@
 class StoresController < ApplicationController
     before_action :set_store, only: [:show, :edit, :update]
     def index
-        if !params[:store_sort]
-            if params[:store_search]
+        if params[:store_sort] and params[:store_sort] != ""
+            if params[:store_search] and params[:store_search] != ""
+                @stores = Store.paginate(page: params[:page], per_page: 9)
+            else
                 q_string = '%'+params[:store_search]+'%'
                 @stores = Store.paginate(page: params[:page], per_page: 9).where('name LIKE ?', q_string)
-            else
-                @stores = Store.paginate(page: params[:page], per_page: 9)
             end
         else
-            if params[:store_search]
-                q_string = '%'+params[:store_search]+'%'
-                @stores = Store.paginate(page: params[:page], per_page: 9).where('name LIKE ?', q_string).order(params[:store_sort] + ' ASC')
+            if params[:store_search] and params[:store_search] != ""
+                @stores = Store.paginate(page: params[:page], per_page: 9)
             else
-                @stores = Store.paginate(page: params[:page], per_page: 9).order(params[:store_sort] + ' ASC')
+                q_string = '%'+params[:store_search]+'%'
+                @stores = Store.paginate(page: params[:page], per_page: 9).where('name LIKE ?', q_string)
             end
         end
     end
