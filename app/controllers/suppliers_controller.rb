@@ -1,10 +1,20 @@
 class SuppliersController < ApplicationController
     before_action :set_supplier, only: [:show, :edit, :update]
     def index
-        if !params[:sort_by]
-            @suppliers = Supplier.paginate(page: params[:page], per_page: 14)
+        if params[:supplier_sort] and params[:supplier_sort] != ""
+            if params[:supplier_search] and params[:supplier_search] != ""
+                q_string = '%'+params[:supplier_search]+'%'
+                @suppliers = Store.paginate(page: params[:page], per_page: 9).where('name LIKE ?', q_string).order(params[:supplier_sort] + ' ASC')
+            else
+                @suppliers = Store.paginate(page: params[:page], per_page: 9).order(params[:supplier_sort] + ' ASC')
+            end
         else
-            @suppliers = Supplier.paginate(page: params[:page], per_page: 14).order('name ' + params[:sort_by])
+            if params[:supplier_search] and params[:supplier_search] != ""
+                q_string = '%'+params[:supplier_search]+'%'
+                @suppliers = Supplier.paginate(page: params[:page], per_page: 9).where('name LIKE ?', q_string)
+            else
+                @suppliers = Supplier.paginate(page: params[:page], per_page: 9)
+            end
         end
     end
     def new
