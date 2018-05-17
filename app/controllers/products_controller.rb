@@ -4,9 +4,9 @@ class ProductsController < ApplicationController
         if params[:product_sort] and params[:product_sort] != ""
             if params[:product_search] and params[:product_search] != ""
                 q_string = '%'+params[:product_search]+'%'
-                @products = Product.paginate(page: params[:page], per_page: 14).where('name LIKE ? or sku LIKE ?', q_string,q_string).order('updated_at DESC')
+                @products = Product.paginate(page: params[:page], per_page: 14).where('name LIKE ? or sku LIKE ?', q_string,q_string).order(params[:product_sort] + ' DESC')
             else
-                @products = Product.paginate(page: params[:page], per_page: 14).order('updated_at DESC')
+                @products = Product.paginate(page: params[:page], per_page: 14).order(params[:product_sort] + ' DESC')
             end
         else
             if params[:product_search] and params[:product_search] != ""
