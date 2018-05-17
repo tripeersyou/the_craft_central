@@ -3,17 +3,17 @@ class StoresController < ApplicationController
     def index
         if params[:store_sort] and params[:store_sort] != ""
             if params[:store_search] and params[:store_search] != ""
-                @stores = Store.paginate(page: params[:page], per_page: 9)
-            else
                 q_string = '%'+params[:store_search]+'%'
                 @stores = Store.paginate(page: params[:page], per_page: 9).where('name LIKE ?', q_string)
+            else
+                @stores = Store.paginate(page: params[:page], per_page: 9)
             end
         else
             if params[:store_search] and params[:store_search] != ""
-                @stores = Store.paginate(page: params[:page], per_page: 9)
-            else
                 q_string = '%'+params[:store_search]+'%'
                 @stores = Store.paginate(page: params[:page], per_page: 9).where('name LIKE ?', q_string)
+            else
+                @stores = Store.paginate(page: params[:page], per_page: 9)
             end
         end
     end
