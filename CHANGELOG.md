@@ -13,6 +13,7 @@
 
 ## Changelog and Development Log
 * May 14, 2018
+    * Removed the add order button when logged in as staff
     * Responsive Web Design
 * May 12, 2018
     * Edited the `seeds.rb` file to simulate 2 years of data.

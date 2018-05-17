@@ -69,12 +69,18 @@
     <table class="ui very basic table show-table">
         <thead>
             <tr>
+                <% if admin_signed_in?%>
                 <th colspan='4'>
                     <h2>List of Supplier Orders</h2>  
                 </th>
                 <th style="text-align:center;">
                     <%= link_to 'ADD ORDER', new_supplier_order_path(@supplier), class: 'ui basic positive button' %>
                 </th>
+                <% else %>
+                <th colspan='5'>
+                    <h2>List of Supplier Orders</h2>  
+                </th>
+                <% end %>
             </tr>
             <tr>
                 <th>Date</th>
