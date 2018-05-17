@@ -4,9 +4,9 @@ class StoresController < ApplicationController
         if params[:store_sort] and params[:store_sort] != ""
             if params[:store_search] and params[:store_search] != ""
                 q_string = '%'+params[:store_search]+'%'
-                @stores = Store.paginate(page: params[:page], per_page: 9).where('name LIKE ?', q_string).order(params[:store_sort] + ' DESC')
+                @stores = Store.paginate(page: params[:page], per_page: 9).where('name LIKE ?', q_string).order(params[:store_sort] + ' ASC')
             else
-                @stores = Store.paginate(page: params[:page], per_page: 9).order(params[:store_sort] + ' DESC')
+                @stores = Store.paginate(page: params[:page], per_page: 9).order(params[:store_sort] + ' ASC')
             end
         else
             if params[:store_search] and params[:store_search] != ""
