@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
             else
                 @products = Product.paginate(page: params[:page], per_page: 14).order('updated_at DESC')
             end
-        elsif params[:product_sort]
+        else
             if params[:product_search]
                 q_string = '%'+params[:product_search]+'%'
                 @products = Product.paginate(page: params[:page], per_page: 14).where('name LIKE ? or sku LIKE ?', q_string, q_string).order(params[:product_sort] + ' ASC')
