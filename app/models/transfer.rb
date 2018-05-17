@@ -14,7 +14,6 @@ class Transfer < ApplicationRecord
   # Validation
   validates :store_to, presence: true
   validates :transfer_products, presence: true
-  validates :delivery, :pullout, presence: true
   validate :transfer_products_unique
 
   def transfer_products_unique
@@ -23,7 +22,7 @@ class Transfer < ApplicationRecord
         products << transfer_product.product
     end
     if products.size != products.uniq.size
-        errors.add(:store_to,'Supplier products must be unique.')
+        errors.add(:store_to,'Transfer products must be unique.')
     end
   end
 
