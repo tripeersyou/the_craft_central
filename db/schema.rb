@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20180212125601) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "admins", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -39,7 +42,7 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "deliveries", force: :cascade do |t|
-    t.integer "store_id"
+    t.bigint "store_id"
     t.integer "total_items"
     t.decimal "total_cost", precision: 10, scale: 2
     t.decimal "total_price", precision: 10, scale: 2
@@ -51,8 +54,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "delivery_products", force: :cascade do |t|
-    t.integer "delivery_id"
-    t.integer "product_id"
+    t.bigint "delivery_id"
+    t.bigint "product_id"
     t.integer "quantity"
     t.decimal "price", precision: 10, scale: 2
     t.decimal "cost", precision: 10, scale: 2
@@ -63,7 +66,7 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "ending_inventories", force: :cascade do |t|
-    t.integer "store_id"
+    t.bigint "store_id"
     t.decimal "sales", precision: 10, scale: 2
     t.decimal "cogs", precision: 10, scale: 2
     t.datetime "created_at", null: false
@@ -72,8 +75,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "ending_inventory_products", force: :cascade do |t|
-    t.integer "product_id"
-    t.integer "ending_inventory_id"
+    t.bigint "product_id"
+    t.bigint "ending_inventory_id"
     t.integer "beginning_quantity"
     t.integer "ending_quantity"
     t.decimal "price", precision: 10, scale: 2
@@ -85,8 +88,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "order_products", force: :cascade do |t|
-    t.integer "order_id"
-    t.integer "product_id"
+    t.bigint "order_id"
+    t.bigint "product_id"
     t.integer "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -95,7 +98,7 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "supplier_id"
+    t.bigint "supplier_id"
     t.integer "total_items"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -105,7 +108,7 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   create_table "products", force: :cascade do |t|
     t.string "sku", null: false
     t.string "name", null: false
-    t.integer "brand_id"
+    t.bigint "brand_id"
     t.text "description"
     t.integer "limit", null: false
     t.decimal "price", precision: 10, scale: 2, null: false
@@ -118,8 +121,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "pullout_products", force: :cascade do |t|
-    t.integer "pullout_id"
-    t.integer "product_id"
+    t.bigint "pullout_id"
+    t.bigint "product_id"
     t.integer "quantity", null: false
     t.decimal "price", precision: 10, scale: 2
     t.decimal "cost", precision: 10, scale: 2
@@ -130,7 +133,7 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "pullouts", force: :cascade do |t|
-    t.integer "store_id"
+    t.bigint "store_id"
     t.integer "total_items"
     t.decimal "total_cost", precision: 10, scale: 2
     t.decimal "total_price", precision: 10, scale: 2
@@ -160,8 +163,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "store_products", force: :cascade do |t|
-    t.integer "store_id"
-    t.integer "product_id"
+    t.bigint "store_id"
+    t.bigint "product_id"
     t.integer "inventory", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -180,8 +183,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "supplier_products", force: :cascade do |t|
-    t.integer "supplier_id"
-    t.integer "product_id"
+    t.bigint "supplier_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_supplier_products_on_product_id"
@@ -199,8 +202,8 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "transfer_products", force: :cascade do |t|
-    t.integer "transfer_id"
-    t.integer "product_id"
+    t.bigint "transfer_id"
+    t.bigint "product_id"
     t.integer "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -209,10 +212,10 @@ ActiveRecord::Schema.define(version: 20180212125601) do
   end
 
   create_table "transfers", force: :cascade do |t|
-    t.integer "store_to_id", null: false
-    t.integer "store_from_id", null: false
-    t.integer "pullout_id"
-    t.integer "delivery_id"
+    t.bigint "store_to_id", null: false
+    t.bigint "store_from_id", null: false
+    t.bigint "pullout_id"
+    t.bigint "delivery_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["delivery_id"], name: "index_transfers_on_delivery_id"
@@ -221,4 +224,27 @@ ActiveRecord::Schema.define(version: 20180212125601) do
     t.index ["store_to_id"], name: "index_transfers_on_store_to_id"
   end
 
+  add_foreign_key "deliveries", "stores"
+  add_foreign_key "delivery_products", "deliveries"
+  add_foreign_key "delivery_products", "products"
+  add_foreign_key "ending_inventories", "stores"
+  add_foreign_key "ending_inventory_products", "ending_inventories"
+  add_foreign_key "ending_inventory_products", "products"
+  add_foreign_key "order_products", "orders"
+  add_foreign_key "order_products", "products"
+  add_foreign_key "orders", "suppliers"
+  add_foreign_key "products", "brands"
+  add_foreign_key "pullout_products", "products"
+  add_foreign_key "pullout_products", "pullouts"
+  add_foreign_key "pullouts", "stores"
+  add_foreign_key "store_products", "products"
+  add_foreign_key "store_products", "stores"
+  add_foreign_key "supplier_products", "products"
+  add_foreign_key "supplier_products", "suppliers"
+  add_foreign_key "transfer_products", "products"
+  add_foreign_key "transfer_products", "transfers"
+  add_foreign_key "transfers", "deliveries"
+  add_foreign_key "transfers", "pullouts"
+  add_foreign_key "transfers", "stores", column: "store_from_id"
+  add_foreign_key "transfers", "stores", column: "store_to_id"
 end

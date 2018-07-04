@@ -7,7 +7,7 @@ class Supplier < ApplicationRecord
     
     # Validation
     validate :contact_number_valid_length
-    validates :name, :address, :email, :contact_person, :contact_number, presence: true
+    validates :name, :address, :contact_number, presence: true
     validate :supplier_products_unique
     
     def contact_number_valid_length

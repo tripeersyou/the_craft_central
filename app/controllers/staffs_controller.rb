@@ -24,7 +24,7 @@ class StaffsController < ApplicationController
         if @staff.present?
             name = @staff.first_name
             @staff.delete
-            redirect_to manage_accounts_path, notice: "#{name}'s account has been deleted'"
+            redirect_to manage_accounts_path, notice: "#{name}'s account has been deleted."
         else
             redirect_to manage_accounts_path
         end
