@@ -18,12 +18,12 @@
 @import "semantic-ui";
 //****************GLOBAL*****************//
 @font-face {
-    font-family: Proxima Nova;
-    src: url('Proxima Nova.ttf');
+    font-family: 'ProximaNova';
+    src: url('Proxima Nova.ttf') format('truetype');
 }
 
 * {
-    font-family: Proxima Nova;
+    font-family: 'ProximaNova';
     color: #7a828a;
 }
 
